@@ -1,20 +1,9 @@
 # TPR-DB-documentation
-This is a repository used to generate a static site containing all documentation for the CRITT Translation Process Research Database (TPR-DB).
+This is a repository used to generate a static site containing all documentation for the CRITT Translation Process Research Database (TPR-DB). The static site is generated from [markdown](https://www.markdownguide.org/getting-started/) files using a tool called [zensical](https://zensical.org/).
 
 ## Contributing
-Feel free to make a pull request to contribute to the docs.
 
-> [!WARNING]
-> **Keep Links Permanent** DO NOT change the names of the directories or markdown files within the `docs` directory!
-
-### Using Zensical
-
-For full documentation visit [zensical.org](https://zensical.org/docs/).
-
-#### Steps to Contribute
-
-If you have never used Git or GitHub before, follow every step below carefully.
-
+If you have never used Git or GitHub before, follow every step below carefully. For full *zensical* documentation visit [zensical.org/docs/](https://zensical.org/docs/).
 ---
 
 **Step 1 — Fork the repository**
@@ -43,7 +32,7 @@ git clone https://github.com/YOUR-USERNAME/TPR-DB-documentation.git
 cd TPR-DB-documentation
 ```
 
-Replace `YOUR-USERNAME` with your GitHub username.
+**Remember** to replace `YOUR-USERNAME` with your GitHub username :cowboy_hat_face:
 
 > [!TIP]
 > If you don't have Git installed, download it from [git-scm.com](https://git-scm.com/downloads) first.
@@ -76,16 +65,19 @@ Run the local development server so you can see your changes in a browser as you
 zensical serve
 ```
 
-Then open [http://localhost:8000](http://localhost:8000) in your browser. The page will automatically reload whenever you save a file.
+Then open [http://localhost:8002](http://localhost:8002) in your browser. The page will automatically reload whenever you save a file.
 
 > [!NOTE]
-> Sometimes, if the page is behaving strangely in your browser, you may need to press `CTRL + C` to stop the server and then rerun `zensical serve`.
+> Sometimes, if the page is behaving strangely in your browser, you may need to press `CTRL + C` to stop the development server and then rerun `zensical serve` to restart it.
 
 When you are done, press `CTRL + C` to stop the server.
 
 ---
 
 **Step 5 — Make your edits**
+
+> [!WARNING]
+> **Keep Links Permanent** Do **NOT** change the names of the directories or markdown files within the `docs` directory!
 
 > [!IMPORTANT]
 > Only edit `.md` files inside the `docs/` directory. Do not rename, move, or delete any files or folders — see the warning above.
