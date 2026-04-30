@@ -23,13 +23,13 @@ Open a terminal (**Terminal** on Mac, **PowerShell** on Windows) and run:
 
 On **Mac**:
 ```bash
-git clone https://github.com/YOUR-USERNAME/TPR-DB-documentation.git
+git clone https://github.com/YOUR-USERNAME/TPR-DB-documentation
 cd TPR-DB-documentation
 ```
 
 On **Windows**:
 ```powershell
-git clone https://github.com/YOUR-USERNAME/TPR-DB-documentation.git
+git clone https://github.com/YOUR-USERNAME/TPR-DB-documentation
 cd TPR-DB-documentation
 ```
 
@@ -116,6 +116,25 @@ git push origin main
 4. Click **Create pull request**.
 
 That's it! A maintainer will review your contribution and merge it if everything looks good.
+
+---
+
+### Step 9 - Keep your fork up to date
+
+Over time, the official repository may receive changes from other contributors. Run these commands occasionally to keep your fork and local `main` branch in sync:
+
+```bash
+# only run this command once per local clone
+git remote add upstream https://github.com/Critt-Kent/TPR-DB-documentation
+# run rest of commands every time you want to update
+git fetch upstream
+git switch main
+git merge upstream/main
+git push origin main
+```
+
+> [!TIP]
+> You only need to run `git remote add upstream ...` once per local clone. After that, just run the other commands when you want to sync.
 
 ### Zensical Markdown Guide (very brief)
 
