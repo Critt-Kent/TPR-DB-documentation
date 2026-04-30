@@ -7,7 +7,7 @@ If you have never used Git or GitHub before, follow every step below carefully. 
 
 ---
 
-**Step 1 — Fork the repository**
+### Step 1 - Fork the repository
 
 1. Make sure you are signed in to [GitHub](https://github.com).
 2. Go to the top of this page and click the **Fork** button (top-right corner).
@@ -15,7 +15,7 @@ If you have never used Git or GitHub before, follow every step below carefully. 
 
 ---
 
-**Step 2 — Clone your fork to your computer**
+### Step 2 - Clone your fork to your computer
 
 Cloning downloads the repository so you can edit files locally.
 
@@ -40,7 +40,7 @@ cd TPR-DB-documentation
 
 ---
 
-**Step 3 — Activate the virtual environment**
+### Step 3 - Activate the virtual environment
 
 This project uses a Python virtual environment that already has all the required tools installed.
 
@@ -58,7 +58,7 @@ You will know it worked when you see `(venv)` appear at the start of your termin
 
 ---
 
-**Step 4 — Preview the site locally**
+### Step 4 - Preview the site locally
 
 Run the local development server so you can see your changes in a browser as you work:
 
@@ -75,7 +75,7 @@ When you are done, press `CTRL + C` to stop the server.
 
 ---
 
-**Step 5 — Make your edits**
+### Step 5 - Make your edits
 
 > [!WARNING]
 > **Keep Links Permanent** Do **NOT** change the names of the directories or markdown files within the `docs` directory!
@@ -87,7 +87,7 @@ Open any `.md` file in the `docs/` folder with a text editor and make your chang
 
 ---
 
-**Step 6 — Commit your changes**
+### Step 6 - Commit your changes
 
 Once you are happy with your edits, tell Git to save a snapshot of them:
 
@@ -98,7 +98,7 @@ git commit -m "Brief description of what you changed"
 
 ---
 
-**Step 7 — Push your changes to GitHub**
+### Step 7 - Push your changes to GitHub
 
 Send your committed changes back up to your fork on GitHub:
 
@@ -108,7 +108,7 @@ git push origin main
 
 ---
 
-**Step 8 — Open a pull request**
+### Step 8 - Open a pull request
 
 1. Go to your fork on GitHub (`https://github.com/YOUR-USERNAME/TPR-DB-documentation`).
 2. You should see a banner saying **"This branch is ahead of..."** — click **Contribute** → **Open pull request**.
