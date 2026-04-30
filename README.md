@@ -4,6 +4,7 @@ This is a repository used to generate a static site containing all documentation
 ## Contributing
 
 If you have never used Git or GitHub before, follow every step below carefully. For full *zensical* documentation visit [zensical.org/docs/](https://zensical.org/docs/).
+
 ---
 
 **Step 1 — Fork the repository**
