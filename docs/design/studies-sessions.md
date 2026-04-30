@@ -2,4 +2,4 @@
 icon: lucide/brain
 ---
 
-# Design & Collect
+# Study Design

@@ -46,12 +46,35 @@ Copyright &copy; 2026 CRITT
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
   { "The CRITT TPR-DB 3.0" = "index.md" },
-  { "Design & Collect" = "design.md" },
-  { "Upload & Process" = "process.md" },
-  { "Align & Annotate" = "align-annotate.md" },
-  { "Data Tables (3.0)" = "tables.md" },
-  { "Visualize" = "visualize.md" },
-  { "Analyze" = "analyze.md" },
+  { "Design & Collect" = [
+    "design/studies-sessions.md",
+    "design/file-naming.md",
+    "design/translog-ii.md",
+    "design/trados.md",
+    "design/inputlog.md",
+    "design/eyetrackers.md",
+  ]},
+  { "Upload & Process" = [
+    "process/index.md",
+    "process/monolingual.md",
+    "process/bilingual-alignment.md",
+    "process/word-boundaries.md",
+    "process/keystroke-mapping.md",
+    "process/fixation-mapping.md",
+    "process/session-props.md",
+  ]},
+  { "Align & Annotate" = [
+    "align-annotate/index.md",
+  ]},
+  { "Data Tables (3.0)" = [
+    "tables/index.md",
+  ]},
+  { "Visualize" = [
+    "visualize/index.md",
+  ]},
+  { "Analyze" = [
+    "analyze/index.md",
+  ]},
 ]
 
 # With the "extra_css" option you can add your own CSS styling to customize
@@ -200,7 +223,7 @@ features = [
     # In order to provide a better user experience on slow connections when
     # using instant navigation, a progress indicator can be enabled.
     # https://zensical.org/docs/setup/navigation/#progress-indicator
-    #"navigation.instant.progress",
+    "navigation.instant.progress",
 
     # When navigation paths are activated, a breadcrumb navigation is rendered
     # above the title of each page
@@ -220,12 +243,12 @@ features = [
     # When tabs are enabled, top-level sections are rendered in a menu layer
     # below the header for viewports above 1220px, but remain as-is on mobile.
     # https://zensical.org/docs/setup/navigation/#navigation-tabs
-    #"navigation.tabs",
+    "navigation.tabs",
 
     # When sticky tabs are enabled, navigation tabs will lock below the header
     # and always remain visible when scrolling down.
     # https://zensical.org/docs/setup/navigation/#sticky-navigation-tabs
-    #"navigation.tabs.sticky",
+    "navigation.tabs.sticky",
 
     # A back-to-top button can be shown when the user, after scrolling down,
     # starts to scroll up again.
@@ -282,6 +305,7 @@ features = [
 #[project.theme.font]
 #text = "Inter"
 #code = "Jetbrains Mono"
+font = false
 
 # ----------------------------------------------------------------------------
 # In the "palette" subsection you can configure options for the color scheme.
@@ -293,14 +317,20 @@ features = [
 # - https://zensical.org/docs/setup/colors/
 # ----------------------------------------------------------------------------
 [[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
 scheme = "default"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
+primary = "indigo"
+accent = "blue"
 
 [[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
 scheme = "slate"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
+primary = "orange"
+accent = "deep orange"
 
 # ----------------------------------------------------------------------------
 # The "extra" section contains miscellaneous settings.
