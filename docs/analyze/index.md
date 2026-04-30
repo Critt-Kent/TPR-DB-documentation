@@ -1,5 +1,4 @@
 ---
-icon: lucide/goal
+template: redirect.html
+redirect: utilities/
 ---
-
-# Analyze

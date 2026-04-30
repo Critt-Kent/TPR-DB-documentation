@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <link rel="canonical" href="{{ page.meta.redirect }}">
+    <meta http-equiv="refresh" content="0; url={{ page.meta.redirect }}">
+  </head>
+  <body>
+    <p>Redirecting... Click <a href="{{ page.meta.redirect }}">here</a> if you are not redirected.</p>
+    <script>window.location.href = "{{ page.meta.redirect }}"</script>
+  </body>
+</html>

@@ -1,5 +1,4 @@
 ---
-icon: lucide/grid-2x2-check
+template: redirect.html
+redirect: types/
 ---
-
-# Data Tables (3.0)

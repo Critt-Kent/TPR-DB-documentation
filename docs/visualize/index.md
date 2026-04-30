@@ -1,5 +1,4 @@
 ---
-icon: lucide/chart-spline
+template: redirect.html
+redirect: progression/
 ---
-
-# Visualize

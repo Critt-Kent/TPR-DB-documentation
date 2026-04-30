@@ -1,4 +1,4 @@
 ---
 template: redirect.html
-redirect: automatic/
+redirect: studies-sessions/
 ---

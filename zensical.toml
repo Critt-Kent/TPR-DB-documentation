@@ -55,7 +55,7 @@ nav = [
     "design/eyetrackers.md",
   ]},
   { "Upload & Process" = [
-    "process/index.md",
+    "process/upload.md",
     "process/monolingual.md",
     "process/bilingual-alignment.md",
     "process/word-boundaries.md",
@@ -64,16 +64,26 @@ nav = [
     "process/session-props.md",
   ]},
   { "Align & Annotate" = [
-    "align-annotate/index.md",
+    "align-annotate/automatic.md",
+    "align-annotate/manual.md",
+    "align-annotate/segmentation.md",
+    "align-annotate/annotate.md",
   ]},
   { "Data Tables (3.0)" = [
-    "tables/index.md",
+    "tables/types.md",
+    "tables/features.md",
+    "tables/universal.md",
+    "tables/keystrokes.md",
+    "tables/fixations.md",
+    "tables/entropy.md",
   ]},
   { "Visualize" = [
-    "visualize/index.md",
+    "visualize/progression.md",
+    "visualize/replay.md",
   ]},
   { "Analyze" = [
-    "analyze/index.md",
+    "analyze/utilities.md",
+    "analyze/shiny-r.md",
   ]},
 ]
 
@@ -111,7 +121,7 @@ nav = [
 # Read more:
 # - https://zensical.org/docs/customization/#extending-the-theme
 #
-#custom_dir = "overrides"
+custom_dir = "overrides"
 
 # With the "favicon" option you can set your own image to use as the icon
 # browsers will use in the browser title bar or tab bar. The path provided
@@ -322,7 +332,7 @@ scheme = "default"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 primary = "indigo"
-accent = "blue"
+accent = "indigo"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme: dark)"
@@ -330,7 +340,7 @@ scheme = "slate"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 primary = "orange"
-accent = "deep orange"
+accent = "orange"
 
 # ----------------------------------------------------------------------------
 # The "extra" section contains miscellaneous settings.

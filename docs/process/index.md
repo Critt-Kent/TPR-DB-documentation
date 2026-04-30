@@ -1,5 +1,4 @@
 ---
-icon: lucide/cpu
+template: redirect.html
+redirect: upload/
 ---
-
-# Upload & Process
