@@ -77,13 +77,10 @@ nav = [
     "tables/fixations.md",
     "tables/entropy.md",
   ]},
-  { "Visualize" = [
-    "visualize/progression.md",
-    "visualize/replay.md",
-  ]},
-  { "Analyze" = [
+  { "Visualize & Analyze" = [
     "analyze/utilities.md",
-    "analyze/shiny-r.md",
+    "analyze/progression.md",
+    "analyze/replay.md",
   ]},
 ]
 
