@@ -2,4 +2,4 @@
 icon: lucide/atom
 ---
 
-# Universal Features
+# Session Features

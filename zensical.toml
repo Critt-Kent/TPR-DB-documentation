@@ -56,11 +56,7 @@ nav = [
   ]},
   { "Upload & Process" = [
     "process/upload.md",
-    "process/monolingual.md",
-    "process/bilingual-alignment.md",
-    "process/word-boundaries.md",
-    "process/keystroke-mapping.md",
-    "process/fixation-mapping.md",
+    "process/automatic-processing.md",
     "process/session-props.md",
   ]},
   { "Align & Annotate" = [
@@ -72,10 +68,9 @@ nav = [
   { "Data Tables (3.0)" = [
     "tables/types.md",
     "tables/features.md",
-    "tables/universal.md",
-    "tables/keystrokes.md",
-    "tables/fixations.md",
-    "tables/entropy.md",
+    "tables/session.md",
+    "tables/process.md",
+    "tables/product.md",
   ]},
   { "Visualize & Analyze" = [
     "analyze/utilities.md",
