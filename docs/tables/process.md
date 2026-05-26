@@ -26,9 +26,9 @@ Pupillometry is the measurement of pupil size and its dynamic changes over time.
 When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty.
 In reading research, pupillometry helps reveal where and when comprehension becomes effortful:
 
-- Lexical difficulty — rare or low-frequency words trigger measurable dilation compared to common words
-- Syntactic complexity — structurally ambiguous or embedded clauses cause increased load
-- Discourse integration — resolving pronouns or bridging inferences produces detectable peaks
+- Lexical difficulty: rare or low-frequency words trigger measurable dilation compared to common words
+- Syntactic complexity: structurally ambiguous or embedded clauses cause increased load
+- Discourse integration: resolving pronouns or bridging inferences produces detectable peaks
 
 Pupil responses are often time-locked to specific words, allowing researchers to pinpoint which linguistic features drive difficulty. However, particular caution needs to be taken in pupillometry since blinks can produce extreme values (outliers) and there are large individual differences: readers with lower working memory capacity tend to show larger and more prolonged dilation responses.
 
@@ -56,9 +56,7 @@ Since the pupil size and their changes is specific to every participant, a norma
 
 For each gaze sample point $`SP`$, TPR-DB 3.0 computes an effective pupil size $`SP_p`$ as the mean of the left and right pupil diameters when both are available (i.e., diameter $> 0$) for binocular tracking, and otherwise falls back to the available monocular diameter. Each $SP_p$ is then normalised by the session median. In addition, TPR-DB 3.0 computes two measures of dispersion per participant session: a robust median absolute deviation and a standard deviation
 
-- $`\mathtt{baseline}  = median(SP_{p})`$
-- $`\text{baseline}  = median(SP_{p})`$
-- $`baseline = median(SP_{p})`$
+- $\mathtt{baseline}  = median(SP_{p})$
 - $\mathtt{pupil\_mad} = median(abs(SP_{p} -  \mathtt{baseline}))$
 - $\mathtt{pupil\_std} = std(SP_{p})$
 
@@ -74,8 +72,8 @@ For each of the three measures `[per|z|mad]` the TPR-DB produces the following e
 
 | Description | Features in the FD table |
 |------|---------| 
-| maximum pupil size | `PUP_[per\|mad\|z]_max`|
-| minimum pupil size | `PUP_[per\|mad\|z]_min`|
+| max. pupil size, 95th percentile (peak)| `PUP_[per\|mad\|z]_max`|
+| min. pupil size, 5th percentile (floor) | `PUP_[per\|mad\|z]_min`|
 | mean pupil size | `PUP_[per\|mad\|z]_mean`|
 | standard deviation (SD) | `PUP_[per\|mad\|z]_mean`|
 | Area Under the Curve (AUC) |   `PUP_[per\|mad\|z]_AUC`|
@@ -87,4 +85,4 @@ For each of the three measures `[per|z|mad]` the TPR-DB produces the following e
 *[AUC]: Area Under the Curve: cumulative dilation over a time window
 *[SD]: standard deviation: 
 *[TPR]: Translation Process Research
-95th percentile % change
+
