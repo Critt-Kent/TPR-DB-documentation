@@ -18,17 +18,37 @@ According to Jakobsen (2011) translation sessions can be separated into an orien
 
 ### Pause Measures
 
-Lacruz and colleagues[^lacruz] introduce several measures to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are a "good indicators of cognitive demand in monolingual language production and in translation." 
-They suggest  measures, such as *Pause Ratio*, *Average Pause Ratio*,  *Pause to Word Ratio*, all of which
-rely on the notion $\mathtt{pause}$, and the definition of how long the *pause* ought to be. 
+Lacruz and colleagues[^lacruz] introduce several measures to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are "good indicators of cognitive demand in monolingual language production and in translation." 
+They suggest several measures, including *Pause Ratio* (PR), *Average Pause Ratio*,  *Pause to Word Ratio* (PWR), all of which
+rely on a notion $\mathtt{pause}$, which has been a topic of discussion for many years. 
+
+- pause ratio (PR) 
+
+   $\mbox{PR} =\frac{\mbox{total pause time in segment}}{\mbox{total time in segment}}$
+    
+
+- event to word ratio (EWR) 
+
+    $\mbox{EWR} =\frac{\mbox{number of complete editing events}}{\mbox{number of words}}$
+    
+
+- average pause ratio (APR)
+
+    $ \mbox{APR} =\frac{\mbox{average time per pause}}{\mbox{average time per words}}$
+    
+
+- pause to word ratio (PWR) 
+
+    $ \mbox{PWR} =\frac{\mbox{number of pauses in segment}}{\mbox{number of words in segment}}$
+
+The TPR-DB provides the basic features for computing these measures on the segment level (SG). In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed set $\mathtt{pause}$ of $500$ms $1000$ms, $2000ms$ and $5000ms$. 
+
+Since pausing behavior in the TPR-DB 3.0 is assumed to be traslator-specific, $\mathtt{pause}$ are now based on the values of `KUI` and `PUB` $1000$ms
 
 
-$$PWR = \frac{number of pauses}{number of words}$$
-
-$$APR = \frac{average time per pauses}{average time per word}$$
+ 
 
 
-The TPR-DB provides these measures on the segment level (SG) 
 
 - `Dur` : production duration for a segment; duration between the first and the last keystroke.
 - `Nedit`: number of times the segment was edited.
@@ -46,9 +66,10 @@ It may be possible to edit a segment several times. The features provide the sum
 Note that the typing pause preceeding the typing events in a segment are not included in `Dur`. 
 Note also that the `PostGap` value of a segment may be different from `PreGap` of the next segment, if one of the segments was edited more than once.
 
-$$ `PR300` = frac{(PreGap + TG } {(Dur +1)} $$
+$$ PR = frac{\text{`PreGap` + `TG` } {\test{Dur} +1} $$
 
-
+ $\mbox{PR} =\frac{\mbox{total pause time in segment}}{\mbox{total time in segment}}$
+    
 
 [^lacruz]:
     - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
@@ -59,11 +80,11 @@ $$ `PR300` = frac{(PreGap + TG } {(Dur +1)} $$
 ### Typing Inefficiency (InEff)
 We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in) efficiency for a word, chunk or segment as:
 
-$$ InEff = \frac{number of typed characters}{length of final translation} $$
+$$ \mbox{InEff} = \frac{\mbox{number of typed characters}}{\text{length of final translation}} $$
 
 They approximate this in terms of number of insertions and deletions:
  
-$$ InEff = \frac{insertions + deletions}{insertions - deletions - 1} $$
+$$ \mbox{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
 
 A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
 
