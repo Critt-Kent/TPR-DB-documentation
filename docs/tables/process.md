@@ -4,50 +4,53 @@ icon: lucide/clock-8
 
 # Process Features
 Process features capture the cognitive and behavioral dynamics of action (e.g., translation) as they unfold in real time. In the context of the TPR-DB 3.0, they comprise keystroke logging measures — such as production pauses and typing bursts, etc. — and gaze metrics derived from eye-tracking, including fixation durations, regressive eye movements, and re-reading behavior. 
-Many features are described in the context of the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view). In this section we present new features or if the definition has changed.
-
-## Translation Phases
-According to Jakobsen (2011) translation sessions can be separated into an orientation phase (O), a drafting phase (D) and a revision phase (R). Drafting starts with the first keystroke and the time before is defined as the orientation phase. We adopt this definition, even though it may not always be entirely correct. Some translators actually start with testing the keyboard, by typing some characters, and then start the actual orientation phase. We will ignore these cases. According to Jakobsen, drafting ends when the last word has been typed. We operationalize this definitionas follows: 
-
-1. We take the last word in the TT, rather than the translation of the last ST word.
-2. Drafting produces at least 50% of the keystrokes in a translation sessions.
-3. Drafting proceeds sequentially, i.e., successive keystrokes are no further than [-5 .. +2] word IDs and no more than [-20 .. +10] cursor positions apart. Drafting ends when five (or more) successive keystrokes not in a sequential.
+Many features are described in the context of the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view). This section focuses on new features or features for which the definition has changed.
 
 
 ## Keystroke Features
 
-### Pause Measures
+The features `Ins`, `Del`, `FixS`, `FixT` ... have not changed, althought due to a redefinition of word boundaries and the reimplementation in Python their values may be silightly different. Some changes ha
 
-Lacruz and colleagues[^lacruz] introduce several measures to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are "good indicators of cognitive demand in monolingual language production and in translation." 
-They suggest several measures, including *Pause Ratio* (PR), *Average Pause Ratio*,  *Pause to Word Ratio* (PWR), all of which
-rely on a notion $\mathtt{pause}$, which has been a topic of discussion for many years. 
+### Typing Inefficiency (InEff)
+We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in) efficiency for a word, chunk or segment as:
+
+$$ \text{InEff} = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
+
+They approximate this in terms of number of insertions and deletions:
+ 
+$$ \text{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
+
+A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
+
+$$ InEff = \frac{insertions + deletions}{insertions - deletions - 1} $$
+
+Note that this measure only applies if number of insertions >= number of deletions which ensures that the result >= 1. Otherwise, if there are more deletions than insertions, as might be the case in post-editing, InEff is computed as follows, which provides a number between 0 and 1:
+
+$$ InEff = \frac{1}{deletions} $$
+
+### Pause Metrics
+
+Lacruz and colleagues[^lacruz] introduce several metrics to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are "good indicators of cognitive demand in monolingual language production and in translation." 
+All their metrics, including *Pause Ratio* (PR), *Average Pause Ratio* (APR),  *Pause to Word Ratio* (PWR), and others:
 
 - pause ratio (PR) 
 
-   $\mbox{PR} =\frac{\mbox{total pause time in segment}}{\mbox{total time in segment}}$
+   $\text{PR} =\frac{\text{total pause time in segment}}{\text{total time in segment}}$
     
-
-- event to word ratio (EWR) 
-
-    $\mbox{EWR} =\frac{\mbox{number of complete editing events}}{\mbox{number of words}}$
-    
-
 - average pause ratio (APR)
 
-    $ \mbox{APR} =\frac{\mbox{average time per pause}}{\mbox{average time per words}}$
+    $ \text{APR} =\frac{\text{average time per pause}}{\text{average time per words}}$
     
 
 - pause to word ratio (PWR) 
 
-    $ \mbox{PWR} =\frac{\mbox{number of pauses in segment}}{\mbox{number of words in segment}}$
+    $ \text{PWR} =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
 
-The TPR-DB provides the basic features for computing these measures on the segment level (SG). In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed set $\mathtt{pause}$ of $500$ms $1000$ms, $2000ms$ and $5000ms$. 
+All these metrics rely on a notion of $\mathtt{pause}$, which has been a topic of discussion and controversy for many years. The TPR-DB provides basic features for computing pause metrics on the segment level (SG). In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed $\mathtt{pause}$ thresholds of $500ms$ $1000ms$, $2000ms$ and $5000ms$. 
 
-Since pausing behavior in the TPR-DB 3.0 is assumed to be traslator-specific, $\mathtt{pause}$ are now based on the values of `KUI` and `PUB` $1000$ms
+Since pausing behavior in the TPR-DB 3.0 is assumed to be traslator-specific, the $\mathtt{pause}$ thresholds are now also based on the translator-specific values of `KUI` and `PUB` and include $1000ms$ `KUI`, `PUB`, $2 \times `PUB`$ and $4 \times `PUB`$. 
 
-
- 
-
+The following features on the SG level are involved in the TPR-DB Pause Metrics:
 
 
 - `Dur` : production duration for a segment; duration between the first and the last keystroke.
@@ -58,41 +61,25 @@ Since pausing behavior in the TPR-DB 3.0 is assumed to be traslator-specific, $\
 - `TG`$\mathtt{pause}$: total duration of pausing (gap) time given the $\mathtt{pause}$ threshold.
 - `TD`<pause> : total duration of drafting time given the $\mathtt{pause}$ threshold.
 
+Note that  `Dur` = `TB` + `TG`. That is, neither the typing pause preceeding the typing events in a segment not the pause following it are included in `Dur`. Note also that it may be possible to edit a segment several times. However, the features are the sums if a segment is edited several times. This implies that the `PostGap` value of a segment may be different from `PreGap` of the next segment, if one of the segments was edited more than once.
+Depending on the definition, if the `PostGap` is taken to be pause in the segment, then the number of $\mathtt{pause}$ is the number of typing bursts (TB) plus one,  otherwise the number of pauses is just identical to `TB`.
 
-`Dur` = `TB` + `TG`
+Based on these considerations, it is possible to compute pause metrics as:
 
-It may be possible to edit a segment several times. The features provide the sum of sum if a segment is edited several times, the 
+$$ \text{`PR`} = \frac{\text{`PreGap` + `TG` } {\test{Dur} +1} $$
 
-Note that the typing pause preceeding the typing events in a segment are not included in `Dur`. 
-Note also that the `PostGap` value of a segment may be different from `PreGap` of the next segment, if one of the segments was edited more than once.
+$$ \text{PWR}_S = \frac{TB} {\test{`TokS`}} $$
 
-$$ PR = frac{\text{`PreGap` + `TG` } {\test{Dur} +1} $$
+$$ \text{PWR}_T = \frac{TB} {\test{`TokT`}} $$
 
- $\mbox{PR} =\frac{\mbox{total pause time in segment}}{\mbox{total time in segment}}$
-    
+$$ \text{APR} = \frac{TG}{TB} / \frac{TD}/{\test{`TokT`}} = \frac{TG * TokT}{TB * TD} $$
+
 
 [^lacruz]:
     - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
     - Lacruz et al. (2014): https://aclanthology.org/2014.amta-wptp.6.pdf
     - Lacruz et al. (2015): https://research-api.cbs.dk/ws/portalfiles/portal/58771005/Michael_Cral_2016_01.pdf
 
-
-### Typing Inefficiency (InEff)
-We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in) efficiency for a word, chunk or segment as:
-
-$$ \mbox{InEff} = \frac{\mbox{number of typed characters}}{\text{length of final translation}} $$
-
-They approximate this in terms of number of insertions and deletions:
- 
-$$ \mbox{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
-
-A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
-
-$$ InEff = \frac{insertions + deletions}{insertions - deletions - 1} $$
-
-Note that this measure only applies if number of insertions >= number of deletions which ensures that the result >= 1. Otherwise, if there are more deletions than insertions, as might be the case in post-editing, InEff is computed as follows, which provides a number between 0 and 1:
-
-$$ InEff = \frac{1}{deletions} $$
 
 
 ## Gaze Features
@@ -163,6 +150,13 @@ For each of the three measures `[per|z|mad]` the TPR-DB produces the following e
 | time-normalized AUC for constriction |   `PUP_[per|mad|z]_AUC_C`|
 | time-normalized AUC for dilation |   `PUP_[per|mad|z]_AUC_D`|
 
+
+## Translation Phases
+According to Jakobsen (2011) translation sessions can be separated into an orientation phase (O), a drafting phase (D) and a revision phase (R). Drafting starts with the first keystroke and the time before is defined as the orientation phase. We adopt this definition, even though it may not always be entirely correct. Some translators actually start with testing the keyboard, by typing some characters, and then start the actual orientation phase. We will ignore these cases. According to Jakobsen, drafting ends when the last word has been typed. We operationalize this definitionas follows: 
+
+1. We take the last word in the TT, rather than the translation of the last ST word.
+2. Drafting produces at least 50% of the keystrokes in a translation sessions.
+3. Drafting proceeds sequentially, i.e., successive keystrokes are no further than [-5 .. +2] word IDs and no more than [-20 .. +10] cursor positions apart. Drafting ends when five (or more) successive keystrokes not in a sequential.
 
 *[AUC]: Area Under the Curve: cumulative dilation over a time window
 *[SD]: standard deviation: 
