@@ -75,15 +75,15 @@ Depending on the definition, if the `PostGap` is taken to be pause in the segmen
 
 Based on these considerations, it is possible to compute pause metrics as follows:
 
-PR = `PreGap` + `TG`/ (`Dur` +1)
+PR = (`PreGap` + `TG`) / (`Dur` +1)
 
-$$ \text{PR} = \frac{\text{PreGap + TG} {\text{Dur} +1} $$
+$ \text{PR} = \frac{\text{PreGap + TG} {\text{Dur} +1} $
 
-$$ \text{PWR}_S = \frac{TB} {\text{`TokS`}} $$
+$ \text{PWR}_S = \frac{TB} {\text{`TokS`}} $
 
 $ \text{PWR}_T = \frac{TB} {\text{`TokT`}} $
 
-$$ \text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{`TokT`}} = \frac{TG * TokT}{TB * TD} $$
+$ \text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{TokT}} = \frac{TG * TokT}{TB * TD} $
 
 
 [^lacruz]:
