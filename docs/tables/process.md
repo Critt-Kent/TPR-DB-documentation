@@ -28,14 +28,14 @@ This same principle applies to these features also in the other tables, includin
 
 As for the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), also the TPR-DB 3.0 fragments the flow of keystrokes into processing units. Keystroke-based processing units are separated by a pre-defined lag of time between successive keystrokes (aka inter keystroke intervals, IKIs). The TPD-DB 3.0 distinguishes between two tresholds which, respecively, separate Keystroke Units (KUs) and Production Units (PUs). KUs consist of at least one keystroke separated from the next KU by an IKI $\ge$ `KUI` (the KU Interruption threshold); PUs are separated by an IKI $\ge$ `PUB`, a PU Break. Bandaru and others [^Bandaru] define these thresholds as: 
 
-- `KUI` : $KUI = 2 \times median(\text{within word IKI})$
-- `PUB` : IKI duration of the keystroke quantile
-  $1 - \frac{\text{text length}}{\text{number of 3-word chunks}}$ 
+- `KUI` : $2 \times median(\text{within word IKI})$
+- `PUB` : IKI duration of the keystroke quantile: 
+  $1 - \frac{3*\text{text length in characters}}{\text{number of words}}$ 
 
 KUs and PUs are enumerated in two separate tables. 
-KU tables enumerate the sequence of KUs and the intervening keystroke pauses (`KUI`, and `PUB`) in their sequential order. The `Type` of a KU can be one of $\mathtt{I}$, $\mathtt{C}$ or $\mathtt{D}$, depending on whether the keystrokes are only insertions, deletions or both insertions and delations, respecively. A keystroke pause can be $\mathtt{K}$, (`KUI`) or a $\mathtt{P}$ (`PUB`). 
+KU tables enumerate the sequence of KUs and the intervening keystroke pauses (`KUI`, and `PUB`) in their sequential order. The `Type` of a KU can be one of $\mathtt{I}$, $\mathtt{C}$ or $\mathtt{D}$, depending on whether the keystrokes are only insertions, deletions or both insertions and deletions, respecively. A keystroke pause can be of `Type`  $\mathtt{K}$, (`KUI`) or a $\mathtt{P}$ (`PUB`). 
 
-As `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). Thus, there is no overlapping between KUs and PUs. 
+As for each session, `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). Thus, there is no overlapping between KUs and PUs. 
 
 
 [^Bandaru]:
@@ -50,7 +50,7 @@ Their metrics include, among others:
 
 - Pause Ratio: $PR = \frac{\text{total pause time in segment}}{\text{total time in segment}}$
     
-- Average Pause Ratio:  $APR =\frac{\text{average time per pause}}{\text{average time per words}}$
+- Average Pause Ratio: $APR =\frac{\text{average time per pause}}{\text{average time per words}}$
     
 - Pause to Word Ratio: $PWR =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
 
@@ -75,11 +75,13 @@ Depending on the definition, if the `PostGap` is taken to be pause in the segmen
 
 Based on these considerations, it is possible to compute pause metrics as follows:
 
+PR = `PreGap` + `TG`/ (`Dur` +1)
+
 $$ \text{PR} = \frac{\text{PreGap + TG} {\text{Dur} +1} $$
 
 $$ \text{PWR}_S = \frac{TB} {\text{`TokS`}} $$
 
-$$ \text{PWR}_T = \frac{TB} {\text{`TokT`}} $$
+$ \text{PWR}_T = \frac{TB} {\text{`TokT`}} $
 
 $$ \text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{`TokT`}} = \frac{TG * TokT}{TB * TD} $$
 
