@@ -13,7 +13,7 @@ This section therefore, mainly focuses on new features or features for which the
 
 ## Source and Target Groups and IDs 
 
-The features `STid`, `TTid`, `SGid`, and `TGid` appear in several tables. `STid`and `TTid` are indexes of individual tokens in the source and target text respectively, and are, therefore, integers. `SGid`, and `TGid` (may) refer to gropus of words and are, therefore, strings, i.e., the concatenation of several token IDs. 
+The features `STid`, `TTid`, `SGid`, and `TGid` appear in several TPR-DB tables. `STid`and `TTid` are indexes of individual tokens in the source and target text respectively, and are, therefore, integers. `SGid` and `TGid` (may) refer to gropus of words and are, therefore, strings, i.e., the concatenation of several token IDs, e.g., $\mathtt{8+10}$. 
 
 During [keystroke-to-word mapping](#Keystroke-to-word Mapping) each keystroke is associated with a unique target word. The Id of this target word is the `TTid`, an integer, in the KD file. During [Bilingual Alignment](#Bilingual Alignment) source words and target words are connected in a way such that one target word can be associated with several source words,  i.e., the `SGid`. Each `SGid` is, in turn, aligned with one or more target words, which together are the `TGid`. Thus, the `TTid` is part of the `TGid`, but the latter may contain several elements. The `STid` is smallest number in the source group. 
 
@@ -29,7 +29,7 @@ This same principle applies to these features also in the other tables, includin
 As for the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), also the TPR-DB 3.0 fragments the flow of keystrokes into processing units. Keystroke-based processing units are separated by a pre-defined lag of time between successive keystrokes (aka inter keystroke intervals, IKIs). The TPD-DB 3.0 distinguishes between two tresholds which, respecively, separate Keystroke Units (KUs) and Production Units (PUs). KUs consist of at least one keystroke separated from the next KU by an IKI $\ge$ `KUI` (KU Interruption); PUs are separated by an IKI $\ge$ `PUB`, a PU Break. Bandaru and others [^Bandaru] define these thresholds as: 
 
 - Keystroke Units (KUs) : $KUI = 2 \times median(\text{within word IKI})$
-- Production Units (PUs) : IKI duration the quantile $\frac{\text{text length}{number of 3-word chunks}}$ 
+- Production Units (PUs) : IKI duration the quantile: $\frac{\text{text length}}{\text{number of 3-word chunks}}$ 
 
 KUs and PUs are enumerated in two separate tables. 
 KU tables enumerate the sequence of KUs and the intervening keystroke pauses (KUI, and PUB) in their sequential order. The `Type` of a KU can be one of `I`, `C` or `D`, depending on whether the keystrokes are only insertions, deletions or both insertions and delations, respecively. A keystroke pause can be `K`, (KUI) or a `P` (PUB). . 
