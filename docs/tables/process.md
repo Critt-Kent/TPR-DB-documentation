@@ -26,15 +26,14 @@ This same principle applies to these features also in the other tables, includin
 
 ## Keystroke Units (KUs) and Production Units (PUs)
 
-As for the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), also the TPR-DB 3.0 fragments the flow of keystrokes into processing units. Keystroke-based processing units are separated by a pre-defined lag of time between successive keystrokes (aka inter keystroke intervals, IKIs). The TPD-DB 3.0 distinguishes between two tresholds which, respecively, separate Keystroke Units (KUs) and Production Units (PUs). KUs consist of at least one keystroke separated from the next KU by an IKI $\ge$ `KUI` (KU Interruption); PUs are separated by an IKI $\ge$ `PUB`, a PU Break. Bandaru and others [^Bandaru] define these thresholds as: 
+As for the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), also the TPR-DB 3.0 fragments the flow of keystrokes into processing units. Keystroke-based processing units are separated by a pre-defined lag of time between successive keystrokes (aka inter keystroke intervals, IKIs). The TPD-DB 3.0 distinguishes between two tresholds which, respecively, separate Keystroke Units (KUs) and Production Units (PUs). KUs consist of at least one keystroke separated from the next KU by an IKI $\ge$ `KUI` (the KU Interruption threshold); PUs are separated by an IKI $\ge$ `PUB`, a PU Break. Bandaru and others [^Bandaru] define these thresholds as: 
 
-- Keystroke Units (KUs) : $KUI = 2 \times median(\text{within word IKI})$
-- Production Units (PUs) : IKI duration the quantile:
-  $\frac{\text{text length}}{\text{number of 3-word chunks}}$ 
+- `KUI` : $KUI = 2 \times median(\text{within word IKI})$
+- `PUB` : IKI duration of the keystroke quantile
+  $1 - \frac{\text{text length}}{\text{number of 3-word chunks}}$ 
 
 KUs and PUs are enumerated in two separate tables. 
-KU tables enumerate the sequence of KUs and the intervening keystroke pauses (KUI, and PUB) in their sequential order. The `Type` of a KU can be one of `I`, `C` or `D`, depending on whether the keystrokes are only insertions, deletions or both insertions and delations, respecively. A keystroke pause can be `K`, (KUI) or a `P` (PUB). . 
-. and is further classified with respect to the 
+KU tables enumerate the sequence of KUs and the intervening keystroke pauses (`KUI`, and `PUB`) in their sequential order. The `Type` of a KU can be one of $\mathtt{I}$, $\mathtt{C}$ or $\mathtt{D}$, depending on whether the keystrokes are only insertions, deletions or both insertions and delations, respecively. A keystroke pause can be $\mathtt{K}$, (`KUI`) or a $\mathtt{P}$ (`PUB`). 
 
 As `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). Thus, there is no overlapping between KUs and PUs. 
 
@@ -49,14 +48,11 @@ As `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). Thus, there is no 
 Lacruz and colleagues[^lacruz] introduce several metrics to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are "good indicators of cognitive demand in monolingual language production and in translation." 
 Their metrics include, among others: 
 
-- Pause Ratio:
-$PR =\frac{\text{total pause time in segment}}{\text{total time in segment}}$
+- Pause Ratio: $PR = \frac{\text{total pause time in segment}}{\text{total time in segment}}$
     
-- Average Pause Ratio:  
-$APR =\frac{\text{average time per pause}}{\text{average time per words}}$
+- Average Pause Ratio:  $APR =\frac{\text{average time per pause}}{\text{average time per words}}$
     
-- Pause to Word Ratio: 
-$PWR =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
+- Pause to Word Ratio: $PWR =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
 
 The TPR-DB provides basic features for computing these and other pause metrics on the segment level (SG). 
 The pause metrics rely on a notion of $\mathtt{pause}$, which has been a topic of discussion and controversy for many years. 
