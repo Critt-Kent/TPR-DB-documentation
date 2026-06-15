@@ -60,19 +60,16 @@ nav = [
     "process/session-props.md",
   ]},
   { "Align & Annotate" = [
-    "align-annotate/automatic.md",
-    "align-annotate/manual.md",
     "align-annotate/segmentation.md",
+    "align-annotate/manual.md",
     "align-annotate/annotate.md",
   ]},
-  { "Data Tables (3.0)" = [
-    "tables/types.md",
-    "tables/features.md",
-    "tables/session.md",
-    "tables/process.md",
-    "tables/product.md",
-  ]},
-  { "Visualize & Analyze" = [
+  { "Analyze" = [
+    "analyze/types.md",
+    "analyze/features.md",
+    "analyze/session.md",
+    "analyze/process.md",
+    "analyze/product.md",
     "analyze/utilities.md",
     "analyze/academy.md",
     "analyze/advanced.md",

@@ -1,7 +1,7 @@
 ---
-icon: lucide/server-cog
-title: Automatic Processing
-description: Documentation for the automatic processing the CRITT TPR-DB completes when uploading raw keystroke/gaze data to it.
+icon: lucide/cpu
+title: TPR Pipeline
+description: Documentation for the "TPR Pipeline," which is the automatic processing the CRITT TPR-DB completes when uploading raw keystroke/gaze data to it.
 ---
 
 
