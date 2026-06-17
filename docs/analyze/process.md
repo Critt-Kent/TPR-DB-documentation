@@ -19,7 +19,7 @@ During [keystroke-to-word mapping](#Keystroke-to-word Mapping) each keystroke is
 
 For instance, a target token "$\mathtt{8}$" can be aligned with source tokens "$\mathtt{8}$" and "$\mathtt{9}$", thus the `SGid` value is "$\mathtt{8+9}$" and `STid` is "$\mathtt{8}$". If this source group is aligned to a group of target words, say, target words "$\mathtt{8}$" and $\mathtt{10}$", the `TGid` has the vaue "$\mathtt{8+10}$".  
 
-A similar mechanism applies to fixations. While keystrokes can only occur in the target text, fixations are observed on source and trarget words. Thus, a fixation may occur on a source word $7$ which is associated with target words "$\mathtt{5}$" and "$\mathtt{6}$". If this target group is associated with source words "$\mathtt{7}$" and "$\mathtt{8}"$, the `SGid` of this fixation is "$\mathtt{7+8}$", while `TTid` is $"\mathtt{5}"$. 
+A similar mechanism applies to fixations. While keystrokes can only occur in the target text, fixations are observed on source and trarget words. Thus, a fixation may occur on a source word $7$ which is associated with target words "$\mathtt{5}$" and "$\mathtt{6}$". If this target group is associated with source words "$\mathtt{7}$" and "$\mathtt{8}$", the `SGid` of this fixation is "$\mathtt{7+8}$", while `TTid` is "$\mathtt{5}$". 
 
 This same principle applies to these features also in the other tables, including AU, KU, PU, ST, TT, etc. where the ID refers to the token, while the group feature relates to the alignment group to which the unit refers.
 
@@ -30,7 +30,7 @@ As for the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6M
 
 - `KUI` : $2 \times median(\text{within word IKI})$
 - `PUB` : IKI duration of the keystroke quantile: 
-  $1 - \frac{3*\text{text length in characters}}{\text{number of words}}$ 
+  $1 - \frac{3 \times \text{text length in characters}}{\text{number of words}}$ 
 
 KUs and PUs are enumerated in two separate tables. 
 KU tables enumerate the sequence of KUs and the intervening keystroke pauses (`KUI`, and `PUB`) in their sequential order. The `Type` of a KU can be one of $\mathtt{I}$, $\mathtt{C}$ or $\mathtt{D}$, depending on whether the keystrokes are only insertions, deletions or both insertions and deletions, respecively. A keystroke pause can be of `Type`  $\mathtt{K}$, (`KUI`) or a $\mathtt{P}$ (`PUB`). 
@@ -55,10 +55,10 @@ Their metrics include, among others:
 - Pause to Word Ratio: $PWR =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
 
 The TPR-DB provides basic features for computing these and other pause metrics on the segment level (SG). 
-The pause metrics rely on a notion of $\mathtt{pause}$, which has been a topic of discussion and controversy for many years. 
-In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed $\mathtt{pause}$ thresholds of $500ms$, $1000ms$, $2000ms$ and $5000ms$. 
+The pause metrics rely on a notion of *pause*, which has been a topic of discussion and controversy for many years. 
+In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed `Pause` thresholds of $\mathtt{500}ms$, $\mathtt{1000}ms$, $\mathtt{2000}ms$ and $\mathtt{5000}ms$. 
 
-Since pausing behavior in the TPR-DB 3.0 is taken to be translator-specific, the $\mathtt{pause}$ thresholds are now also based on the translator-specific values of `KUI` and `PUB` and include $1000ms$ `KUI`, `PUB`, $2 \times$ `PUB` and $4 \times$ `PUB`. 
+Since pausing behavior in the TPR-DB 3.0 is taken to be translator-specific, the $\mathbb{pause}$ thresholds are now also based on the translator-specific values of `KUI` and `PUB`. They also include $\mathtt{1000}ms$ `KUI`, `PUB`, $2 \times$ `PUB` and $4 \times$ `PUB`. 
 
 The following features on the SG level are involved in the TPR-DB Pause Metrics:
 
@@ -66,8 +66,8 @@ The following features on the SG level are involved in the TPR-DB Pause Metrics:
 - `Nedit`: number of times the segment was edited.
 - `PreGap` : segment initial keystroke pause; lag between the last keystroke of the previous segment (or beginning of session) and the first keystoke of the current segment.
 - `PostGap` : segment final keystroke pause; lag between the last keystroke of the current segment and the first keystoke of the next segment (or end of session).
-- `TB`$\mathtt{pause}$: number of typing bursts given the $\mathtt{pause}$ threshold.
-- `TG`$\mathtt{pause}$: total duration of pausing (gap) time given the $\mathtt{pause}$ threshold.
+- `TB`$_{pause}$: number of typing bursts given the $\mathtt{pause}$ threshold.
+- `TG`$_{pause}$: total duration of pausing (gap) time given the $\mathtt{pause}$ threshold.
 - `TD`<pause> : total duration of drafting time given the $\mathtt{pause}$ threshold.
 
 Note that  `Dur` = `TB` + `TG`. That is, neither the typing pause preceeding the typing events in a segment not the pause following it are included in `Dur`. Note also that it may be possible to edit a segment several times. However, the features are the sums if a segment is edited several times. This implies that the `PostGap` value of a segment may be different from `PreGap` of the next segment, if one of the segments was edited more than once.
@@ -79,12 +79,13 @@ PR = (`PreGap` + `TG`) / (`Dur` +1)
 
 $\text{PR} = \frac{\text{PreGap + TG} {\text{Dur} +1}$
 
-$\text{PWR}_S = \frac{TB} {\text{`TokS`}}$
+$\text{PWR}_S = \frac{TB} {\text{TokS}}$
 
-$\text{PWR}_T = \frac{TB} {\text{`TokT`}}$
+$\text{PWR}_T = \frac{TB} {\text{TokT}}$
 
 $$\text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{TokT}} = \frac{TG * TokT}{TB * TD}$$
 
+These equations are also part of the [CRITT academy](XXXX) and explained in more detail there.
 
 [^lacruz]:
     - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
@@ -92,22 +93,79 @@ $$\text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{TokT}} = \frac{TG * TokT}{TB * T
     - Lacruz et al. (2015): https://research-api.cbs.dk/ws/portalfiles/portal/58771005/Michael_Cral_2016_01.pdf
 
 
+///////////////////////////////
+
+## Pause Metrics
+
+Lacruz and colleagues[^lacruz] introduce several metrics to quantify the relationship between text production (i.e., sequences of fluent typing) and pausing, on the assumption that keystroke pauses are good indicators of cognitive demand in monolingual language production and translation.
+
+Their metrics include, among others:
+
+- **Pause Ratio (PR):** the proportion of segment time spent pausing.
+$$PR = \frac{\text{total pause time in segment}}{\text{total time in segment}}$$
+
+- **Average Pause Ratio (APR):** the average pause duration relative to the average word duration.
+$$APR = \frac{\text{average time per pause}}{\text{average time per word}}$$
+
+- **Pause-to-Word Ratio (PWR):** the number of pauses relative to the number of words in a segment.
+$$PWR = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$$
+
+The TPR-DB provides basic features for computing these and other pause metrics at the segment level (SG).
+
+The pause metrics rely on a notion of *pause*, which has been the subject of debate for many years. Following the literature, [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) used fixed `Pause` thresholds of 500ms, 1000ms, 2000ms, and 5000ms. In TPR-DB 3.0, pausing behavior is instead treated as translator-specific, so thresholds are now also based on the translator-specific values `KUI` and `PUB`: 1000ms, `KUI`, `PUB`, 2 × `PUB`, and 4 × `PUB`.
+
+The following segment-level features are used in the TPR-DB pause metrics:
+
+- `Dur`: production duration for a segment — the time between the first and last keystroke.
+- `Nedit`: the number of times the segment was edited.
+- `PreGap`: the segment-initial keystroke pause — the lag between the last keystroke of the previous segment (or the start of the session) and the first keystroke of the current segment.
+- `PostGap`: the segment-final keystroke pause — the lag between the last keystroke of the current segment and the first keystroke of the next segment (or the end of the session).
+- `TB`<sub>pause</sub>: the number of typing bursts, given a pause threshold.
+- `TG`<sub>pause</sub>: the total duration of pausing (gap) time, given a pause threshold.
+- `TD`<sub>pause</sub>: the total duration of drafting time, given a pause threshold.
+
+Note that `Dur` = `TB` + `TG`: neither the pause preceding the typing events in a segment nor the pause following them is included in `Dur`. Note also that a segment may be edited multiple times; in that case, the relevant features are summed across edits. This means a segment's `PostGap` may differ from the next segment's `PreGap`, if either segment was edited more than once.
+
+Depending on the definition adopted, if `PostGap` is counted as a pause within the segment, the number of pauses equals the number of typing bursts (`TB`) plus one; otherwise, the number of pauses is simply equal to `TB`.
+
+Based on these considerations, the pause metrics can be computed as follows:
+
+$$PR = \frac{\text{PreGap} + TG}{\text{Dur} + 1}$$
+
+$$PWR_S = \frac{TB}{\text{TokS}}$$
+
+$$PWR_T = \frac{TB}{\text{TokT}}$$
+
+$$APR = \frac{TG / TB}{TD / \text{TokT}} = \frac{TG \times \text{TokT}}{TB \times TD}$$
+
+These equations are also part of the [CRITT academy](XXXX) and are explained there in more detail.
+
+[^lacruz]:
+    - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
+    - Lacruz et al. (2014): https://aclanthology.org/2014.amta-wptp.6.pdf
+    - Lacruz et al. (2015): https://research-api.cbs.dk/ws/portalfiles/portal/58771005/Michael_Cral_2016_01.pdf
+
+
+/////////////////////////////////
+
+
+
 ## Typing Inefficiency (InEff)
 We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in) efficiency for a word, chunk or segment as:
 
-$$ InEff = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
+$$ \mathtt{InEff} = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
 
 They approximate this in terms of number of insertions and deletions:
  
-$$ InEff = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
+$$ \mathtt{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
 
 A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
 
-$$ InEff = \frac{insertions + deletions + 1}{insertions - deletions - 1} $$
+$$ \mathtt{InEff} = \frac{insertions + deletions + 1}{insertions - deletions - 1} $$
 
 Note that this measure only applies if number of insertions >= number of deletions which ensures that the result >= 1. Otherwise, if there are more deletions than insertions, as might be the case in post-editing, InEff is computed as follows, which provides a number between 0 and 1:
 
-$$ InEff = \frac{1}{deletions} $$
+$$ \mathtt{InEff} = \frac{1}{deletions} $$
 
 
 ## Gaze measures
@@ -238,16 +296,19 @@ For each of the three measures `[per|z|mad]` the TPR-DB produces the following e
 | time-normalized AUC for constriction |   `PUP_[per|mad|z]_AUC_C`|
 | time-normalized AUC for dilation |   `PUP_[per|mad|z]_AUC_D`|
 
-## Level 1 and level 2: Fixation metrics
+## Level 1 and 2: Fixation metrics
 
 These metrics have been the in the main focus of research and are documented in the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) an are FD and FU tables. 
 
 Level 1 metrics include :
-- first fixation duration `FFD`,
+- First fixation duration `FFD`,
 - Total reading times on the ST word `TrtS`, or on the target word `TrtT`
 - Number of fixations  `FixS`, `FixT` 
 
 Level 2 metrics include: 
+- first fixation duration `FFD`,
+- Total reading times on the ST word `TrtS`, or on the target word `TrtT`
+- Number of fixations  `FixS`, `FixT` 
 
 ## Level 3: Gaze Patterns
 T
