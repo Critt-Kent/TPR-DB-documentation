@@ -88,7 +88,7 @@ $PWR\_S_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokS}}$
 
 $PWR\_T_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokT}}$
 
-$$APR = \frac{TG / TB}{TD / \text{TokT}} = \frac{TG \times \text{TokT}}{TB \times TD}$$
+$APR_{\text{pause}}  = \frac{TG_{\text{pause}}  / TB_{\text{pause}} }{TD_{\text{pause}}  / \text{TokT}} = \frac{TG_{\text{pause}}  \times \text{TokT}}{TB_{\text{pause}}  \times TD_{\text{pause}} }$
 
 These equations are also part of the [CRITT academy](XXXX) and are explained there in more detail.
 
