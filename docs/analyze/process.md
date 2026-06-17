@@ -17,9 +17,9 @@ The features `STid`, `TTid`, `SGid`, and `TGid` appear in several TPR-DB tables.
 
 During [keystroke-to-word mapping](#Keystroke-to-word Mapping) each keystroke is associated with a unique target word. The Id of this target word is the `TTid`, an integer, in the KD file. During [Bilingual Alignment](#Bilingual Alignment) source words and target words are connected in a way such that one target word can be associated with several source words,  i.e., the `SGid`. Each `SGid` is, in turn, aligned with one or more target words, which together are the `TGid`. Thus, the `TTid` is part of the `TGid`, but the latter may contain several elements. The `STid` is smallest number in the source group. 
 
-For instance, a target token "$\mathtt{8}$" can be aligned with source tokens "$\mathtt{8}$" and "$\mathtt{9}$", thus the `SGid` value is "$\mathtt{8+9}$" and `STid` is "$\mathtt{8}$". If this source group is aligned to a group of target words, say, target words "$\mathtt{8}$" and $\mathtt{10}$", the `TGid` has the vaue "$\mathtt{8+10}$".  
+For instance, a target token "$\mathtt{8}$" can be aligned with source tokens "$\mathtt{8}$" and "$\mathtt{9}$", thus the `SGid` value is "$\mathtt{8+9}$" and `STid` is "$\mathtt{8}$". If this source group is aligned to a group of target words, say, target words "$\mathtt{8}$" and "$\mathtt{10}$", the `TGid` has the value "$\mathtt{8+10}$".
 
-A similar mechanism applies to fixations. While keystrokes can only occur in the target text, fixations are observed on source and trarget words. Thus, a fixation may occur on a source word $7$ which is associated with target words "$\mathtt{5}$" and "$\mathtt{6}$". If this target group is associated with source words "$\mathtt{7}$" and "$\mathtt{8}$", the `SGid` of this fixation is "$\mathtt{7+8}$", while `TTid` is "$\mathtt{5}$". 
+A similar mechanism applies to fixations. While keystrokes can only occur in the target text, fixations are observed on source and target words. Thus, a fixation may occur on a source word "$\mathtt{7}$" which is associated with target words "$\mathtt{5}$" and "$\mathtt{6}$". If this target group is associated with source words "$\mathtt{7}$" and "$\mathtt{8}$", the `SGid` of this fixation is "$\mathtt{7+8}$", while `TTid` is "$\mathtt{5}$".
 
 This same principle applies to these features also in the other tables, including AU, KU, PU, ST, TT, etc. where the ID refers to the token, while the group feature relates to the alignment group to which the unit refers.
 
@@ -43,7 +43,7 @@ As for each session, `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). 
     - Muñoz and Apfelthaler (2014): https://aclanthology.org/2014.amta-wptp.6.pdf
 
 
-## Pause Metrics
+## Keystroke pauses
 
 Lacruz and colleagues[^lacruz] introduce several metrics to quantify the relationship between text production (i.e., sequences of fluent typing or drafting) and pausing, on the assumption that keystroke pauses are good indicators of cognitive demand in monolingual language production and translation.
 
@@ -140,53 +140,10 @@ A fixation is a dynamic event that changes in time with respect to the gaze posi
 - [Pupil dilation](#Level 0: Pupilometry) (cognitive load proxy)
 - Blink rate and duration
 
-### Level 1 — fixation measures on a word level
-Level 1 measures capture what happens at one specific location, in isolation from surrounding context. Fixations are quantified based on their position on the screen (X/Y coordinates), duration, and the character/word/image looked. They reflect early, bottom-up processing:
+#### Pupillometry 
 
-- First fixation duration: how long the eye rests on first landing in a word
-- Single fixation duration: duration when the word receives only one fixation
-- Total fixation duration / dwell time: summed time across all fixations on the word
-- Number of fixations: how often the word is fixated
-- Fixation probability: whether the word was fixated at all
+While the pupil's primary function is the regulation of light intake, it also responds to cognitive and emotional states, which modulates arousal and mental effort. When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty. This makes pupil dilation a sensitive, non-invasive proxy for cognitive load.
 
-
-### Level 2 — Transitions between words 
-Level 2 measures capture how the eye moves between words. The unit of analysis is the fixation behavior on a word in relation to the neighboring words:
-
-- First-pass reading time: total fixation time of a word before the eye leaves it for the first time
-- Regression path duration: time from first fixation until the eye moves *rightward past the word*, including any regressions launched from it
-- Go-past time: total time including regressions back into earlier AOIs triggered by this region
-- Re-reading time: time spent on second and later passes
-- Regression rate in / out: number of regressions into (entering) or out of (leaving) the word
-- Refixation rate: probability of making more than one fixation before leaving
-
-
-### Level 3 — Local reading strategy, gaze path measures
-These measures describe the local reading strategy. The unit of analysis is a sequence of fixations and how the eyes move sequentially. 
-
-- Linear reading: sequential, left-to-right, top-to-bottom progression
-- Scattered fixations: non-sequential, exploratory, attention-driven
-- Regressions / refixations — backward movements, indicating comprehension difficulty or verification
-- **Scan path similarity** — comparing one participant's path to another or to an ideal (e.g., Levenshtein distance on AOI sequences)
-- **Coverage / revisit rate** — what proportion of AOIs were visited, and how often
-- **Reading order deviation** — how much the actual sequence departs from canonical order
-
-
-### Level 4 — Global gaze behavior
-Above the local gaze path level, aggregating across multiple trials or participants:
-
-- Mean gaze behavior per participant (reading speed profile, regression tendency)
-- Cluster-based reader types (skimmer vs. careful reader)
-- Learning effects across trials
-
-
-## Level 0: Pupillometry
-
-Pupil measures are a new feature in the TPR-DB 3.0. Pupillometry is the measurement of pupil size and its dynamic changes over time. While the pupil's primary function is the regulation of light intake, it also responds to cognitive and emotional states, which modulates arousal and mental effort. This makes pupil dilation a sensitive, non-invasive proxy for cognitive load.
-
-### The Basic Principle
-
-When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty.
 In reading research, pupillometry helps reveal where and when comprehension becomes effortful:
 
 - Lexical difficulty: rare or low-frequency words trigger measurable dilation compared to common words
@@ -203,7 +160,10 @@ Pupillometry has also become a tool in TPR to assess:
 
 Expertise differences — professional translators tend to show more efficient (lower or faster-recovering) pupil responses than novices on equivalent texts, suggesting automatization of sub-processes
 
-### Pupillometric Measures in the TPR-DB
+
+#### Pupillometry in the TPR-DB
+
+Pupil measures are a new feature in the TPR-DB 3.0. Pupillometry is the measurement of pupil size and its dynamic changes over time. 
 
 Given the heterogeneous nature of the TPR-DB (different eyetrackers, lighting conditions, sampling rates, etc.) the pupillometric measures are based on change in pupil diameter relative to the median pupil size in each session. 
 For each gaze sample (depending on the eyetracker sampling rate) the TPR-DB proceeds in several steps:
@@ -244,22 +204,55 @@ For each of the three measures `[per|z|mad]` the TPR-DB produces the following e
 | time-normalized AUC for constriction |   `PUP_[per|mad|z]_AUC_C`|
 | time-normalized AUC for dilation |   `PUP_[per|mad|z]_AUC_D`|
 
-## Level 1 and 2: Fixation metrics
+### Level 1 — fixation measures on a word level
+Level 1 measures capture what happens at one specific location, in isolation from surrounding context. Fixations are quantified based on their position on the screen (X/Y coordinates), duration, and the character/word/image looked. They reflect early, bottom-up processing:
+
+- First fixation duration: how long the eye rests on first landing in a word
+- Single fixation duration: duration when the word receives only one fixation
+- Total fixation duration / dwell time: summed time across all fixations on the word
+- Number of fixations: how often the word is fixated
+- Fixation probability: whether the word was fixated at all
+
+#### Fixation measures in the TPR-DB
 
 These metrics have been the in the main focus of research and are documented in the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) an are FD and FU tables. 
 
 Level 1 metrics include :
 - First fixation duration `FFD`,
 - Total reading times on the ST word `TrtS`, or on the target word `TrtT`
-- Number of fixations  `FixS`, `FixT` 
+- Number of fixations  `FixS`, `FixT`
+- 
+### Level 2 — Transitions between words 
+Level 2 measures capture how the eye moves between words. The unit of analysis is the fixation behavior on a word in relation to the neighboring words:
+
+- First-pass reading time: total fixation time of a word before the eye leaves it for the first time
+- Regression path duration: time from first fixation until the eye moves *rightward past the word*, including any regressions launched from it
+- Go-past time: total time including regressions back into earlier AOIs triggered by this region
+- Re-reading time: time spent on second and later passes
+- Regression rate in / out: number of regressions into (entering) or out of (leaving) the word
+- Refixation rate: probability of making more than one fixation before leaving
+
+
+#### Fixation transitions measures in the TPR-DB
 
 Level 2 metrics include: 
 - first fixation duration `FFD`,
 - Total reading times on the ST word `TrtS`, or on the target word `TrtT`
 - Number of fixations  `FixS`, `FixT` 
 
-## Level 3: Gaze Patterns
-T
+
+### Level 3 — Local reading strategy, gaze path measures
+These measures describe the local reading strategy. The unit of analysis is a sequence of fixations and how the eyes move sequentially. 
+
+- Linear reading: sequential, left-to-right, top-to-bottom progression
+- Scattered fixations: non-sequential, exploratory, attention-driven
+- Regressions / refixations — backward movements, indicating comprehension difficulty or verification
+- **Scan path similarity** — comparing one participant's path to another or to an ideal (e.g., Levenshtein distance on AOI sequences)
+- **Coverage / revisit rate** — what proportion of AOIs were visited, and how often
+- **Reading order deviation** — how much the actual sequence departs from canonical order
+
+#### Level 3: Gaze Patterns
+
 
 `Dur_L`
 `Dur_R`
@@ -269,6 +262,15 @@ T
 `RelDur_R`
 `RelDur_S`
 `RelDur_N`
+
+
+
+### Level 4 — Global gaze behavior
+Above the local gaze path level, aggregating across multiple trials or participants:
+
+- Mean gaze behavior per participant (reading speed profile, regression tendency)
+- Cluster-based reader types (skimmer vs. careful reader)
+- Learning effects across trials
 
 
 
@@ -288,5 +290,6 @@ According to Jakobsen (2011) translation sessions can be separated into an orien
 *[ST]: source text 
 *[KU]: Keystroke Units; sequences of keystrokes separated by a KU Interruption (KUI)
 *[PU]: Production Units; sequences of keystrokes separated by a PU break (PUB)
+*[AU]: Activity Unit 
 *[AOI]: Areas of Interest
 
