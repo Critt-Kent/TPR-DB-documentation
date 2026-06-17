@@ -45,74 +45,22 @@ As for each session, `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). 
 
 ## Pause Metrics
 
-Lacruz and colleagues[^lacruz] introduce several metrics to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are "good indicators of cognitive demand in monolingual language production and in translation." 
-Their metrics include, among others: 
-
-- Pause Ratio: $PR = \frac{\text{total pause time in segment}}{\text{total time in segment}}$
-    
-- Average Pause Ratio: $APR =\frac{\text{average time per pause}}{\text{average time per words}}$
-    
-- Pause to Word Ratio: $PWR =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
-
-The TPR-DB provides basic features for computing these and other pause metrics on the segment level (SG). 
-The pause metrics rely on a notion of *pause*, which has been a topic of discussion and controversy for many years. 
-In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed `Pause` thresholds of $\mathtt{500}ms$, $\mathtt{1000}ms$, $\mathtt{2000}ms$ and $\mathtt{5000}ms$. 
-
-Since pausing behavior in the TPR-DB 3.0 is taken to be translator-specific, the $\mathbb{pause}$ thresholds are now also based on the translator-specific values of `KUI` and `PUB`. They also include $\mathtt{1000}ms$ `KUI`, `PUB`, $2 \times$ `PUB` and $4 \times$ `PUB`. 
-
-The following features on the SG level are involved in the TPR-DB Pause Metrics:
-
-- `Dur` : production duration for a segment; duration between the first and the last keystroke.
-- `Nedit`: number of times the segment was edited.
-- `PreGap` : segment initial keystroke pause; lag between the last keystroke of the previous segment (or beginning of session) and the first keystoke of the current segment.
-- `PostGap` : segment final keystroke pause; lag between the last keystroke of the current segment and the first keystoke of the next segment (or end of session).
-- `TB`$_{pause}$: number of typing bursts given the $\mathtt{pause}$ threshold.
-- `TG`$_{pause}$: total duration of pausing (gap) time given the $\mathtt{pause}$ threshold.
-- `TD`<pause> : total duration of drafting time given the $\mathtt{pause}$ threshold.
-
-Note that  `Dur` = `TB` + `TG`. That is, neither the typing pause preceeding the typing events in a segment not the pause following it are included in `Dur`. Note also that it may be possible to edit a segment several times. However, the features are the sums if a segment is edited several times. This implies that the `PostGap` value of a segment may be different from `PreGap` of the next segment, if one of the segments was edited more than once.
-Depending on the definition, if the `PostGap` is taken to be pause in the segment, then the number of $\mathtt{pause}$ is the number of typing bursts (TB) plus one,  otherwise the number of pauses is just identical to `TB`.
-
-Based on these considerations, it is possible to compute pause metrics as follows:
-
-PR = (`PreGap` + `TG`) / (`Dur` +1)
-
-$\text{PR} = \frac{\text{PreGap + TG} {\text{Dur} +1}$
-
-$\text{PWR}_S = \frac{TB} {\text{TokS}}$
-
-$\text{PWR}_T = \frac{TB} {\text{TokT}}$
-
-$$\text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{TokT}} = \frac{TG * TokT}{TB * TD}$$
-
-These equations are also part of the [CRITT academy](XXXX) and explained in more detail there.
-
-[^lacruz]:
-    - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
-    - Lacruz et al. (2014): https://aclanthology.org/2014.amta-wptp.6.pdf
-    - Lacruz et al. (2015): https://research-api.cbs.dk/ws/portalfiles/portal/58771005/Michael_Cral_2016_01.pdf
-
-
-///////////////////////////////
-
-## Pause Metrics
-
-Lacruz and colleagues[^lacruz] introduce several metrics to quantify the relationship between text production (i.e., sequences of fluent typing) and pausing, on the assumption that keystroke pauses are good indicators of cognitive demand in monolingual language production and translation.
+Lacruz and colleagues[^lacruz] introduce several metrics to quantify the relationship between text production (i.e., sequences of fluent typing or drafting) and pausing, on the assumption that keystroke pauses are good indicators of cognitive demand in monolingual language production and translation.
 
 Their metrics include, among others:
 
 - **Pause Ratio (PR):** the proportion of segment time spent pausing.
-$$PR = \frac{\text{total pause time in segment}}{\text{total time in segment}}$$
+$PR = \frac{\text{total pausing duration in segment}}{\text{total time spent in segment}}$
 
 - **Average Pause Ratio (APR):** the average pause duration relative to the average word duration.
-$$APR = \frac{\text{average time per pause}}{\text{average time per word}}$$
+$APR = \frac{\text{average time per pause}}{\text{average time per word}}$
 
 - **Pause-to-Word Ratio (PWR):** the number of pauses relative to the number of words in a segment.
-$$PWR = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$$
+$PWR = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
 
 The TPR-DB provides basic features for computing these and other pause metrics at the segment level (SG).
 
-The pause metrics rely on a notion of *pause*, which has been the subject of debate for many years. Following the literature, [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) used fixed `Pause` thresholds of 500ms, 1000ms, 2000ms, and 5000ms. In TPR-DB 3.0, pausing behavior is instead treated as translator-specific, so thresholds are now also based on the translator-specific values `KUI` and `PUB`: 1000ms, `KUI`, `PUB`, 2 × `PUB`, and 4 × `PUB`.
+The pause metrics rely on a notion of *pause*, which has been the subject of debate for many years. Following the literature, [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) used fixed `Pause` thresholds of 500ms, 1000ms, 2000ms, and 5000ms. In TPR-DB 3.0, pausing behavior is instead treated as translator-specific, so thresholds are now also based on the translator-specific values `KUI` and `PUB`: 1000ms, `KUI`, `PUB`.
 
 The following segment-level features are used in the TPR-DB pause metrics:
 
@@ -124,17 +72,17 @@ The following segment-level features are used in the TPR-DB pause metrics:
 - `TG`<sub>pause</sub>: the total duration of pausing (gap) time, given a pause threshold.
 - `TD`<sub>pause</sub>: the total duration of drafting time, given a pause threshold.
 
-Note that `Dur` = `TB` + `TG`: neither the pause preceding the typing events in a segment nor the pause following them is included in `Dur`. Note also that a segment may be edited multiple times; in that case, the relevant features are summed across edits. This means a segment's `PostGap` may differ from the next segment's `PreGap`, if either segment was edited more than once.
+Note that for any value of the pause threshold: `Dur` = `TB`<sub>pause</sub> + `TG`<sub>pause</sub>. That is, 1) neither the pause preceding the typing events in a segment nor the pause following them is included in `Dur` and 2) depending on the duration of the pause, more share `TB` and less the . Note also that a segment may be edited multiple times; in that case, the relevant features are summed across edits. This means a segment's `PostGap` may differ from the next segment's `PreGap`, if either segment was edited more than once.
 
 Depending on the definition adopted, if `PostGap` is counted as a pause within the segment, the number of pauses equals the number of typing bursts (`TB`) plus one; otherwise, the number of pauses is simply equal to `TB`.
 
 Based on these considerations, the pause metrics can be computed as follows:
 
-$$PR = \frac{\text{PreGap} + TG}{\text{Dur} + 1}$$
+$$PR_{\text{pause}} = \frac{\text{PreGap} + TG_{\text{pause}}}{\text{Dur} + 1}$$
 
-$$PWR_S = \frac{TB}{\text{TokS}}$$
+$PWR_S_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokS}}$
 
-$$PWR_T = \frac{TB}{\text{TokT}}$$
+$PWR_T_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokT}}$
 
 $$APR = \frac{TG / TB}{TD / \text{TokT}} = \frac{TG \times \text{TokT}}{TB \times TD}$$
 
