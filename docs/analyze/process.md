@@ -52,15 +52,15 @@ Their metrics include, among others:
 - **Pause Ratio (PR):** the proportion of segment time spent pausing.
 
 
-$PR = \frac{\text{total pausing duration in segment}}{\text{total time spent in segment}}$
+$\mathtt{PR} = \frac{\text{total pausing duration in segment}}{\text{total time spent in segment}}$
 
 - **Average Pause Ratio (APR):** the average pause duration relative to the average word duration.
 
-$APR = \frac{\text{average time per pause}}{\text{average time per word}}$
+$\mathtt{APR} = \frac{\text{average time per pause}}{\text{average time per word}}$
 
 - **Pause-to-Word Ratio (PWR):** the number of pauses relative to the number of words in a segment.
 
-$PWR = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
+$\mathtt{PWR} = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
 
 The TPR-DB provides basic features for computing these and other pause metrics at the segment level (SG).
 
@@ -82,15 +82,15 @@ Depending on the definition adopted, if `PostGap` is counted as a pause within t
 
 Based on these considerations, the pause metrics can be computed as follows:
 
-$$PR_{\text{pause}} = \frac{\text{PreGap} + TG_{\text{pause}}}{\text{Dur} + 1}$$
+$$\mathtt{PR}_{\text{pause}} = \frac{\text{PreGap} + TG_{\text{pause}}}{\text{Dur} + 1}$$
 
-$PWR\_S_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokS}}$
+$$\mathtt{PWR}\_S_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokS}}$$
 
-$PWR\_T_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokT}}$
+$$\mathtt{PWR}\_T_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokT}}$$
 
-$APR_{\text{pause}}  = \frac{TG_{\text{pause}}  / TB_{\text{pause}} }{TD_{\text{pause}}  / \text{TokT}} = \frac{TG_{\text{pause}}  \times \text{TokT}}{TB_{\text{pause}}  \times TD_{\text{pause}} }$
+$$\mathtt{APR}_{\text{pause}}  = \frac{TG_{\text{pause}}  / TB_{\text{pause}} }{TD_{\text{pause}}  / \text{TokT}} = \frac{TG_{\text{pause}}  \times \text{TokT}}{TB_{\text{pause}}  \times TD_{\text{pause}} }$$
 
-These equations are also part of the [CRITT academy](XXXX) and are explained there in more detail.
+These equations are also part of the [CRITT academy](#CRITT Academy) and are explained there in more detail.
 
 [^lacruz]:
     - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
