@@ -52,15 +52,15 @@ Their metrics include, among others:
 - **Pause Ratio (PR):** the proportion of segment time spent pausing.
 
 
-$$\mathtt{PR} = \frac{\text{total pausing duration in segment}}{\text{total time spent in segment}}$$
+$$\text{PR} = \frac{\text{total pausing duration in segment}}{\text{total time spent in segment}}$$
 
 - **Average Pause Ratio (APR):** the average duration per pause relative to the average word duration.
 
-$$\mathtt{APR} = \frac{\text{average time per pause}}{\text{average time per word}}$$
+$$\text{APR} = \frac{\text{average time per pause}}{\text{average time per word}}$$
 
 - **Pause-to-Word Ratio (PWR):** the number of pauses relative to the number of words in a segment.
 
-$$\mathtt{PWR} = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$$
+$$\text{PWR} = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$$
 
 The TPR-DB provides basic features for computing these and other pause metrics at the segment level (SG).
 
@@ -82,13 +82,15 @@ Depending on the definition adopted, if `PostGap` is counted as a pause within t
 
 Based on these considerations, the pause metrics can be computed as follows:
 
-$$\mathtt{PR}_{\text{pause}} = \frac{\text{PreGap} + TG_{\text{pause}}}{\text{Dur} + 1}$$
+$$\text{PR}_{\text{pause}} = \frac{\text{PreGap} + \text{TG}_{\text{pause}}}{\text{Dur} + 1}$$
 
-$$\mathtt{PWR_S}_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokS}}$$
+$$\text{PWR_S}_{\text{pause}} = \frac{\text{TB}_{\text{pause}}}{\text{TokS}}$$
 
-$$\mathtt{PWR_T}_{\text{pause}} = \frac{TB_{\text{pause}}}{\text{TokT}}$$
+$$\text{PWR_T}_{\text{pause}} = \frac{\text{TB}_{\text{pause}}}{\text{TokT}}$$
 
-$$\mathtt{APR}_{\text{pause}}  = \frac{TG_{\text{pause}}  / TB_{\text{pause}} }{TD_{\text{pause}}  / \text{TokT}} = \frac{TG_{\text{pause}}  \times \text{TokT}}{TB_{\text{pause}}  \times TD_{\text{pause}} }$$
+$$\text{APR}_{\text{pause}}  = \frac{\text{TG}_{\text{pause}}  / \text{TB}_{\text{pause}} }
+    {\text{TD}_{\text{pause}}  / \text{TokT}} = 
+    \frac{\text{TG}_{\text{pause}}  \times \text{TokT}}{\text{TB}_{\text{pause}}  \times \text{TD}_{\text{pause}} }$$
 
 These equations are also part of the [CRITT academy](#CRITT Academy) and are explained there in more detail.
 
@@ -101,19 +103,19 @@ These equations are also part of the [CRITT academy](#CRITT Academy) and are exp
 ## Typing Inefficiency (InEff)
 We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in)efficiency for a word, chunk or segment as:
 
-$$ \mathtt{InEff} = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
+$$ \text{InEff} = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
 
 They approximate this in terms of number of insertions and deletions:
  
-$$ \mathtt{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
+$$ \text{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
 
 A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
 
-$$ \mathtt{InEff} = \frac{insertions + deletions + 1}{insertions - deletions - 1} $$
+$$ \text{InEff} = \frac{insertions + deletions + 1}{insertions - deletions - 1} $$
 
 Note that this measure only applies if number of insertions >= number of deletions which ensures that the result >= 1. Otherwise, if there are more deletions than insertions, as might be the case in post-editing, InEff is computed as follows, which provides a number between 0 and 1:
 
-$$ \mathtt{InEff} = \frac{1}{deletions} $$
+$$ \text{InEff} = \frac{1}{deletions} $$
 
 
 ## Gaze measures
@@ -137,7 +139,7 @@ A fixation is a dynamic event that changes in time with respect to the gaze posi
 
 - Saccade amplitude, velocity, direction
 - Microsaccades during fixation
-- [Pupil dilation](#Level 0: Pupilometry) (cognitive load proxy)
+- Pupil dilation (cognitive load proxy)
 - Blink rate and duration
 
 #### Pupillometry 
@@ -179,17 +181,18 @@ Since the pupil size and their changes is specific to every participant, a norma
 
 For each gaze sample point $SP$, the TPR-DB 3.0 computes an effective pupil size $SP_p$ as the mean of the left and right pupil diameters when both are available (i.e., diameter $> 0$) for binocular tracking, and otherwise falls back to the available monocular diameter. Each $SP_p$ is then normalised by the session median. In addition, TPR-DB 3.0 computes two measures of dispersion per participant session: a robust median absolute deviation and a standard deviation
 
-- $\mathtt{baseline}  = median(SP_{p})$
-- $\mathtt{pupil\_mad} = median(abs(SP_{p} -  \mathtt{baseline}))$
-- $\mathtt{pupil\_std} = std(SP_{p})$
+- $\mathtt{baseline} = \text{median}(SP_{p})$
+- $\mathtt{pupil\_mad} = \text{median}(|SP_{p} - \mathtt{baseline}|)$
+- $\mathtt{pupil\_std} = \text{std}(SP_{p})$
+
 
 An $SP$ can be said to be in a dilated or constricted state relative to the $\mathtt{baseline}$, i.e., a dilation if $SP_{p} > \mathtt{baseline}$ and a constriction if $SP_{p} <= \mathtt{baseline}$
 
 The TPR-DB then computes three sample-level measures 1. percent of change `per` from the baseline, 2. a median-centred z-score `z` and  3. a mean robust z-score `mad`:
 
-1. `per`: $SP_{\mathtt{per}} = 100 * \frac{SP_{AVG} - \mathtt{baseline}}{\mathtt{baseline}}$
-2. `z`: $SP_{\mathtt{z}} = \frac{SP_{AVG} -  \mathtt{baseline}}{\mathtt{pupil\_std}}$
-3. `mad`: $SP_{\mathtt{mad}} = \frac{SP_{AVG} -  \mathtt{baseline}}{\mathtt{pupil\_mad}}$
+1. `per`: $SP_{\text{per}} = 100 \times \frac{SP_{\text{avg}} - \mathtt{baseline}}{\mathtt{baseline}}$
+2. `z`: $SP_{\text{z}} = \frac{SP_{\text{avg}} - \mathtt{baseline}}{\mathtt{pupil\_std}}$
+3. `mad`: $SP_{\text{mad}} = \frac{SP_{\text{avg}} - \mathtt{baseline}}{\mathtt{pupil\_mad}}$
 
 For each of the three measures `[per|z|mad]` the TPR-DB produces the following eight commonly used measures in pupillometry research, for each fixation in the FD tables:
 
