@@ -268,9 +268,11 @@ While *Fixation transitions measures* capture transitions to and from a word (a 
 3. Scattered gaze patterns: neither linear nor 
 4. No gaze detected: while this is not a gazing pattern
 
-Each fixation in the FD table is tagged with a label `L`, `R`, or `S` depending whether the fixation is part of a linear, refixation or scattered gaze pattern. AU tables provide features `Dur_L`, `Dur_R`,or `Dur_S`, which indicate the sum of the fixation durations part of the three patterns, or `Dur_N` for the duration in which no gaze data was collected. The features `RelDur_L`, `RelDur_R`, `RelDur_S`, `RelDur_N` provide the proportion of the and are computed as:
+Each fixation in the FD table is tagged with a label `L`, `R`, or `S` depending whether the fixation is part of a linear, refixation or scattered gaze pattern. AU tables provide features `Dur_L`, `Dur_R`,or `Dur_S`, which indicate the sum of the fixation durations part of the three patterns, or `Dur_N` for the duration in which no gaze data was collected. The features `RelDur_L`, `RelDur_R`, `RelDur_S`, `RelDur_N` provide the proportion of the gazing patterns and are computed as:
 
-$\text(RelDur}_{\text{label}} = \frac{\text{Dur}_{\text{label}}}{\text{Dur}}$
+$$\text{RelDur}_{\text{label}} = \frac{\text{Dur}_{\text{label}}}{\text{Dur}}$$
+
+
 
 
 ### Level 4 — Global gaze behavior
