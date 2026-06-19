@@ -76,7 +76,7 @@ The following segment-level features are used in the TPR-DB pause metrics:
 - `TD`<sub>pause</sub>: the total duration in typing bursts, given a pause threshold.
 - `TG`<sub>pause</sub>: the total pausing duration, i.e., the gap between bursts, given a pause threshold.
 
-Note that for any pause threshold value, `Dur` = `TD`<sub>pause</sub> + `TG`<sub>pause</sub>. That is, 1) neither the `PreGap` preceding the typing events in a segment nor the `PostGap` following them is included in `Dur` and 2) depending on the duration of the pause threshold, the total duration is distributed differently `TD`<sub>pause</sub> and `TG`<sub>pause</sub>: longer thresholds increase the total drafting duration and proportinally shorten the total pauseing duration. Note also that a segment may be edited multiple times; in that case, the relevant features are summed across edits. This means a segment's `PostGap` may differ from the next segment's `PreGap`, if either segment was edited more than once.
+Note that for any pause threshold value, `Dur` = `TD`<sub>pause</sub> + `TG`<sub>pause</sub>. That is, 1) neither the `PreGap` preceding the first keystroke event in a segment nor the `PostGap` following the last keystroke in that segment is included in `Dur` and 2) depending on the duration of the pause threshold, the total duration is distributed differently across `TD`<sub>pause</sub> and `TG`<sub>pause</sub>: longer thresholds increase the total drafting duration (`TD`); they decreas the number of typing bursts (`TB`) and proportinally shorten the total pausing duration (`TG`). Note that a segment may be edited multiple times; in that case, the relevant features are summed across edits. This means a segment's `PostGap` may differ from the next segment's `PreGap`, if a segment was edited more than once.
 
 Depending on the definition adopted, if `PostGap` is counted as a pause within the segment, the number of pauses equals the number of typing bursts (`TB`) plus one; otherwise, the number of pauses is simply equal to `TB`.
 
@@ -111,11 +111,11 @@ $$ \text{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions -
 
 A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
 
-$$ \text{InEff} = \frac{insertions + deletions + 1}{insertions - deletions - 1} $$
+$$ \text{InEff} = \frac{\text{insertions} + \text{deletions} + 1}{\text{insertions} - \text{deletions} - 1} $$
 
 Note that this measure only applies if number of insertions >= number of deletions which ensures that the result >= 1. Otherwise, if there are more deletions than insertions, as might be the case in post-editing, InEff is computed as follows, which provides a number between 0 and 1:
 
-$$ \text{InEff} = \frac{1}{deletions} $$
+$$ \text{InEff} = \frac{1}{\text{deletions}} $$
 
 
 ## Gaze measures
@@ -207,7 +207,7 @@ For each of the three measures `[per|z|mad]` the TPR-DB produces the following e
 | time-normalized AUC for constriction |   `PUP_[per|mad|z]_AUC_C`|
 | time-normalized AUC for dilation |   `PUP_[per|mad|z]_AUC_D`|
 
-### Level 1 — fixation measures on a word level
+### Level 1 — Fixation measures on a word level
 Level 1 measures capture what happens at one specific location, in isolation from surrounding context. Fixations are quantified based on their position on the screen (X/Y coordinates), duration, and the character/word/image looked. They reflect early, bottom-up processing:
 
 - First fixation duration: how long the eye rests on first landing in a word
@@ -249,7 +249,7 @@ Level 2 metrics include:
 - TO BE COMPLETED
 
 
-### Level 3 — gaze path measures and local reading strategies 
+### Level 3 — Gaze path measures and local reading strategies 
 These measures describe the local reading strategy. The unit of analysis is a sequence of fixations and how the eyes move sequentially. 
 
 - Linear reading: sequential, left-to-right, top-to-bottom progression
@@ -261,15 +261,14 @@ These measures describe the local reading strategy. The unit of analysis is a se
 
 #### Gaze patterns in the TPR-DB
 
-While *Fixation transitions measures* capture transitions to and from a word (a static AOI, e.g., a chunk or segment) *Local reading strategies* describe sequences of gaze patterns. These gaze patterns may occur on the source text or on the target text. As soon as the eyes switch the window, a new pattern starts. We make a distinction between three types of gaze patterns:
+While *Fixation transitions measures* capture transitions to and from a word (a static AOI, e.g., a chunk or segment) *Local reading strategies* describe sequences of gaze patterns. These gaze patterns may occur on the source text or on the target text. As soon as the eyes switch from the source to the target window or vice versa, a new pattern starts. We make a distinction between three types of gaze patterns:
 
 1. Linear reading: sequences of mainly progressive fixations indicating successive reading, i.e., input of new information. 
-2. Refixation/regressive reading: sequences of fixations on the same or on neighboring words, indicating indicating difficulties, i.e., input of new information. 
-3. Scattered gaze patterns: neither linear nor 
-4. No gaze detected: while this is not a gazing pattern
+2. Refixation/regressive reading: sequences of fixations on the same or on neighboring words, probably indicating comprehension difficulties. 
+3. Scattered gaze patterns: sequences of fixations that do not fit the two categories above
+4. No gaze detected: a non-gazing pattern
 
-
-Each fixation in the FD table is tagged with a label `L`, `R`, or `S` depending on whether the fixation is part of a linear, refixation, or scattered gaze pattern. AU tables provide features `Dur_L`, `Dur_R`, and `Dur_S`, which indicate the sum of fixation durations belonging to each of the three patterns, and `Dur_N` for the duration in which no gaze data was collected. The features `RelDur_L`, `RelDur_R`, `RelDur_S`, and `RelDur_N` provide the proportion of total gaze time spent in each pattern, computed as:
+Each fixation in the $\mathbb{FD}$ table is tagged with a label `L`, `R`, or `S` depending on whether the fixation is part of a linear, refixation, or scattered gaze pattern. AU tables provide features `Dur_L`, `Dur_R`, and `Dur_S`, which indicate the sum of fixation durations belonging to each of the three patterns, and `Dur_N` for the duration in which no gaze data was collected. The features `RelDur_L`, `RelDur_R`, `RelDur_S`, and `RelDur_N` provide the proportion of total gaze time spent in each pattern, computed as:
 $$\text{RelDur}_{\text{label}} = \frac{\text{Dur}_{\text{label}}}{\text{Dur}}$$
 
 
@@ -284,12 +283,13 @@ Above the local gaze path level, aggregating across multiple trials or participa
 
 as of now there are no such measures in the TPR-DB
 
-## Translation Phases
+## Translation Phases in the TPR-DB
 According to Jakobsen (2011) translation sessions can be separated into an orientation phase (O), a drafting phase (D) and a revision phase (R). Drafting starts with the first keystroke and the time before is defined as the orientation phase. We adopt this definition, even though it may not always be entirely correct. Some translators actually start with testing the keyboard, by typing some characters, and then start the actual orientation phase. We will ignore these cases. According to Jakobsen, drafting ends when the last word has been typed. We operationalize this definitionas follows: 
 
 1. We take the last word in the TT, rather than the translation of the last ST word.
 2. Drafting produces at least 50% of the keystrokes in a translation sessions.
 3. Drafting proceeds sequentially, i.e., successive keystrokes are no further than [-5 .. +2] word IDs and no more than [-20 .. +10] cursor positions apart. Drafting ends when five (or more) successive keystrokes not in a sequential.
+
 
 *[IKI]: inter keystroke intervals
 *[AUC]: Area Under the Curve: cumulative dilation over a time window
