@@ -185,9 +185,9 @@ An $SP$ can be said to be in a dilated or constricted state relative to the $\ma
 
 Because pupillary responses unfold over several hundred milliseconds, pupil dilatipon measures should generally be aggregated over higher-level units such as words, AUs, PUs, HORF states, translation phases, or segments before substantive interpretation. The TPR-DB computes three sample-level measures 1. percent of change `per` from the baseline, 2. a mean robust std-score `mad` 3. a median-centred z-score `std`:
 
-1. `per`: percentage change from session median $SP_{\text{per}} = 100 \times \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{baseline}}$
-2. `mad`: median-centred MAD-standardised pupil size $SP_{\text{mad}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_mad}}$
-3. `std`: median-centred SD-standardised pupil size $SP_{\text{std}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_std}}$
+1. `per`: percentage change from $\mathtt{baseline} (session median): $SP_{\text{per}} = 100 \times \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{baseline}}$
+2. `mad`: median-centred MAD-standardized pupil size: $SP_{\text{mad}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_mad}}$
+3. `std`: median-centred SD-standardized pupil size: $SP_{\text{std}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_std}}$
 
 
 For each of the three measures (`[per|std|mad]`) the TPR-DB produces the following eight measures in pupillometry research, for each fixation in the FD tables:
