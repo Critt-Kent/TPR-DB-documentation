@@ -144,7 +144,7 @@ A fixation is a dynamic event that changes in time with respect to the gaze posi
 
 #### Pupillometry 
 
-While the pupil's primary function is the regulation of light intake, it also responds to cognitive and emotional states, which modulates arousal and mental effort. When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty. This makes pupil dilation a sensitive, non-invasive proxy for cognitive load.
+While the pupil's primary function is the regulation of light intake, it also responds to cognitive and emotional states, which modulates arousal and mental effort. When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty. This makes pupil diameter a sensitive, non-invasive proxy for cognitive effort and task-related arousal.
 
 In reading research, pupillometry helps reveal where and when comprehension becomes effortful:
 
@@ -167,45 +167,52 @@ Expertise differences — professional translators tend to show more efficient (
 
 Pupil measures are a new feature in the TPR-DB 3.0. Pupillometry is the measurement of pupil size and its dynamic changes over time. 
 
-Given the heterogeneous nature of the TPR-DB (different eyetrackers, lighting conditions, sampling rates, etc.) the pupillometric measures are based on change in pupil diameter relative to the median pupil size in each session. 
-For each gaze sample (depending on the eyetracker sampling rate) the TPR-DB proceeds in several steps:
+Given the heterogeneous nature of the TPR-DB (different eyetrackers with sampling rates, different lighting conditions and recording environments, etc.) and since the pupil size and their changes is specific to every participant, a normalization is required. To address this issue, the TPR-DB computes pupil size baseline as the *median* pupil diameter (rather than the mean) for every translation session. The pupillometric measures are then based on change in pupil diameter relative to the baseline in each session. For each gaze sample point ($SP$, depending on the eyetracker sampling rate) the TPR-DB computes pupilometric measures in several steps:
 
 1. Average pupil diameter across both eyes for binocular gaze sample data   
-2. Compute median pupil diameter across entire session as a baseline  
+2. Compute median pupil diameter across an entire session as a baseline  
 4. Interpolate over blink gaps, fill edges for sequences of gaze samples  
 3. Compute deviation from baseline in various ways for each gaze sample  
-5. Compute pupillometric measures for each fixation
+5. Compute pupillometric measures for each fixation or other unit
 
-
-Since the pupil size and their changes is specific to every participant, a normalization is required. To address this issue, the TPR-DB computes pupil size baseline as the median pupil diameter for every translation session.
-
-For each gaze sample point $SP$, the TPR-DB 3.0 computes an effective pupil size $SP_p$ as the mean of the left and right pupil diameters when both are available (i.e., diameter $> 0$) for binocular tracking, and otherwise falls back to the available monocular diameter. Each $SP_p$ is then normalised by the session median. In addition, TPR-DB 3.0 computes two measures of dispersion per participant session: a robust median absolute deviation and a standard deviation
+For each gaze sample point $SP$, the TPR-DB 3.0 computes an effective pupil size $SP_p$ as the mean of the left and right pupil diameters when both are available (i.e., diameter $> 0$) for binocular tracking, and otherwise falls back to the available monocular diameter. Each $SP_p$ is then normalised by the session median. The TPR-DB 3.0 computes two measures of dispersion per participant session: a robust median absolute deviation (MAD) and a standard deviation:
 
 - $\mathtt{baseline} = \text{median}(SP_{p})$
 - $\mathtt{pupil\_mad} = \text{median}(|SP_{p} - \mathtt{baseline}|)$
 - $\mathtt{pupil\_std} = \text{std}(SP_{p})$
 
-
 An $SP$ can be said to be in a dilated or constricted state relative to the $\mathtt{baseline}$, i.e., a dilation if $SP_{p} > \mathtt{baseline}$ and a constriction if $SP_{p} <= \mathtt{baseline}$
 
-The TPR-DB then computes three sample-level measures 1. percent of change `per` from the baseline, 2. a median-centred z-score `z` and  3. a mean robust z-score `mad`:
+Because pupillary responses unfold over several hundred milliseconds, pupil dilatipon measures should generally be aggregated over higher-level units such as words, AUs, PUs, HORF states, translation phases, or segments before substantive interpretation. The TPR-DB computes three sample-level measures 1. percent of change `per` from the baseline, 2. a mean robust std-score `mad` 3. a median-centred z-score `std`:
 
-1. `per`: $SP_{\text{per}} = 100 \times \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{baseline}}$
-2. `z`: $SP_{\text{z}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_std}}$
-3. `mad`: $SP_{\text{mad}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_mad}}$
+1. `per`: percentage change from session median $SP_{\text{per}} = 100 \times \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{baseline}}$
+2. `mad`: median-centred MAD-standardised pupil size $SP_{\text{mad}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_mad}}$
+3. `std`: median-centred SD-standardised pupil size $SP_{\text{std}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_std}}$
 
-For each of the three measures `[per|z|mad]` the TPR-DB produces the following eight commonly used measures in pupillometry research, for each fixation in the FD tables:
+
+For each of the three measures (`[per|std|mad]`) the TPR-DB produces the following eight measures in pupillometry research, for each fixation in the FD tables:
+
 
 | Description | Features in the FD table |
 |------|---------| 
-| max. pupil size, 95th percentile (peak)| `PUP_[per|mad|z]_max`|
-| min. pupil size, 5th percentile (floor) | `PUP_[per|mad|z]_min`|
-| mean pupil size | `PUP_[per|mad|z]_mean`|
-| standard deviation (SD) | `PUP_[per|mad|z]_mean`|
-| Area Under the Curve (AUC) |   `PUP_[per|mad|z]_AUC`|
-| time-normalized AUC |   `PUP_[per|mad|z]_AUC_N`|
-| time-normalized AUC for constriction |   `PUP_[per|mad|z]_AUC_C`|
-| time-normalized AUC for dilation |   `PUP_[per|mad|z]_AUC_D`|
+| mean pupil size | `PUP_[per|mad|std]_mean`|
+| max. pupil size, 95th percentile (peak)| `PUP_[per|mad|std]_max`|
+| min. pupil size, 5th percentile (floor) | `PUP_[per|mad|std]_min`|
+| standard deviation (SD) | `PUP_[per|mad|std]_std`|
+| Area Under the Curve (AUC) |   `PUP_[per|mad|std]_AUC`|
+| time-normalized AUC |   `PUP_[per|mad|std]_AUC_N`|
+| time-normalized AUC for constriction |   `PUP_[per|mad|std]_AUC_C`|
+| time-normalized AUC for dilation |   `PUP_[per|mad|std]_AUC_D`|
+
+
+We make a distinction between primary pupil measures, the mean measures (`PUP_per_mean` and `PUP_std_mean`, `PUP_mad_mean`), secondary measures, the max and min measures (`PUP_per_max`; `PUP_per_min` and `PUP_per_sd`); and exploratory measures, the variants of AUC, time-normalised AUC, time-normalised AUC for constriction and time-normalised AUC for dilation.
+
+
+zMAD​= x - median(x) divided by 1.4826 times MAD​
+The factor 1.4826 arises from the relationship between the median absolute deviation (MAD) and the standard deviation under normality. It ensures that:
+if the data are approximately normally distributed, the robust z-score is on the same scale as a conventional z-score;
+if the data contain outliers, the estimate remains much more stable than the standard deviation.
+
 
 ### Level 1 — Fixation measures on a word level
 Level 1 measures capture what happens at one specific location, in isolation from surrounding context. Fixations are quantified based on their position on the screen (X/Y coordinates), duration, and the character/word/image looked. They reflect early, bottom-up processing:
@@ -269,6 +276,7 @@ While *Fixation transitions measures* capture transitions to and from a word (a 
 4. No gaze detected: a non-gazing pattern
 
 Each fixation in the $\mathbb{FD}$ table is tagged with a label `L`, `R`, or `S` depending on whether the fixation is part of a linear, refixation, or scattered gaze pattern. AU tables provide features `Dur_L`, `Dur_R`, and `Dur_S`, which indicate the sum of fixation durations belonging to each of the three patterns, and `Dur_N` for the duration in which no gaze data was collected. The features `RelDur_L`, `RelDur_R`, `RelDur_S`, and `RelDur_N` provide the proportion of total gaze time spent in each pattern, computed as:
+
 $$\text{RelDur}_{\text{label}} = \frac{\text{Dur}_{\text{label}}}{\text{Dur}}$$
 
 
@@ -286,7 +294,7 @@ as of now there are no such measures in the TPR-DB
 ## Translation Phases in the TPR-DB
 According to Jakobsen (2011) translation sessions can be separated into an orientation phase (O), a drafting phase (D) and a revision phase (R). Drafting starts with the first keystroke and the time before is defined as the orientation phase. We adopt this definition, even though it may not always be entirely correct. Some translators actually start with testing the keyboard, by typing some characters, and then start the actual orientation phase. We will ignore these cases. According to Jakobsen, drafting ends when the last word has been typed. We operationalize this definitionas follows: 
 
-1. We take the last word in the TT, rather than the translation of the last ST word.
+1. We take the last word in the target text, rather than the translation of the last source text word.
 2. Drafting produces at least 50% of the keystrokes in a translation sessions.
 3. Drafting proceeds sequentially, i.e., successive keystrokes are no further than [-5 .. +2] word IDs and no more than [-20 .. +10] cursor positions apart. Drafting ends when five (or more) successive keystrokes not in a sequential.
 
