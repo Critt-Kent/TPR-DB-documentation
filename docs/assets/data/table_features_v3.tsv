@@ -1,0 +1,499 @@
+Table	Feature	Description	Type
+PU	AUid	IDs of AUs covered in the unit	string: '1+2+ ..'
+ST	AUid	IDs of AUs covered in the unit	string: '1+2+ ..'
+TT	AUid	IDs of AUs covered in the unit	string: '1+2+ ..'
+PU	AUtype	Types of AUs covered in the unit	string: '1+2+ ..'
+KD	Border	Keystroke at word border: within word, (W) white space (S) deletion (D)	cat: {WW, SW, WS, …}
+KD	Char	Characters typed or deleted	string
+ST	Cross	Cross value	int: -n .. +m
+TT	Cross	Cross value	int: -n .. +m
+AG	CrossS	Cross value from ST view	int: -n .. +m
+AG	CrossT	Cross value from TT view	int: -n .. +m
+FD	Cur	Cursor position in text	int
+KD	Cur	Cursor position in text	int
+ST	Cur	Cursor position in text	int
+TT	Cur	Cursor position in text	int
+AG	Del	Number of deletions in the unit	int
+AU	Del	Number of deletions in the unit	int
+HC	Del	Number of deletions in the unit	int
+HS	Del	Number of deletions in the unit	int
+KU	Del	Number of deletions in the unit	int
+PU	Del	Number of deletions in the unit	int
+SG	Del	Number of deletions in the unit	int
+SS	Del	Number of deletions in the unit	int
+ST	Del	Number of deletions in the unit	int
+TT	Del	Number of deletions in the unit	int
+AG	Del1	Number of deletions in the first micro unit	int
+ST	Del1	Number of deletions in the first micro unit	int
+TT	Del1	Number of deletions in the first micro unit	int
+AG	Del2	Number of deletions in the second micro unit	int
+ST	Del2	Number of deletions in the second micro unit	int
+TT	Del2	Number of deletions in the second micro unit	int
+AG	DelR	Number of deletions in the revision phase micro unit	int
+TT	DelR	Number of deletions in the revision phase micro unit	int
+ST	deprel	stanza: dependency relation	string
+TT	deprel	stanza: dependency relation	string
+EX	DFix	Total fixation duration	
+SS	DraftTime	Timestamp of the first keystroke (start of drafting)	int
+AG	Dur	Total duration of the unit (in ms)	int: 0 .. n
+AU	Dur	Total duration of the unit (in ms)	int: 0 .. n
+EX	Dur	Total duration of the unit (in ms)	int: 0 .. n
+FD	Dur	Total duration of the unit (in ms)	int: 0 .. n
+FU	Dur	Total duration of the unit (in ms)	int: 0 .. n
+HC	Dur	Total duration of the unit (in ms)	int: 0 .. n
+HS	Dur	Total duration of the unit (in ms)	int: 0 .. n
+KD	Dur	Total duration of the unit (in ms)	int: 0 .. n
+KU	Dur	Total duration of the unit (in ms)	int: 0 .. n
+PU	Dur	Total duration of the unit (in ms)	int: 0 .. n
+SG	Dur	Total duration of the unit (in ms)	int: 0 .. n
+SS	Dur	Total duration of the unit (in ms)	int: 0 .. n
+ST	Dur	Total duration of the unit (in ms)	int: 0 .. n
+TT	Dur	Total duration of the unit (in ms)	int: 0 .. n
+AU	Dur_L	Duration of linear reading	int: 0 .. n
+HC	Dur_L	Duration of linear reading	int: 0 .. n
+HS	Dur_L	Duration of linear reading	int: 0 .. n
+AU	Dur_N	Duration with no gaze data	int: 0 .. n
+HC	Dur_N	Duration with no gaze data	int: 0 .. n
+HS	Dur_N	Duration with no gaze data	int: 0 .. n
+AU	Dur_R	Duration of refixation/regressive reading	int: 0 .. n
+HC	Dur_R	Duration of refixation/regressive reading	int: 0 .. n
+HS	Dur_R	Duration of refixation/regressive reading	int: 0 .. n
+AU	Dur_S	Duration of scattered reading	int: 0 .. n
+HC	Dur_S	Duration of scattered reading	int: 0 .. n
+HS	Dur_S	Duration of scattered reading	int: 0 .. n
+AG	Dur1	Duration of the first micro unit	int: 0 .. n
+ST	Dur1	Duration of the first micro unit	int: 0 .. n
+TT	Dur1	Duration of the first micro unit	int: 0 .. n
+AG	Dur2	Duration of the second micro unit	int: 0 .. n
+ST	Dur2	Duration of the second micro unit	int: 0 .. n
+TT	Dur2	Duration of the second micro unit	int: 0 .. n
+AG	DurR	Duration of micro unit in revision phase	int: 0 .. n
+ST	DurR	Duration of micro unit in revision phase	int: 0 .. n
+TT	DurR	Duration of micro unit in revision phase	int: 0 .. n
+PU	DurTU	Duration of Translation Unit: TU = duration of PU + duration preceeding pause	int: 0 .. n
+AG	Edit	Total edited string	string
+AG	Edit	Total edited string	string
+EX	Edit	Total edited string	string
+KU	Edit	Total edited string	string
+PU	Edit	Total edited string	string
+ST	Edit	Total edited string	string
+TT	Edit	Total edited string	string
+AG	Edit1	Edited operations in the first micro unit	string
+ST	Edit1	Edited operations in the first micro unit	string
+TT	Edit1	Edited operations in the first micro unit	string
+AG	Edit2	Edited operations in the second micro unit	string
+ST	Edit2	Edited operations in the second micro unit	string
+TT	Edit2	Edited operations in the second micro unit	string
+AG	EditR	Edited operations during the revision phase	string
+ST	EditR	Edited operations during the revision phase	string
+TT	EditR	Edited operations during the revision phase	string
+AG	End	Timestamp when the unit ends (in ms)	int
+AU	End	Timestamp when the unit ends (in ms)	int
+EX	End	Timestamp when the unit ends (in ms)	int
+FD	End	Timestamp when the unit ends (in ms)	int
+FU	End	Timestamp when the unit ends (in ms)	int
+HS	End	Timestamp when the unit ends (in ms)	int
+KU	End	Timestamp when the unit ends (in ms)	int
+PU	End	Timestamp when the unit ends (in ms)	int
+AG	End1	Timestamp when the first micro unit ends (in ms)	int
+ST	End1	Timestamp when the first micro unit ends (in ms)	int
+TT	End1	Timestamp when when first micro unit ends (in ms)	int
+AG	End2	Timestamp when second micro unit ends (in ms)	int
+HC	Fdur		
+ST	feats	stanza: morphological features	string
+TT	feats	stanza: morphological features	string
+AG	FFDurS	First fixation duration on ST word	int
+ST	FFDurS	First fixation duration on ST word	int
+TT	FFDurS	First fixation duration on ST word	int
+AG	FFDurT	First fixation duration on TT word	int
+ST	FFDurT	First fixation duration on TT word	int
+TT	FFDurT	First fixation duration on TT word	int
+AG	FFTimeS	Timestamp of first fixation on ST word	int
+ST	FFTimeS	Timestamp of first fixation on ST word	int
+TT	FFTimeS	Timestamp of first fixation on ST word	int
+AG	FFTimeT	Timestamp of first fixation on TT word	int
+ST	FFTimeT	Timestamp of first fixation on TT word	int
+TT	FFTimeT	Timestamp of first fixation on TT word	int
+FU	Fix	Total number of fixations	int
+AU	FixPerW	Average number of fixations per word	Float
+SS	FixRatio	Precentage of time in fixations (100 * total session time / total duration of fixations)	Float
+AG	FixS	Number of fixations on ST	int
+AU	FixS	Number of fixations on ST	int
+SG	FixS	Number of fixations on ST	int
+SS	FixS	Number of fixations on ST	int
+ST	FixS	Number of fixations on ST	int
+TT	FixS	Number of fixations on ST	int
+AG	FixT	Number of fixations on TT	int
+AU	FixT	Number of fixations on TT	int
+SG	FixT	Number of fixations on TT	int
+SS	FixT	Number of fixations on TT	int
+ST	FixT	Number of fixations on TT	int
+TT	FixT	Number of fixations on TT	int
+EX	Focus	Title of active GUI window	string
+AU	GazePath	Sequence of fixations on ST/TT word IDs	string
+FU	GazePath	Sequence of fixations on ST/TT word IDs	string
+AU	GPlabel	Label of gaze path	{L,R,S,N}
+FD	GPlabel	Label of gaze path	{L,R,S,N}
+HS	HCid	ID of embedding HORF cycle	
+HC	Hdur	Duration of Hesitation	
+ST	head	Stanza: head feature of dependency relation	string
+TT	head	Stanza: head feature of dependency relation	string
+HC	HORF	Type HORF state	{H,O,R,F}
+HS	HORF	Type HORF state	{H,O,R,F}
+AU	HSid	ID of HORF state	int: 1 .. n
+SS	HZ	Sample frequency of eyetracker (Herz)	int
+AG	Id	Unique unit ID of unit per session	int: 1 .. n
+AU	Id	Unique unit ID of unit per session	int: 1 .. n
+EX	Id	Unique unit ID of unit per session	int: 1 .. n
+FD	Id	Unique unit ID of unit per session	int: 1 .. n
+FU	Id	Unique unit ID of unit per session	int: 1 .. n
+HC	Id	Unique unit ID of unit per session	int: 1 .. n
+HS	Id	Unique unit ID of unit per session	int: 1 .. n
+KD	Id	Unique unit ID of unit per session	int: 1 .. n
+KU	Id	Unique unit ID of unit per session	int: 1 .. n
+PU	Id	Unique unit ID of unit per session	int: 1 .. n
+SG	Id	Unique unit ID of unit per session	int: 1 .. n
+SS	Id	Unique unit ID of unit per session	int: 1 .. n
+ST	Id	Unique unit ID of unit per session	int: 1 .. n
+TT	Id	Unique unit ID of unit per session	int: 1 .. n
+AG	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	float
+ST	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	float
+TT	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	float
+AG	Ins	Number of insertions	int: 1.. n
+AU	Ins	Number of insertions	int: 1.. n
+HC	Ins	Number of insertions	int: 1.. n
+HS	Ins	Number of insertions	int: 1.. n
+KU	Ins	Number of insertions	int: 1.. n
+PU	Ins	Number of insertions	int: 1.. n
+SG	Ins	Number of insertions	int: 1.. n
+SS	Ins	Number of insertions	int: 1.. n
+ST	Ins	Number of insertions	int: 1.. n
+TT	Ins	Number of insertions	int: 1.. n
+AG	Ins1	Number of insertions in first micro unit	int: 1.. n
+ST	Ins1	Number of insertions in first micro unit	int: 1.. n
+TT	Ins1	Number of insertions in first micro unit	int: 1.. n
+AG	Ins2	Number of insertions in second micro unit	int: 1.. n
+ST	Ins2	Number of insertions in second micro unit	int: 1.. n
+TT	Ins2	Number of insertions in second micro unit	int: 1.. n
+AG	InsR	Number of insertions in revision phase	int: 1.. n
+TT	InsR	Number of insertions in revision phase	int: 1.. n
+HS	KUcount	Number of embedded Kus	
+AU	KUdur	Duration of embedding AU	
+AU	KUI	Keystroke unit interruption: 2*WW IKI	int
+FU	KUI	Keystroke unit interruption: 2*WW IKI	int
+KU	KUI	Keystroke unit interruption: 2*WW IKI	int
+PU	KUI	Keystroke unit interruption: 2*WW IKI	int
+SG	KUI	Keystroke unit interruption: 2*WW IKI	int
+SS	KUI	Keystroke unit interruption: 2*WW IKI	int
+AU	KUid	Keystroke unit ID	int
+HS	KUseq	Sequence of KU IDs	string
+AU	KUtype	Sequence of KU types	string
+ST	Lemma	stanza: lemma of word	string
+TT	Lemma	stanza: lemma of word	string
+AG	LenS	Length of ST in number of characters	int
+SG	LenS	Length of ST in number of characters	int
+SS	LenS	Length of ST in number of characters	int
+AG	LenT	Length of TT in number of characters	int
+SG	LenT	Length of TT in number of characters	int
+SS	LenT	Length of TT in number of characters	int
+AG	MU1rtS	ST reading time during first micro unit	int
+ST	MU1rtS	ST reading time during first micro unit	int
+TT	MU1rtS	ST reading time during first micro unit	int
+AG	MU1rtT	TT reading time during first micro unit	int
+ST	MU1rtT	TT reading time during first micro unit	int
+TT	MU1rtT	TT reading time during first micro unit	int
+ST	multi_ner	stanza: label for Named Entity	string
+TT	multi_ner	stanza: label for Named Entity	string
+AG	Munit	Number of micro units	int
+ST	Munit	Number of micro units	int
+TT	Munit	Number of micro units	int
+SG	Nedit	Number of segment revisions (edits )	int
+ST	ner	stanza: named entity label	string
+TT	ner	stanza: named entity label	string
+EX	nFix	Number of fixations	int
+HC	Odur	Duration of embedded orientation HORF state	int
+AG	OrtS	ST reading time preceding first keystroke (ST orientation)	int
+ST	OrtS	ST reading time preceding first keystroke (ST orientation)	int
+TT	OrtS	ST reading time preceding first keystroke (ST orientation)	int
+AG	OrtT	TT reading time preceding first keystroke (TT orientation)	int
+ST	OrtT	TT reading time preceding first keystroke (TT orientation)	int
+TT	OrtT	TT reading time preceding first keystroke (TT orientation)	int
+AG	Part	Participant number in study	string:P[0-9]+
+AU	Part	Participant number in study	string:P[0-9]+
+EX	Part	Participant number in study	string:P[0-9]+
+FD	Part	Participant number in study	string:P[0-9]+
+FU	Part	Participant number in study	string:P[0-9]+
+HC	Part	Participant number in study	string:P[0-9]+
+HS	Part	Participant number in study	string:P[0-9]+
+KD	Part	Participant number in study	string:P[0-9]+
+KU	Part	Participant number in study	string:P[0-9]+
+PU	Part	Participant number in study	string:P[0-9]+
+SG	Part	Participant number in study	string:P[0-9]+
+SS	Part	Participant number in study	string:P[0-9]+
+ST	Part	Participant number in study	string:P[0-9]+
+TT	Part	Participant number in study	string:P[0-9]+
+AG	Pause	Keystroke pause preceeding the unit	int
+KD	Pause	Keystroke pause preceeding the unit	int
+PU	Pause	Keystroke pause preceeding the unit	int
+AG	Pause1	Keystroke pause preceeding the first micro unit	int
+ST	Pause1	Keystroke pause preceeding the first micro unit	int
+TT	Pause1	Keystroke pause preceeding the first micro unit	int
+AG	Pause2	Keystroke pause preceeding the second micro unit	int
+ST	Pause2	Keystroke pause preceeding the second micro unit	int
+TT	Pause2	Keystroke pause preceeding the second micro unit	int
+AG	PauseR	Keystroke pause preceeding the micro unit in the revision phase	int
+ST	PauseR	Keystroke pause preceeding the micro unit in the revision phase	int
+TT	PauseR	Keystroke pause preceeding the micro unit in the revision phase	int
+AU	Phase	Flag indicating in which phase Orientation, Drafting Revision, of the unit occurs	{O,D,R}
+KD	Phase	Flag indicating in which phase Orientation, Drafting Revision, of the unit occurs	{O,D,R}
+PU	Phase	Flag indicating in which phase Orientation, Drafting Revision, of the unit occurs	{O,D,R}
+ST	pos	NLTK: Penn-tree POS tag	string
+TT	pos	NLTK: Penn-tree POS tag	string
+SG	PostGap	Lag of time between last keystroke of current segment and first keystoke of next segment	int
+SG	PreGap	Lag of time between last keystroke of previous segment and first keystoke of current segment	int
+AU	PUB	Duration of Production Unit Break	int
+FU	PUB	Duration of Production Unit Break	int
+KU	PUB	Duration of Production Unit Break	int
+PU	PUB	Duration of Production Unit Break	int
+SG	PUB	Duration of Production Unit Break	int
+SS	PUB	Duration of Production Unit Break	int
+AU	PUdur	Duration of PU in which AU is contained	int
+AU	PUid	ID of PU in which AU is contained	int
+HC	Rdur	Duration of embedded revision HORF state	int
+AU	RelDur_L	Relative duration of linear reading (Dur_L / Dur)	float
+HS	RelDur_L	Relative duration of linear reading (Dur_L / Dur)	float
+AU	RelDur_N	Relative duration of no reading (Dur_N / Dur)	float
+HS	RelDur_N	Relative duration of no reading (Dur_N / Dur)	float
+AU	RelDur_R	Relative duration of refixation/regression reading (Dur_R / Dur)	float
+HS	RelDur_R	Relative duration of refixation/regression reading (Dur_R / Dur)	float
+AU	RelDur_S	Relative duration of scattered (Dur_S / Dur)	float
+HS	RelDur_S	Relative duration of scattered (Dur_S / Dur)	float
+HC	RelFdur	Relative duration of flow (Duration Flow / total Duration)	float
+HC	RelHdur	Relative duration of hesitation (Duration Hesitation / total Duration)	float
+HC	RelOdur	Relative duration of orientation (Duration Orientation / total Duration)	float
+HC	RelRdur	Relative duration of revision (Duration Revision / total Duration)	float
+SS	RevTime	Timestamp startpoint of revision / end of drafting	int
+AG	Session	Name of session	string
+AU	Session	Name of session	string
+EX	Session	Name of session	string
+FD	Session	Name of session	string
+FU	Session	Name of session	string
+HC	Session	Name of session	string
+HS	Session	Name of session	string
+KD	Session	Name of session	string
+KU	Session	Name of session	string
+PU	Session	Name of session	string
+SG	Session	Name of session	string
+SS	Session	Name of session	string
+ST	Session	Name of session	string
+TT	Session	Name of session	string
+AG	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+AU	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+FD	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+KD	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+KU	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+PU	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+ST	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+TT	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+AG	SGroup	ST words in unit	string: word1_word2_ …
+ST	SGroup	ST words in unit	string: word1_word2_ …
+TT	SGroup	ST words in unit	string: word1_word2_ …
+AG	SL	Source language of session	string
+AU	SL	Source language of session	string
+EX	SL	Source language of session	string
+FD	SL	Source language of session	string
+FU	SL	Source language of session	string
+HC	SL	Source language of session	string
+HS	SL	Source language of session	string
+KD	SL	Source language of session	string
+KU	SL	Source language of session	string
+PU	SL	Source language of session	string
+SG	SL	Source language of session	string
+SS	SL	Source language of session	string
+ST	SL	Source language of session	string
+TT	SL	Source language of session	string
+AG	STid	Lowest ST word ID in SGid	int
+FD	STid	Lowest ST word ID in SGid	int
+KD	STid	Lowest ST word ID in SGid	int
+ST	STid	Lowest ST word ID in SGid	int
+TT	STid	Lowest ST word ID in SGid	int
+ST	Annot	Code of annotation (was previously Yawat)	string
+ST	SDur	Duration of ST word production (interpretation)	int
+ST	STime	Startimg time when ST word was produced (interpreting)	int
+ST	SToken	ST token (word)	string
+SG	String	TT segment - segment translation, sequence of words	string
+KD	Strokes	Number of keystrokes (eg. In Chinese IME)	int
+KU	Strokes	Number of keystrokes (eg. In Chinese IME)	int
+PU	Strokes	Number of keystrokes (eg. In Chinese IME)	int
+AG	STseg	ST segment IDs that are part of the unit	int
+FD	STseg	ST segment IDs that are part of the unit	int
+KD	STseg	ST segment IDs that are part of the unit	int
+KU	STseg	ST segment IDs that are part of the unit	int
+PU	STseg	ST segment IDs that are part of the unit	int
+SG	STseg	ST segment IDs that are part of the unit	int
+SS	STseg	ST segment IDs that are part of the unit	int
+ST	STseg	ST segment IDs that are part of the unit	int
+TT	STseg	ST segment IDs that are part of the unit	int
+AG	Study	Study name	string
+AU	Study	Study name	string
+EX	Study	Study name	string
+FD	Study	Study name	string
+FU	Study	Study name	string
+HC	Study	Study name	string
+HS	Study	Study name	string
+KD	Study	Study name	string
+KU	Study	Study name	string
+PU	Study	Study name	string
+SG	Study	Study name	string
+SS	Study	Study name	string
+ST	Study	Study name	string
+TT	Study	Study name	string
+AG	StudySession	Concatenation of <StudyName>@<SessionName>	string
+AU	StudySession	Concatenation of <StudyName>@<SessionName>	string
+EX	StudySession	Concatenation of <StudyName>@<SessionName>	string
+FD	StudySession	Concatenation of <StudyName>@<SessionName>	string
+FU	StudySession	Concatenation of <StudyName>@<SessionName>	string
+HC	StudySession	Concatenation of <StudyName>@<SessionName>	string
+HS	StudySession	Concatenation of <StudyName>@<SessionName>	string
+KD	StudySession	Concatenation of <StudyName>@<SessionName>	string
+KU	StudySession	Concatenation of <StudyName>@<SessionName>	string
+PU	StudySession	Concatenation of <StudyName>@<SessionName>	string
+SG	StudySession	Concatenation of <StudyName>@<SessionName>	string
+SS	StudySession	Concatenation of <StudyName>@<SessionName>	string
+ST	StudySession	Concatenation of <StudyName>@<SessionName>	string
+TT	StudySession	Concatenation of <StudyName>@<SessionName>	string
+AG	Task	Session Task (following TPR-DB naming convention)	string
+AU	Task	Session Task (following TPR-DB naming convention)	string
+EX	Task	Session Task (following TPR-DB naming convention)	string
+FD	Task	Session Task (following TPR-DB naming convention)	string
+FU	Task	Session Task (following TPR-DB naming convention)	string
+HC	Task	Session Task (following TPR-DB naming convention)	string
+HS	Task	Session Task (following TPR-DB naming convention)	string
+KD	Task	Session Task (following TPR-DB naming convention)	string
+KU	Task	Session Task (following TPR-DB naming convention)	string
+PU	Task	Session Task (following TPR-DB naming convention)	string
+SG	Task	Session Task (following TPR-DB naming convention)	string
+SS	Task	Session Task (following TPR-DB naming convention)	string
+ST	Task	Session Task (following TPR-DB naming convention)	string
+TT	Task	Session Task (following TPR-DB naming convention)	string
+SG	TB_2PUB	Typing Bursts: bigger than 2*PUB value	int
+SG	TB_4PUB	Typing Bursts: bigger than4*PUB value	int
+SG	TB_KUI	Typing Bursts: bigger than KBI value	int
+SG	TB_PUB	Typing Bursts: bigger than PUB value	int
+SG	TB1000	Typing Bursts: bigger than static 1000ms	int
+SG	TD_2PUB	Typing Duration: bigger than 2*PUB value	int
+SG	TD_4PUB	Typing Duration: bigger than4*PUB value	int
+SG	TD_KUI	Typing Duration: bigger than KBI value	int
+SG	TD_PUB	Typing Duration: bigger than PUB value	int
+SG	TD1000	Typing Duration: bigger than static 1000ms	int
+AG	Text	Source text ID in study	string
+AU	Text	Source text ID in study	string
+EX	Text	Source text ID in study	string
+FD	Text	Source text ID in study	string
+FU	Text	Source text ID in study	string
+HC	Text	Source text ID in study	string
+HS	Text	Source text ID in study	string
+KD	Text	Source text ID in study	string
+KU	Text	Source text ID in study	string
+PU	Text	Source text ID in study	string
+SG	Text	Source text ID in study	string
+SS	Text	Source text ID in study	string
+ST	Text	Source text ID in study	string
+TT	Text	Source text ID in study	string
+SG	TG_2PUB	Typing Gap: bigger than 2*PUB value	
+SG	TG_4PUB	Typing Gap: bigger than4*PUB value	
+SG	TG_KUI	Typing Gap: bigger than KBI value	
+SG	TG_PUB	Typing Gap: bigger than PUB value	
+SG	TG1000	Typing Gap: bigger than static 1000ms	
+AG	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+AU	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+FD	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+KD	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+KU	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+PU	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+ST	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+TT	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+AG	TGroup	TT words in unit	string: word1_word2_ …
+ST	TGroup	TT words in unit	string: word1_word2_ …
+TT	TGroup	TT words in unit	string: word1_word2_ …
+AU	Time	Starting timestamp of unit	int
+EX	Time	Starting timestamp of unit	int
+FD	Time	Starting timestamp of unit	int
+FU	Time	Starting timestamp of unit	int
+HC	Time	Starting timestamp of unit	int
+HS	Time	Starting timestamp of unit	int
+KD	Time	Starting timestamp of unit	int
+KU	Time	Starting timestamp of unit	int
+PU	Time	Starting timestamp of unit	int
+AG	Time1	Starting timestamp of first micro unit	int
+ST	Time1	Starting timestamp of first micro unit	int
+TT	Time1	Starting timestamp of first micro unit	int
+AG	Time2	Starting timestamp of second micro unit	int
+ST	Time2	Starting timestamp of second micro unit	int
+TT	Time2	Starting timestamp of second micro unit	int
+AG	TimeR	Starting timestamp of micro unit in revision phase	int
+ST	TimeR	Starting timestamp of micro unit in revision phase	int
+TT	TimeR	Starting timestamp of micro unit in revision phase	int
+PU	TimeTU	Starting timestamp of micro unit in revision phase	int
+AG	TL	Target language of session	string
+AU	TL	Target language of session	string
+EX	TL	Target language of session	string
+FD	TL	Target language of session	string
+FU	TL	Target language of session	string
+HC	TL	Target language of session	string
+HS	TL	Target language of session	string
+KD	TL	Target language of session	string
+KU	TL	Target language of session	string
+PU	TL	Target language of session	string
+SG	TL	Target language of session	string
+SS	TL	Target language of session	string
+ST	TL	Target language of session	string
+TT	TL	Target language of session	string
+AG	TokS	Number of ST tokens	int
+AU	TokS	Number of ST tokens	int
+SG	TokS	Number of ST tokens	int
+SS	TokS	Number of ST tokens	int
+AG	TokT	Number of TT tokens	int
+AU	TokT	Number of TT tokens	int
+SG	TokT	Number of TT tokens	int
+SS	TokT	Number of TT tokens	int
+AG	TrtS	Total reading time on ST	int
+AU	TrtS	Total reading time on ST	int
+SG	TrtS	Total reading time on ST	int
+SS	TrtS	Total reading time on ST	int
+ST	TrtS	Total reading time on ST	int
+TT	TrtS	Total reading time on ST	int
+AG	TrtT	Total reading time on TT	int
+AU	TrtT	Total reading time on TT	int
+SG	TrtT	Total reading time on TT	int
+SS	TrtT	Total reading time on TT	int
+ST	TrtT	Total reading time on TT	int
+TT	TrtT	Total reading time on TT	int
+AG	TTid	Lowest (starting) TT word ID in TGid	int
+FD	TTid	Lowest (starting) TT word ID in TGid	int
+KD	TTid	Lowest (starting) TT word ID in TGid	int
+ST	TTid	Lowest (starting) TT word ID in TGid	int
+TT	TTid	Lowest (starting) TT word ID in TGid	int
+TT	TToken	TT token (word	string
+AG	TTseg	ID of TT segment	int
+FD	TTseg	ID of TT segment	int
+KD	TTseg	ID of TT segment	int
+KU	TTseg	ID of TT segment	int
+PU	TTseg	ID of TT segment	int
+SG	TTseg	ID of TT segment	int
+SS	TTseg	ID of TT segment	int
+ST	TTseg	ID of TT segment	int
+TT	TTseg	ID of TT segment	int
+AU	Type	Type of activity unit	{1,2,4,5,6,8}
+KD	Type	Type of keystroke	Ins,Del
+KU	Type	Type of keystroke unit: P:PBU, K:KUI, I:Ins, D:Del, C:Change	{P,K,I,D,C}
+PU	Type	Type of production unit: I:Ins, D:Del, C:Change	{I,D,C}
+ST	upos	stanza: universal POS tag	string
+TT	upos	stanza: universal POS tag	string
+AU	WidFix	Set of IDs for words fixated	string
+FD	Win	ST window: 1, TT window:2, no window: 0, re-fixate:-1	int
+FU	Win	ST window: 1, TT window:2, no window: 0, re-fixate:-1	int
+FD	X	X-position on screen (relative to top-left corner of ST/TT window)	int
+ST	xpos	stanza: Part-of-Speech	string
+TT	xpos	stanza: Part-of-Speech	string
+FD	Y	Y-position on screen (relative to top-left corner of ST/TT window)	int
