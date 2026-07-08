@@ -12,7 +12,7 @@ The Python library `tprdb-utilities` ([Python Package Index](https://pypi.org/pr
 
 ### `fetcher`
 
-The `fetcher` module and its `fetch_TPRDB_tables()` function works with the [TPR-DB web app](https://critt.as.kent.edu/tpr/)'s API to download/update data tables for a specific TPR-DB study, saving the most up-to-date tables in a location of your choosing.
+The `fetcher` module and its **`fetch_TPRDB_tables()`** function works with the [TPR-DB web app](https://critt.as.kent.edu/tpr/)'s API to download/update data tables for a specific TPR-DB study, saving the most up-to-date tables in a location of your choosing.
 
 !!! tip "Why fetch?"
 
@@ -20,9 +20,16 @@ The `fetcher` module and its `fetch_TPRDB_tables()` function works with the [TPR
 
 ### `reader`
 
-The `reader` module and its `read_TPRDB_tables()` function takes the data tables you have downloaded for one or more studies you specify and reads them into a Pandas DataFrame object for subsequent analysis.
+The `reader` module and its **`read_TPRDB_tables()`** function takes the data tables you have downloaded for one or more studies you specify and reads them into a Pandas DataFrame object for subsequent analysis.
 
 If working directly from the CRITT TPR-DB Jupyter server, the same module/function will also read the data directly from where the TPR-DB stores it.
+
+### `transformer`
+
+The `transformer` module contains utility functions that will *transform* your data in various ways:
+
+* **`prep_parallel_texts()`**: this function prepares bitexts (source text and the target text of one participant) and/or tritexts (source text and the target texts of two participants), organized by segment, so that you can, for example, run automatic quality evaluation metrics like BLEU and COMET.
+* **`recompute_pause_based_metrics()`**: this function will compute pause-based metrics (typing bursts (**TB**), typing gap (**TB**), and typing duration (**TD**))—calculated using a custom pause threshold you provide—and add them to your Segments DataFrame (based on SG tables)
 
 ## Progression Graphs
 
