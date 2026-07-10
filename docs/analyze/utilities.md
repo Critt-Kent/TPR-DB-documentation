@@ -25,7 +25,60 @@ The `reader` module and its `read_TPRDB_tables()` function takes the data tables
 If working directly from the CRITT TPR-DB Jupyter server, the same module/function will also read the data directly from where the TPR-DB stores it.
 
 ## Progression Graphs
+Translation progression graphs are one of several methods for visualizing data from different tables. It depicts the temporal dynamics of the translation process by concurrently plotting partial information extracted from multiple unit tables.
 
-Placeholder text
+Progression graphs are implemented using `ShinyR`, which is based on a reactive programming model. As a result, plots and tables are automatically updated whenever you change an input. The progression graph interface can be accessed [here](https://critt.as.kent.edu/shiny/ProgGraph/).
 
-### Shiny R
+
+
+### Generating translation progression graphs
+The following are the steps for generating a progression graph. 
+
+
+#### Step 1 — Specify user
+
+The default **User** is *PUBLIC*, which provides access to a variety of public studies. To generate progression graphs for your private studies, change the user name to your own in the left panel.
+
+![Overview](img/User.png)
+
+#### Step 2 — Select a session from a study
+
+Use the drop-down menus to **Select Study** and **Select Session**, then click **Load selected session**.
+
+For demonstration purposes, we use session P01_T3 from the public study RUC17.
+
+![Overview](img/Sess.png)
+
+!!! note
+ 
+    x-axis: time window (in milliseconds) 
+    y-axis: range of the ST and their aligned TT (in words)
+    blue dots: fixations on the source text
+    green dots: fixations on the target text
+
+At this stage, the graph provides a general overview of the translator's behavior. Here, the x-axis represents the entire translation duration. The translator initially reads through the ST before beginning to produce the TT. Toward the end of the translation process, fixations are primarily on the TT, suggesting that the translator is reviewing the translation.
+
+#### Step 3 — Set the time window and ST range
+
+Use the sliders to select the desired **Production Duration** and **Source Text Segments**.
+
+For this example, the time window is set to 540,000–650,000 ms and the ST range to words 30–75. The resulting progression graph is shown below. 
+
+![Details](img/Set.png)
+
+!!! note
+
+    black characters: insertions
+    red characters: deletions
+
+By narrowing the time window and the ST range, the graph provides a finer-grained view of the translator's activity, showing that the translator focused on translating the words within the red boxed area, with a few deletions.
+
+#### Step 4 — Customization
+
+A useful complement to the progression graph is the set of data tables. To view a specific table, select it from the drop-down menu under **Show Data Tables**, where you can review different features. For detailed descriptions of the features, please refer to [Table features in TPR-DB 3.0](https://critt-kent.github.io/TPR-DB-documentation/analyze/features/).
+
+You can also customize the progression graph by selecting **Show/Hide Items** from the left panel to highlight specific features.
+
+![TU line & AU table](img/AU.png)
+
+The progression graph above displays the TU lines (as shown by the red dashed line). Within the selected time window, there are six complete translation units (TUs 21–26). The table provides detailed AU features.
