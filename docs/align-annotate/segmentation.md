@@ -6,14 +6,14 @@ icon: lucide/align-end-vertical
 
 > Perhaps the most fundamental question [...] is to determine the mechanisms underlying the production of translations which are common to all translators. (Carl, Banaglore, Schaeffer 2016: 4 ).
 
-With this phrase in the beginning of their book, the authors expand on the paradigm shifts in Translation Studies; from prescriptive, to descriptive to *predictive*. The TPR-DB, as the speerhead of the most recent paradigm shift, has been therefore empirically studying the various cognitive processes during translation: From reading of the source text (ST #CanIMakeThisAToolTip?), to processing and translating, to typing and proofreading of the Target Text (TT) and everything in between. The real innovation has been the ability to not just observe these processes in isolation but to put them all in relation to each other to more accuretely draw the map of the cognitive architecture during translation.
+With this phrase in the beginning of their book, the authors expand on the paradigm shifts in Translation Studies; from prescriptive, to descriptive to *predictive*. The TPR-DB, as the speerhead of the most recent paradigm shift, has been therefore empirically studying the various cognitive processes during translation: From reading of the source text (ST), to processing and translating, to typing and proofreading of the Target Text (TT) and everything in between. The real innovation has been the ability to not just observe these processes in isolation but to put them all in relation to each other to more accuretely draw the map of the cognitive architecture during translation.
 
 In order to do that, you first need to verify that the ``` Alignment Module  ```  has produced acceptable results.
 
 !!! info
     You can read more about how the alignment module works on the page referring to the TPR Pipeline.
     
-By aligning  ST- and TT-sentences in segments, so-called alignments groups, you make some basic assumptions regarding equivalence: The meaning in the ST-side of the segment is equivelent to the TT-side. In other words: A translator read a ST-sentence during translsation and thus produced an equivalent sentence. It is now up to you as a researcher, to put these two sentences in one segment/alignment group. This eventually allows you to put the underlying cognitive processes that took place during reading and typing in relation to each other.
+By aligning  ST- and TT-sentences in segments, so-called alignments groups, you make some basic assumptions regarding equivalence: The meaning in the ST-side of the segment is equivelent to the TT-side. In other words: A translator read an ST-sentence during translation and thus produced an equivalent sentence. It is now up to you as a researcher, to put these two sentences in one segment/alignment group. This eventually allows you to put the underlying cognitive processes that took place during reading and typing in relation to each other.
 
 ## Getting started
 
@@ -30,7 +30,7 @@ The header displays the basic information about the current study session. Scrol
 !!! warning
     When one language side contains more segments than the other, all remaining segments are collapsed into the final alignment group. 
 
-If this happens or you spot any TT tokens theat ar translations of tokens of another ST-segment than the segment they are currently placed in, then the segmentation is incorrect. In order to correct it and place the tokens in the right segment, click on "Segmentation Mode".
+If this happens or you spot any TT tokens that are translations of tokens of another ST-segment than the segment they are currently placed in, then the segmentation is incorrect. In order to correct it and place the tokens in the right segment, click on "Segmentation Mode".
 
 ## Segmentation Mode
 
@@ -67,11 +67,11 @@ You continue selecting and moving tokens up and down until you have the equivale
 !!! note
     You can save your finished segmentation by clicking on "Save segmentation" on the pop-up window on the lower right corner of your screen. However, you do not need to save your segmentation after every movement. Saving once at the end (after you have made all your changes) is sufficient.
 
-Segmentation Mode excels at correcting minor errors that the ``` Alignment Module  ``` makes. Note that the order of the tokens of the TT remains unchanged; mere the assignment to an alignment group changes. In some cases, you will need to change the order of the TT tokens. The reasons for that can be plethora: For instance, the translator changed the original order of the pieces of information in the TT. Pertaps the translation of a sentence that as in the very beginning of the ST has been written so that it is in the very end of the TT. Alternatvely, the translator added, omitted or summarized information and you need to move the tokens into different segments, thus breaking up the  TT completely. Segmentation Mode was not designed to reflect a non-chronological restructuring of the TT. Luckily, TPR-DB 3.0 offers a powerful tool to deal even with the most difficult situations.
+Segmentation Mode excels at correcting minor errors that the ``` Alignment Module  ``` makes. Note that the order of the tokens of the TT remains unchanged; mere the assignment to an alignment group changes. In some cases, you will need to change the order of the TT tokens. The reasons for that can be plethora: For instance, the translator changed the original order of the pieces of information in the TT. Perhaps the translation of a sentence that is in the very beginning of the ST has been written so that it is in the very end of the TT. Alternatvely, the translator added, omitted or summarized information and you need to move the tokens into different segments, thus breaking up the  TT completely. Segmentation Mode was not designed to reflect a non-chronological restructuring of the TT. Luckily, TPR-DB 3.0 offers a powerful tool to deal even with the most difficult situations.
 
-## Super Segmnetation Mode
+## Super Segmentation Mode
 
-The underlying premise of Segmentation Mode (and of many translation tools) is that each sentence of the TT is placed in the same exact order as the sentences of the ST. But depending on the skopos, domain, styleguides etc., translators may choose to change the order of the information presented in the TT to meet their communicative needs. Thus, the order of the pieces of information of the TT may not be the same as in the ST. With Super Segmentation Mode you can move any token (irrespective of its position) to any other segment. Thus, you can put equivalent ST- and TT-tokens in the same alignment group.
+The underlying premise of Segmentation Mode (and of many translation tools) is that each sentence of the TT is placed in the same exact order as the sentences of the ST. But depending on the skopos, domain, styleguides etc., translators may choose to change the order of the information presented in the TT to meet their communicative needs. Thus, the order of the pieces of information of the TT may not be the same as in the ST. With Super Segmentation Mode you can move any token (irrespective of its position) to any other segment. Threfore, you can put equivalent ST- and TT-tokens in the same alignment group.
 
 To enter Super Segmentation Mode you first need to save all changes you may have done in Segmentation Mode.
 
