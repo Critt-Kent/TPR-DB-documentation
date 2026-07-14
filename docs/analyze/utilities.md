@@ -34,16 +34,11 @@ Progression graphs are implemented using `ShinyR`, which is based on a reactive 
 ### Generating translation progression graphs
 The following are the steps for generating a progression graph. 
 
-
-#### Step 1 — Specify user
-
-The default **User** is *PUBLIC*, which provides access to a variety of public studies. To generate progression graphs for your private studies, change the user name to your own in the left panel.
+First, you need to specify the user. The default **User** is *PUBLIC*, which provides access to a variety of public studies. To generate progression graphs for your private studies, change the user name to your own in the left panel.
 
 ![Overview](img/User.png)
 
-#### Step 2 — Select a session from a study
-
-Use the drop-down menus to **Select Study** and **Select Session**, then click **Load selected session**.
+Then use the drop-down menus to **Select Study** and **Select Session**, after which click **Load selected session**.
 
 For demonstration purposes, we use session P01_T3 from the public study RUC17.
 
@@ -61,9 +56,7 @@ For demonstration purposes, we use session P01_T3 from the public study RUC17.
 
 At this stage, the graph provides a general overview of the translator's behavior. Here, the x-axis represents the entire translation duration. The translator initially reads through the ST before beginning to produce the TT. Toward the end of the translation process, fixations are primarily on the TT, suggesting that the translator is reviewing the translation.
 
-#### Step 3 — Set the time window and ST range
-
-Use the sliders to select the desired **Production Duration** and **Source Text Segments**.
+To set the time window and ST range, use the sliders to select the desired **Production Duration** and **Source Text Segments**.
 
 For this example, the time window is set to 540,000–650,000 ms and the ST range to words 30–75. The resulting progression graph is shown below. 
 
@@ -76,8 +69,6 @@ For this example, the time window is set to 540,000–650,000 ms and the ST rang
     ·red characters: deletions
 
 By narrowing the time window and the ST range, the graph provides a finer-grained view of the translator's activity, showing that the translator focused on translating the words within the red boxed area, with a few deletions.
-
-#### Step 4 — Customization
 
 A useful complement to the progression graph is the set of data tables. To view a specific table, select it from the drop-down menu under **Show Data Tables**, where you can review different features. For detailed descriptions of the features, please refer to [Table features in TPR-DB 3.0](https://critt-kent.github.io/TPR-DB-documentation/analyze/features/).
 
