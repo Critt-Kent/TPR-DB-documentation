@@ -17,9 +17,9 @@ The features `STid`, `TTid`, `SGid`, and `TGid` appear in several TPR-DB tables.
 
 During [keystroke-to-word mapping](#Keystroke-to-word Mapping) each keystroke is associated with a unique target word. The Id of this target word is the `TTid`, an integer, in the KD file. During [Bilingual Alignment](#Bilingual Alignment) source words and target words are connected in a way such that one target word can be associated with several source words,  i.e., the `SGid`. Each `SGid` is, in turn, aligned with one or more target words, which together are the `TGid`. Thus, the `TTid` is part of the `TGid`, but the latter may contain several elements. The `STid` is smallest number in the source group. 
 
-For instance, a target token "$\mathtt{8}$" can be aligned with source tokens "$\mathtt{8}$" and "$\mathtt{9}$", thus the `SGid` value is "$\mathtt{8+9}$" and `STid` is "$\mathtt{8}$". If this source group is aligned to a group of target words, say, target words "$\mathtt{8}$" and $\mathtt{10}$", the `TGid` has the vaue "$\mathtt{8+10}$".  
+For instance, a target token "$\mathtt{8}$" can be aligned with source tokens "$\mathtt{8}$" and "$\mathtt{9}$", thus the `SGid` value is "$\mathtt{8+9}$" and `STid` is "$\mathtt{8}$". If this source group is aligned to a group of target words, say, target words "$\mathtt{8}$" and "$\mathtt{10}$", the `TGid` has the value "$\mathtt{8+10}$".
 
-A similar mechanism applies to fixations. While keystrokes can only occur in the target text, fixations are observed on source and trarget words. Thus, a fixation may occur on a source word $7$ which is associated with target words "$\mathtt{5}$" and "$\mathtt{6}$". If this target group is associated with source words "$\mathtt{7}$" and "$\mathtt{8}"$, the `SGid` of this fixation is "$\mathtt{7+8}$", while `TTid` is $"\mathtt{5}"$. 
+A similar mechanism applies to fixations. While keystrokes can only occur in the target text, fixations are observed on source and target words. Thus, a fixation may occur on a source word "$\mathtt{7}$" which is associated with target words "$\mathtt{5}$" and "$\mathtt{6}$". If this target group is associated with source words "$\mathtt{7}$" and "$\mathtt{8}$", the `SGid` of this fixation is "$\mathtt{7+8}$", while `TTid` is "$\mathtt{5}$".
 
 This same principle applies to these features also in the other tables, including AU, KU, PU, ST, TT, etc. where the ID refers to the token, while the group feature relates to the alignment group to which the unit refers.
 
@@ -30,7 +30,7 @@ As for the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6M
 
 - `KUI` : $2 \times median(\text{within word IKI})$
 - `PUB` : IKI duration of the keystroke quantile: 
-  $1 - \frac{3*\text{text length in characters}}{\text{number of words}}$ 
+  $1 - \frac{3 \times \text{text length in characters}}{\text{number of words}}$ 
 
 KUs and PUs are enumerated in two separate tables. 
 KU tables enumerate the sequence of KUs and the intervening keystroke pauses (`KUI`, and `PUB`) in their sequential order. The `Type` of a KU can be one of $\mathtt{I}$, $\mathtt{C}$ or $\mathtt{D}$, depending on whether the keystrokes are only insertions, deletions or both insertions and deletions, respecively. A keystroke pause can be of `Type`  $\mathtt{K}$, (`KUI`) or a $\mathtt{P}$ (`PUB`). 
@@ -43,48 +43,56 @@ As for each session, `KUI` $\le$ `PUB`, every PU consists of one or more KU(s). 
     - Muñoz and Apfelthaler (2014): https://aclanthology.org/2014.amta-wptp.6.pdf
 
 
-## Pause Metrics
+## Keystroke pauses
 
-Lacruz and colleagues[^lacruz] introduce several metrics to compute the relation between text production (i.e., sequences of fluent typing) and pausing, assuming that keystroke pauses are "good indicators of cognitive demand in monolingual language production and in translation." 
-Their metrics include, among others: 
+Lacruz and colleagues[^lacruz] introduce several metrics to quantify the relationship between text production (i.e., sequences of fluent typing or drafting) and pausing, on the assumption that keystroke pauses are good indicators of cognitive demand in monolingual language production and translation.
 
-- Pause Ratio: $PR = \frac{\text{total pause time in segment}}{\text{total time in segment}}$
-    
-- Average Pause Ratio: $APR =\frac{\text{average time per pause}}{\text{average time per words}}$
-    
-- Pause to Word Ratio: $PWR =\frac{\text{number of pauses in segment}}{\text{number of words in segment}}$
+Their metrics include, among others:
 
-The TPR-DB provides basic features for computing these and other pause metrics on the segment level (SG). 
-The pause metrics rely on a notion of $\mathtt{pause}$, which has been a topic of discussion and controversy for many years. 
-In line with the literature, the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) presumed $\mathtt{pause}$ thresholds of $500ms$, $1000ms$, $2000ms$ and $5000ms$. 
+- **Pause Ratio (PR):** the proportion of segment time spent pausing.
 
-Since pausing behavior in the TPR-DB 3.0 is taken to be translator-specific, the $\mathtt{pause}$ thresholds are now also based on the translator-specific values of `KUI` and `PUB` and include $1000ms$ `KUI`, `PUB`, $2 \times$ `PUB` and $4 \times$ `PUB`. 
 
-The following features on the SG level are involved in the TPR-DB Pause Metrics:
+$$\text{PR} = \frac{\text{total pausing duration in segment}}{\text{total time spent in segment}}$$
 
-- `Dur` : production duration for a segment; duration between the first and the last keystroke.
-- `Nedit`: number of times the segment was edited.
-- `PreGap` : segment initial keystroke pause; lag between the last keystroke of the previous segment (or beginning of session) and the first keystoke of the current segment.
-- `PostGap` : segment final keystroke pause; lag between the last keystroke of the current segment and the first keystoke of the next segment (or end of session).
-- `TB`$\mathtt{pause}$: number of typing bursts given the $\mathtt{pause}$ threshold.
-- `TG`$\mathtt{pause}$: total duration of pausing (gap) time given the $\mathtt{pause}$ threshold.
-- `TD`<pause> : total duration of drafting time given the $\mathtt{pause}$ threshold.
+- **Average Pause Ratio (APR):** the average duration per pause relative to the average word duration.
 
-Note that  `Dur` = `TB` + `TG`. That is, neither the typing pause preceeding the typing events in a segment not the pause following it are included in `Dur`. Note also that it may be possible to edit a segment several times. However, the features are the sums if a segment is edited several times. This implies that the `PostGap` value of a segment may be different from `PreGap` of the next segment, if one of the segments was edited more than once.
-Depending on the definition, if the `PostGap` is taken to be pause in the segment, then the number of $\mathtt{pause}$ is the number of typing bursts (TB) plus one,  otherwise the number of pauses is just identical to `TB`.
+$$\text{APR} = \frac{\text{average time per pause}}{\text{average time per word}}$$
 
-Based on these considerations, it is possible to compute pause metrics as follows:
+- **Pause-to-Word Ratio (PWR):** the number of pauses relative to the number of words in a segment.
 
-PR = (`PreGap` + `TG`) / (`Dur` +1)
+$$\text{PWR} = \frac{\text{number of pauses in segment}}{\text{number of words in segment}}$$
 
-$\text{PR} = \frac{\text{PreGap + TG} {\text{Dur} +1}$
+The TPR-DB provides basic features for computing these and other pause metrics at the segment level (SG).
 
-$\text{PWR}_S = \frac{TB} {\text{`TokS`}}$
+The pause metrics rely on a notion of *pause*, which has been the subject of debate for many years. Following the literature, [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) used fixed `Pause` thresholds of 500ms, 1000ms, 2000ms, and 5000ms. In TPR-DB 3.0, pausing behavior is instead treated as translator-specific, so thresholds are now also based on the translator-specific values `KUI` and `PUB`.
 
-$\text{PWR}_T = \frac{TB} {\text{`TokT`}}$
+The following segment-level features are used in the TPR-DB pause metrics:
 
-$$\text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{TokT}} = \frac{TG * TokT}{TB * TD}$$
+- `Dur`: production duration for a segment — the time between the first and last keystroke.
+- `Nedit`: the number of times the segment was edited.
+- `PreGap`: the segment-initial keystroke pause — the lag between the last keystroke of the previous segment (or the start of the session) and the first keystroke of the current segment.
+- `PostGap`: the segment-final keystroke pause — the lag between the last keystroke of the current segment and the first keystroke of the next segment (or the end of the session).
+- `TB`<sub>pause</sub>: the number of typing bursts, given a pause threshold.
+- `TD`<sub>pause</sub>: the total duration in typing bursts, given a pause threshold.
+- `TG`<sub>pause</sub>: the total pausing duration, i.e., the gap between bursts, given a pause threshold.
 
+Note that for any pause threshold value, `Dur` = `TD`<sub>pause</sub> + `TG`<sub>pause</sub>. That is, 1) neither the `PreGap` preceding the first keystroke event in a segment nor the `PostGap` following the last keystroke in that segment is included in `Dur` and 2) depending on the duration of the pause threshold, the total duration is distributed differently across `TD`<sub>pause</sub> and `TG`<sub>pause</sub>: longer thresholds increase the total drafting duration (`TD`); they decreas the number of typing bursts (`TB`) and proportinally shorten the total pausing duration (`TG`). Note that a segment may be edited multiple times; in that case, the relevant features are summed across edits. This means a segment's `PostGap` may differ from the next segment's `PreGap`, if a segment was edited more than once.
+
+Depending on the definition adopted, if `PostGap` is counted as a pause within the segment, the number of pauses equals the number of typing bursts (`TB`) plus one; otherwise, the number of pauses is simply equal to `TB`.
+
+Based on these considerations, the pause metrics can be computed as follows:
+
+$$\text{PR}_{\text{pause}} = \frac{\text{PreGap} + \text{TG}_{\text{pause}}}{\text{Dur} + 1}$$
+
+$$\text{PWR_S}_{\text{pause}} = \frac{\text{TB}_{\text{pause}}}{\text{TokS}}$$
+
+$$\text{PWR_T}_{\text{pause}} = \frac{\text{TB}_{\text{pause}}}{\text{TokT}}$$
+
+$$\text{APR}_{\text{pause}}  = \frac{\text{TG}_{\text{pause}}  / \text{TB}_{\text{pause}} }
+    {\text{TD}_{\text{pause}}  / \text{TokT}} = 
+    \frac{\text{TG}_{\text{pause}}  \times \text{TokT}}{\text{TB}_{\text{pause}}  \times \text{TD}_{\text{pause}} }$$
+
+These equations are also part of the [CRITT academy](#CRITT Academy) and are explained there in more detail.
 
 [^lacruz]:
     - Lacruz et al. (2012): https://aclanthology.org/2012.amta-wptp.3.pdf
@@ -93,21 +101,21 @@ $$\text{APR} = \frac{TG}{TB} / \frac{TD}/{\text{TokT}} = \frac{TG * TokT}{TB * T
 
 
 ## Typing Inefficiency (InEff)
-We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in) efficiency for a word, chunk or segment as:
+We adopt the definition of InEff from [TPR-DB version 2.0, p.26](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view), who define typing (in)efficiency for a word, chunk or segment as:
 
-$$ InEff = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
+$$ \text{InEff} = \frac{\text{number of typed characters}}{\text{length of final translation}} $$
 
 They approximate this in terms of number of insertions and deletions:
  
-$$ InEff = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
+$$ \text{InEff} = \frac{\text{insertions} + \text{deletions}}{\text{insertions - deletions} - 1} $$
 
 A number 1 is added to the denominator to prevent division by 0, for instance in case of postediting when a word or segment remains unchanged.  In the current version we also add 1 to the nominator, so that if no deletions are recorded, the metric will return 1 irrespectively of how many deletions occurred.
 
-$$ InEff = \frac{insertions + deletions + 1}{insertions - deletions - 1} $$
+$$ \text{InEff} = \frac{\text{insertions} + \text{deletions} + 1}{\text{insertions} - \text{deletions} - 1} $$
 
 Note that this measure only applies if number of insertions >= number of deletions which ensures that the result >= 1. Otherwise, if there are more deletions than insertions, as might be the case in post-editing, InEff is computed as follows, which provides a number between 0 and 1:
 
-$$ InEff = \frac{1}{deletions} $$
+$$ \text{InEff} = \frac{1}{\text{deletions}} $$
 
 
 ## Gaze measures
@@ -131,56 +139,13 @@ A fixation is a dynamic event that changes in time with respect to the gaze posi
 
 - Saccade amplitude, velocity, direction
 - Microsaccades during fixation
-- [Pupil dilation](#Level 0: Pupilometry) (cognitive load proxy)
+- Pupil dilation (cognitive load proxy)
 - Blink rate and duration
 
-### Level 1 — fixation measures on a word level
-Level 1 measures capture what happens at one specific location, in isolation from surrounding context. Fixations are quantified based on their position on the screen (X/Y coordinates), duration, and the character/word/image looked. They reflect early, bottom-up processing:
+#### Pupillometry 
 
-- First fixation duration: how long the eye rests on first landing in a word
-- Single fixation duration: duration when the word receives only one fixation
-- Total fixation duration / dwell time: summed time across all fixations on the word
-- Number of fixations: how often the word is fixated
-- Fixation probability: whether the word was fixated at all
+While the pupil's primary function is the regulation of light intake, it also responds to cognitive and emotional states, which modulates arousal and mental effort. When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty. This makes pupil diameter a sensitive, non-invasive proxy for cognitive effort and task-related arousal.
 
-
-### Level 2 — Transitions between words 
-Level 2 measures capture how the eye moves between words. The unit of analysis is the fixation behavior on a word in relation to the neighboring words:
-
-- First-pass reading time: total fixation time of a word before the eye leaves it for the first time
-- Regression path duration: time from first fixation until the eye moves *rightward past the word*, including any regressions launched from it
-- Go-past time: total time including regressions back into earlier AOIs triggered by this region
-- Re-reading time: time spent on second and later passes
-- Regression rate in / out: number of regressions into (entering) or out of (leaving) the word
-- Refixation rate: probability of making more than one fixation before leaving
-
-
-### Level 3 — Local reading strategy, gaze path measures
-These measures describe the local reading strategy. The unit of analysis is a sequence of fixations and how the eyes move sequentially. 
-
-- Linear reading: sequential, left-to-right, top-to-bottom progression
-- Scattered fixations: non-sequential, exploratory, attention-driven
-- Regressions / refixations — backward movements, indicating comprehension difficulty or verification
-- **Scan path similarity** — comparing one participant's path to another or to an ideal (e.g., Levenshtein distance on AOI sequences)
-- **Coverage / revisit rate** — what proportion of AOIs were visited, and how often
-- **Reading order deviation** — how much the actual sequence departs from canonical order
-
-
-### Level 4 — Global gaze behavior
-Above the local gaze path level, aggregating across multiple trials or participants:
-
-- Mean gaze behavior per participant (reading speed profile, regression tendency)
-- Cluster-based reader types (skimmer vs. careful reader)
-- Learning effects across trials
-
-
-## Level 0: Pupillometry
-
-Pupil measures are a new feature in the TPR-DB 3.0. Pupillometry is the measurement of pupil size and its dynamic changes over time. While the pupil's primary function is the regulation of light intake, it also responds to cognitive and emotional states, which modulates arousal and mental effort. This makes pupil dilation a sensitive, non-invasive proxy for cognitive load.
-
-### The Basic Principle
-
-When a task becomes more mentally demanding, the pupil dilates (widens) slightly — typically by fractions of a millimeter — even under constant lighting conditions. This response is involuntary and continuous, making it useful for tracking moment-to-moment fluctuations in processing difficulty.
 In reading research, pupillometry helps reveal where and when comprehension becomes effortful:
 
 - Lexical difficulty: rare or low-frequency words trigger measurable dilation compared to common words
@@ -197,78 +162,142 @@ Pupillometry has also become a tool in TPR to assess:
 
 Expertise differences — professional translators tend to show more efficient (lower or faster-recovering) pupil responses than novices on equivalent texts, suggesting automatization of sub-processes
 
-### Pupillometric Measures in the TPR-DB
 
-Given the heterogeneous nature of the TPR-DB (different eyetrackers, lighting conditions, sampling rates, etc.) the pupillometric measures are based on change in pupil diameter relative to the median pupil size in each session. 
-For each gaze sample (depending on the eyetracker sampling rate) the TPR-DB proceeds in several steps:
+#### Pupillometry in the TPR-DB
+
+Pupil measures are a new feature in the TPR-DB 3.0. Pupillometry is the measurement of pupil size and its dynamic changes over time. 
+
+Given the heterogeneous nature of the TPR-DB (different eyetrackers with sampling rates, different lighting conditions and recording environments, etc.) and since the pupil size and their changes is specific to every participant, a normalization is required. To address this issue, the TPR-DB computes pupil size baseline as the *median* pupil diameter (rather than the mean) for every translation session. The pupillometric measures are then based on change in pupil diameter relative to the baseline in each session. For each gaze sample point ($SP$, depending on the eyetracker sampling rate) the TPR-DB computes pupilometric measures in several steps:
 
 1. Average pupil diameter across both eyes for binocular gaze sample data   
-2. Compute median pupil diameter across entire session as a baseline  
+2. Compute median pupil diameter across an entire session as a baseline  
 4. Interpolate over blink gaps, fill edges for sequences of gaze samples  
 3. Compute deviation from baseline in various ways for each gaze sample  
-5. Compute pupillometric measures for each fixation
+5. Compute pupillometric measures for each fixation or other unit
 
+For each gaze sample point $SP$, the TPR-DB 3.0 computes an effective pupil size $SP_p$ as the mean of the left and right pupil diameters when both are available (i.e., diameter $> 0$) for binocular tracking, and otherwise falls back to the available monocular diameter. Each $SP_p$ is then normalised by the session median. The TPR-DB 3.0 computes two measures of dispersion per participant session: a robust median absolute deviation (MAD) and a standard deviation:
 
-Since the pupil size and their changes is specific to every participant, a normalization is required. To address this issue, the TPR-DB computes pupil size baseline as the median pupil diameter for every translation session.
-
-For each gaze sample point $SP$, the TPR-DB 3.0 computes an effective pupil size $SP_p$ as the mean of the left and right pupil diameters when both are available (i.e., diameter $> 0$) for binocular tracking, and otherwise falls back to the available monocular diameter. Each $SP_p$ is then normalised by the session median. In addition, TPR-DB 3.0 computes two measures of dispersion per participant session: a robust median absolute deviation and a standard deviation
-
-- $\mathtt{baseline}  = median(SP_{p})$
-- $\mathtt{pupil\_mad} = median(abs(SP_{p} -  \mathtt{baseline}))$
-- $\mathtt{pupil\_std} = std(SP_{p})$
+- $\mathtt{baseline} = \text{median}(SP_{p})$
+- $\mathtt{pupil\_mad} = \text{median}(|SP_{p} - \mathtt{baseline}|)$
+- $\mathtt{pupil\_std} = \text{std}(SP_{p})$
 
 An $SP$ can be said to be in a dilated or constricted state relative to the $\mathtt{baseline}$, i.e., a dilation if $SP_{p} > \mathtt{baseline}$ and a constriction if $SP_{p} <= \mathtt{baseline}$
 
-The TPR-DB then computes three sample-level measures 1. percent of change `per` from the baseline, 2. a median-centred z-score `z` and  3. a mean robust z-score `mad`:
+Because pupillary responses unfold over several hundred milliseconds, pupil dilatipon measures should generally be aggregated over higher-level units such as words, AUs, PUs, HORF states, translation phases, or segments before substantive interpretation. The TPR-DB computes three sample-level measures 1. percent of change `per` from the baseline, 2. a mean robust std-score `mad` 3. a median-centred z-score `std`:
 
-1. `per`: $SP_{\mathtt{per}} = 100 * \frac{SP_{AVG} - \mathtt{baseline}}{\mathtt{baseline}}$
-2. `z`: $SP_{\mathtt{z}} = \frac{SP_{AVG} -  \mathtt{baseline}}{\mathtt{pupil\_std}}$
-3. `mad`: $SP_{\mathtt{mad}} = \frac{SP_{AVG} -  \mathtt{baseline}}{\mathtt{pupil\_mad}}$
+1. `per`: percentage change from $\mathtt{baseline} (session median): $SP_{\text{per}} = 100 \times \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{baseline}}$
+2. `mad`: median-centred MAD-standardized pupil size: $SP_{\text{mad}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_mad}}$
+3. `std`: median-centred SD-standardized pupil size: $SP_{\text{std}} = \frac{SP_{\text{p}} - \mathtt{baseline}}{\mathtt{pupil\_std}}$
 
-For each of the three measures `[per|z|mad]` the TPR-DB produces the following eight commonly used measures in pupillometry research, for each fixation in the FD tables:
+
+For each of the three measures (`[per|std|mad]`) the TPR-DB produces the following eight measures in pupillometry research, for each fixation in the FD tables:
+
 
 | Description | Features in the FD table |
 |------|---------| 
-| max. pupil size, 95th percentile (peak)| `PUP_[per|mad|z]_max`|
-| min. pupil size, 5th percentile (floor) | `PUP_[per|mad|z]_min`|
-| mean pupil size | `PUP_[per|mad|z]_mean`|
-| standard deviation (SD) | `PUP_[per|mad|z]_mean`|
-| Area Under the Curve (AUC) |   `PUP_[per|mad|z]_AUC`|
-| time-normalized AUC |   `PUP_[per|mad|z]_AUC_N`|
-| time-normalized AUC for constriction |   `PUP_[per|mad|z]_AUC_C`|
-| time-normalized AUC for dilation |   `PUP_[per|mad|z]_AUC_D`|
+| mean pupil size | `PUP_[per|mad|std]_mean`|
+| max. pupil size, 95th percentile (peak)| `PUP_[per|mad|std]_max`|
+| min. pupil size, 5th percentile (floor) | `PUP_[per|mad|std]_min`|
+| standard deviation (SD) | `PUP_[per|mad|std]_std`|
+| Area Under the Curve (AUC) |   `PUP_[per|mad|std]_AUC`|
+| time-normalized AUC |   `PUP_[per|mad|std]_AUC_N`|
+| time-normalized AUC for constriction |   `PUP_[per|mad|std]_AUC_C`|
+| time-normalized AUC for dilation |   `PUP_[per|mad|std]_AUC_D`|
 
-## Level 1 and level 2: Fixation metrics
+
+We make a distinction between primary pupil measures, the mean measures (`PUP_per_mean` and `PUP_std_mean`, `PUP_mad_mean`), secondary measures, the max and min measures (`PUP_per_max`; `PUP_per_min` and `PUP_per_sd`); and exploratory measures, the variants of AUC, time-normalised AUC, time-normalised AUC for constriction and time-normalised AUC for dilation.
+
+
+zMAD​= x - median(x) divided by 1.4826 times MAD​
+The factor 1.4826 arises from the relationship between the median absolute deviation (MAD) and the standard deviation under normality. It ensures that:
+if the data are approximately normally distributed, the robust z-score is on the same scale as a conventional z-score;
+if the data contain outliers, the estimate remains much more stable than the standard deviation.
+
+
+### Level 1 — Fixation measures on a word level
+Level 1 measures capture what happens at one specific location, in isolation from surrounding context. Fixations are quantified based on their position on the screen (X/Y coordinates), duration, and the character/word/image looked. They reflect early, bottom-up processing:
+
+- First fixation duration: how long the eye rests on first landing in a word
+- Single fixation duration: duration when the word receives only one fixation
+- Total fixation duration / dwell time: summed time across all fixations on the word
+- Number of fixations: how often the word is fixated
+- Fixation probability: whether the word was fixated at all
+
+#### Fixation measures in the TPR-DB
 
 These metrics have been the in the main focus of research and are documented in the [TPR-DB version 2.0](https://drive.google.com/file/d/1FgOSNcpbjlxdo6MM_jf3Pw5wDS6S9-BB/view) an are FD and FU tables. 
 
-Level 1 metrics include :
-- first fixation duration `FFD`,
-- Total reading times on the ST word `TrtS`, or on the target word `TrtT`
-- Number of fixations  `FixS`, `FixT` 
+Level 1 metrics include:
+
+- Time offset (in ms) of first fixation on the source token `FFtimeS` and on the target token`FFtimeT`
+- First fixation duration on the source token `FFDurS`, and on the target token `FFDurT`
+- Total number of fixations the source token  `FixS` and the trget token  `FixT`
+- Total fixation duration (reading time) of the source token `TrtS`, or on the target token `TrtT`
+- Fixation duration (reading time) in the orientation phase of the source token `OrtS` and target token `OrtT`
+- Fixation duration (reading time) during first micro unit 1 (`MU1`) of the source token `MU1rtS` and target token `MU1rtT`
+
+
+
+### Level 2 — Transitions between words 
+Level 2 measures capture how the eye moves between words. The unit of analysis is the fixation behavior on a word in relation to the neighboring words:
+
+- First-pass reading time: total fixation time of a word before the eye leaves it for the first time
+- Regression path duration: time from first fixation until the eye moves *rightward past the word*, including any regressions launched from it
+- Go-past time: total time including regressions back into earlier AOIs triggered by this region
+- Re-reading time: time spent on second and later passes
+- Regression rate in / out: number of regressions into (entering) or out of (leaving) the word
+- Refixation rate: probability of making more than one fixation before leaving
+
+
+#### Fixation transitions measures in the TPR-DB
 
 Level 2 metrics include: 
 
-## Level 3: Gaze Patterns
-T
-
-`Dur_L`
-`Dur_R`
-`Dur_S`
-`Dur_N`
-`RelDur_L`
-`RelDur_R`
-`RelDur_S`
-`RelDur_N`
+- TO BE COMPLETED
 
 
+### Level 3 — Gaze path measures and local reading strategies 
+These measures describe the local reading strategy. The unit of analysis is a sequence of fixations and how the eyes move sequentially. 
 
-## Translation Phases
+- Linear reading: sequential, left-to-right, top-to-bottom progression
+- Scattered fixations: non-sequential, exploratory, attention-driven
+- Regressions / refixations — backward movements, indicating comprehension difficulty or verification
+- Scan path similarity — comparing one participant's path to another or to an ideal (e.g., Levenshtein distance on AOI sequences)
+- Coverage / revisit rate — what proportion of AOIs were visited, and how often
+- Reading order deviation — how much the actual sequence departs from canonical order
+
+#### Gaze patterns in the TPR-DB
+
+While *Fixation transitions measures* capture transitions to and from a word (a static AOI, e.g., a chunk or segment) *Local reading strategies* describe sequences of gaze patterns. These gaze patterns may occur on the source text or on the target text. As soon as the eyes switch from the source to the target window or vice versa, a new pattern starts. We make a distinction between three types of gaze patterns:
+
+1. Linear reading: sequences of mainly progressive fixations indicating successive reading, i.e., input of new information. 
+2. Refixation/regressive reading: sequences of fixations on the same or on neighboring words, probably indicating comprehension difficulties. 
+3. Scattered gaze patterns: sequences of fixations that do not fit the two categories above
+4. No gaze detected: a non-gazing pattern
+
+Each fixation in the $\mathbb{FD}$ table is tagged with a label `L`, `R`, or `S` depending on whether the fixation is part of a linear, refixation, or scattered gaze pattern. AU tables provide features `Dur_L`, `Dur_R`, and `Dur_S`, which indicate the sum of fixation durations belonging to each of the three patterns, and `Dur_N` for the duration in which no gaze data was collected. The features `RelDur_L`, `RelDur_R`, `RelDur_S`, and `RelDur_N` provide the proportion of total gaze time spent in each pattern, computed as:
+
+$$\text{RelDur}_{\text{label}} = \frac{\text{Dur}_{\text{label}}}{\text{Dur}}$$
+
+
+### Level 4 — Global gaze behavior
+Above the local gaze path level, aggregating across multiple trials or participants:
+
+- Mean gaze behavior per participant (reading speed profile, regression tendency)
+- Cluster-based reader types (skimmer vs. careful reader)
+- Learning effects across trials
+
+#### Global gaze behavior in the TPR-DB
+
+as of now there are no such measures in the TPR-DB
+
+## Translation Phases in the TPR-DB
 According to Jakobsen (2011) translation sessions can be separated into an orientation phase (O), a drafting phase (D) and a revision phase (R). Drafting starts with the first keystroke and the time before is defined as the orientation phase. We adopt this definition, even though it may not always be entirely correct. Some translators actually start with testing the keyboard, by typing some characters, and then start the actual orientation phase. We will ignore these cases. According to Jakobsen, drafting ends when the last word has been typed. We operationalize this definitionas follows: 
 
-1. We take the last word in the TT, rather than the translation of the last ST word.
+1. We take the last word in the target text, rather than the translation of the last source text word.
 2. Drafting produces at least 50% of the keystrokes in a translation sessions.
 3. Drafting proceeds sequentially, i.e., successive keystrokes are no further than [-5 .. +2] word IDs and no more than [-20 .. +10] cursor positions apart. Drafting ends when five (or more) successive keystrokes not in a sequential.
+
 
 *[IKI]: inter keystroke intervals
 *[AUC]: Area Under the Curve: cumulative dilation over a time window
@@ -279,5 +308,6 @@ According to Jakobsen (2011) translation sessions can be separated into an orien
 *[ST]: source text 
 *[KU]: Keystroke Units; sequences of keystrokes separated by a KU Interruption (KUI)
 *[PU]: Production Units; sequences of keystrokes separated by a PU break (PUB)
+*[AU]: Activity Unit 
 *[AOI]: Areas of Interest
 
