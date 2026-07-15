@@ -13,13 +13,13 @@ The TPR-DB 3.0 allows you to put the various cognitive processes taking place ei
 
 Choose the study you wish to work on and open the study sessions. It should look something like this:
 
-![Tabular overview of your study sessions](../assets/images/Alignments-sessions-table.png)
+![Tabular overview of your study sessions](img/Alignments-sessions-table.png)
 
 Pick a session and click on "Open Aligner".
 
 A new window opens displaying your segmented study session. You cannot continue here from here, unless you have finished segmneting your study session, as explain in [Edit Segmentation](segmentation.md). In here you can align individual tokens that are already placed within the correct segments. You should see something similar to this:
 
-![Finished segmentation overview of your study session opnened in the Alignment Editor ](../assets/images/Study-Session-Overview-for-Alignment.png)
+![Finished segmentation overview of your study session opnened in the Alignment Editor ](img/Study-Session-Overview-for-Alignment.png)
 
 ## Start Aligning
 

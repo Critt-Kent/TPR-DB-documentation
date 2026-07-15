@@ -19,7 +19,7 @@ By aligning  ST- and TT-sentences in segments, so-called alignments groups, you 
 
 Choose the study you wish to work on and open the study sessions. It should look something like this:
 
-![Tabular overview of your study sessions](../assets/images/Alignments-sessions-table.png)
+![Tabular overview of your study sessions](img/Alignments-sessions-table.png)
 
 Pick a session and click on "Open Aligner".
 
@@ -55,11 +55,11 @@ You can now use keyboard shortcuts to navigate, select, move and confirm segment
 Segmentation Mode allows you to select any number of tokens from the beginning or the end of the segment and move them one segment up or one segment down accordingly. 
 
 
-![An example of SegmentationMmode, where the tokens "Das wollen die Freien Wähler ändern." at the end  of TT segment 1 have been selected with the intent of moving them into the beginning of TT segment 2.](../assets/images/Segmentation-Mode-normal-up.png)
+![An example of SegmentationMmode, where the tokens "Das wollen die Freien Wähler ändern." at the end  of TT segment 1 have been selected with the intent of moving them into the beginning of TT segment 2.](img/Segmentation-Mode-normal-up.png)
 
 In the example above, the TT-tokens "Das wollen die Freien Wähler ändern." in TT segment 1 have been selected by first clicking on the last period of that sentence and then on the article "Das". This leads to the selection of that entire sentence. Of course, you can also use the key binds. You are then prompted to choose what to do with your selection. As the selected tokens are at the end of TT segment 1, you can only move them down to the following segment, i.e. TT segment 2. By clicking on "Move tokens to T2", the program moves your selection down, as shown in the next image.
 
-![The previously selected tokens "Das wollen die Freien Wähler ändern." at the end  of TT segment 1 have now been moved into the beginning of TT segment 2.](../assets/images/Segmentation-T2-below-corrected.png)
+![The previously selected tokens "Das wollen die Freien Wähler ändern." at the end  of TT segment 1 have now been moved into the beginning of TT segment 2.](img/Segmentation-T2-below-corrected.png)
 
 
 You continue selecting and moving tokens up and down until you have the equivalent ST- and TT-sentences in the same corresponding segments.
@@ -75,7 +75,7 @@ The underlying premise of Segmentation Mode (and of many translation tools) is t
 
 To enter Super Segmentation Mode you first need to save all changes you may have done in Segmentation Mode.
 
-![To enter Super Segmentation Mode, save all changes in Segmentation Mode first and then click on "Super Segmentation Mode" in the pop-up window on the lower right corner of your screen. ](../assets/images/Window-Seg-Mode-Intro.png)
+![To enter Super Segmentation Mode, save all changes in Segmentation Mode first and then click on "Super Segmentation Mode" in the pop-up window on the lower right corner of your screen. ](img/Window-Seg-Mode-Intro.png)
 
 To enter Super Segmentation Mode, save all changes in Segmentation Mode first and then click on "Super Segmentation Mode" in the pop-up window on the lower right corner of your screen.
 
@@ -100,10 +100,10 @@ Again, you will be prompted with a pop-up window explaining the controls of Supe
 
 In the following example, the tokens "Aber vor allem FRONTEX soll die Außen·grenzen schützen" are in the middle of TT-segment T4+10. They need to be moved however to T3. This is not possible in Segmentation Mode, as you can only select tokens from the beginning or the end of a segment, not in the middle. After selecting the desired tokens by left-click to anchor, then right-click or Shift+click another token in the same segment, you select the destination from the drop-down menu and clik GO. 
 
-![In Super Segmentation Mode, you select any number of tokens and are able to move them in any other TT-Segment, as shown in this example.  ](../assets/images/Super-Seg-Mode-Example.png)
+![In Super Segmentation Mode, you select any number of tokens and are able to move them in any other TT-Segment, as shown in this example.  ](img/Super-Seg-Mode-Example.png)
 
 Then your selection is moved to the desired destination:
-![Successful movement of tokens in Super Segmentation Mode ](../assets/images/Super-Seg-Success.png)
+![Successful movement of tokens in Super Segmentation Mode ](img/Super-Seg-Success.png)
 
 !!! note "Target Segment Number Changes"
     Notice how the name of the TT-segments has changed after the movement. This is by design and fuctions as a safeguard to ensure normal functionality after having changed the order of the tokens. 
