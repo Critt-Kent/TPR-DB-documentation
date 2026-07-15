@@ -51,6 +51,7 @@ The Translation Process Research Database (TPR-DB) is a tool for organizing and 
 3. Manually **align** words and **annotate** alignment groups
 4. The TPR-DB will **automatically extract features** to create **TPR-DB data tables**
 5. Use the features in the tables to **visualize** and **analyze** your data &#129299;
+    1. The [CRITT Academy](analyze/academy.md) has many resources and examples to learn how to analyze your data
 
 ## History
 

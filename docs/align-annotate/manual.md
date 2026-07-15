@@ -4,7 +4,7 @@ icon: lucide/notebook-pen
 
 # Manual Alignment
 
-!!! info
+!!! tip "Segmentation First, then Align Tokens"
     Before you start manually aligning tokens in your study sessions, you should first make sure that the Source Text (ST) and the Target Text (TT) have been segmented by the ``` Alignment Module  ``` correctly. If that is not the case, you have to make manual corrections. You can read more about that on the page #Edit Segmentation.
 
 The TPR-DB 3.0 allows you to put the various cognitive processes taking place either on the ST or on the TT during translation in relation to each other. To achieve this, a Graphic User Interface has been developed. 
@@ -44,4 +44,4 @@ Additionally, from within the Controls-window, you can change the orientation se
 By using your mouse and/or keyboard you thus select and align equivalent ST- and TT-tokens. 
 
 !!! warning
-    Beware: How you align the ST to the TT has a big impact on your future analysis. in TPR-typical fashion you need to align as fine-grained and holistically as possible. This means that you favor 1:1 word alignments, wherever possible, over 1:n (or n:n) word alignments. Furthermore, you should align as many tokens as possible to reduce data loss in your further analysis. You can read more about the impact of alignemnt [here](https://www.degruyterbrill.com/de/document/doi/10.1075/ata.xx.10gil/html "Impact of word alignment on word translation entropy and other metrics").
+    Beware: How you align the ST to the TT has a big impact on your future analysis. in TPR-typical fashion you need to align as fine-grained and holistically as possible. This means that you favor 1:1 word alignments, wherever possible, over 1:n (or n:n) word alignments. Furthermore, you should align as many tokens as possible to reduce data loss in your further analysis. You can [read more about the impact of alignment here](https://www.degruyterbrill.com/de/document/doi/10.1075/ata.xx.10gil/html "Impact of word alignment on word translation entropy and other metrics").

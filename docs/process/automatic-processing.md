@@ -4,7 +4,6 @@ title: TPR Pipeline
 description: Documentation for the "TPR Pipeline," which is the automatic processing the CRITT TPR-DB completes when uploading raw keystroke/gaze data to it.
 ---
 
-
 # The TPR Pipeline
 
 The [TPR pipeline](https://github.com/Critt-Kent/TPR-DB-web-app/tree/main/libs/tpr_pipeline) extracts basic linguistic and behavioral units from the raw logging data and enriches the units with additional information. It integrates conventional monolingual Natural Language Processing (NLP) libraries ([NLTK](https://www.nltk.org/) and [Stanza](https://stanfordnlp.github.io/stanza/)), bilingual alignment tools (i.e., [SimAlign](https://github.com/cisnlp/simalign)), and custom-built components for [keystroke-to-word mapping](https://github.com/Critt-Kent/TPR-DB-web-app/blob/main/libs/tpr_pipeline/behavior/keystrokes.py) and [fixation-to-word mapping](https://github.com/Critt-Kent/TPR-DB-web-app/blob/main/libs/tpr_pipeline/behavior/gaze.py). The extracted and enriched units are stored in a `SessionProps` file for further processing. 
@@ -13,15 +12,21 @@ The [TPR pipeline](https://github.com/Critt-Kent/TPR-DB-web-app/tree/main/libs/t
 
 First, the source and target texts are extracted from the raw logging files and processed in a 'classical' monolingual [NLP chain](https://github.com/Critt-Kent/TPR-DB-web-app/tree/main/libs/tpr_pipeline/nlp):
 
-`Sentence Segmentation 🡪 Tokenization 🡪 PoS-Tagging 🡪 Lemmatization 🡪 MWU 🡪 NER 🡪 Dependency Parsing`
+```mermaid
+%%{init: {'themeVariables': {'fontSize': '16px'}}}%%
+graph TB
+	SS["Sentence Segmentation"] --> Tok["Tokenization"] --> PoS["PoS Tagging"]
+	Lem["Lemmatization"] --> MWU["Multi-word Units"] --> NER["Named Entity Recognition"] --> Dep["Dependency Parsing"]
+	PoS --> Lem
+```
 
-The [TPR pipeline](https://github.com/Critt-Kent/TPR-DB-web-app/tree/main/libs/tpr_pipeline) starts with extracting the source and the final texts from the logging files. The texts (other than Chinese and Japanese) are then segmented, tokenized and PoS tagged using [NLTK](https://www.nltk.org/) (Natuaral Language Toolkit). Subsequently, [Stanza](https://stanfordnlp.github.io/stanza/) (Stanford NLP's neural annotation pipeline) annotation chain is applied for UPos tagging (Universal Part-of-Speech) and XPos (Pen-Treebank Pos), for lemmatization, morpho-syntactic features, multi-word token (MWT) expansion, named entity recognition (NER) and dependency parsing, provided Stanza has a package for the language involved. This information is stored for the source and target texts in the `SessionProps` files under the `SourceToken` and `FinalToken`container. The Python code for these processes is [here](https://github.com/Critt-Kent/TPR-DB-web-app/blob/main/libs/tpr_pipeline/nlp/segmentation.py)
+The [TPR pipeline](https://github.com/Critt-Kent/TPR-DB-web-app/tree/main/libs/tpr_pipeline) starts with extracting the source and the final texts from the logging files. The texts (other than Chinese and Japanese) are then segmented, tokenized and PoS tagged using [NLTK](https://www.nltk.org/) (Natuaral Language Toolkit). Subsequently, [Stanza](https://stanfordnlp.github.io/stanza/) (Stanford NLP's neural annotation pipeline) annotation chain is applied for UPos tagging (Universal Part-of-Speech) and XPos (Pen-Treebank Pos), for lemmatization, morpho-syntactic features, multi-word token (MWT) expansion (multi-word units, or MWU), named entity recognition (NER) and dependency parsing, provided Stanza has a package for the language involved. This information is stored for the source and target texts in the `SessionProps` files under the `SourceToken` and `FinalToken`container. The Python code for these processes is [here](https://github.com/Critt-Kent/TPR-DB-web-app/blob/main/libs/tpr_pipeline/nlp/segmentation.py)
 
 ### Linguistic annotation
 Tokenization segmentes the raw texts into individual tokens, while MWT expansion resolved language-specific contractions and fused forms into their constituent units — a step particularly relevant for morphologically rich languages. PoS tagging and lemmatization assign grammatical categories and canonical base forms to each token, enabling normalized frequency and complexity measures. In addition, Stanza also produces morpho-syntactic information for some languages, such as number, person, case, gender, tense, definiteness, etc. NER identifies and classifies named entities such as persons, locations, and organizations, providing a measure of referential density. Finally, dependency parsing established syntactic relationships between tokens, which can be used for tree-based measures of structural complexity such as mean dependency distance and branching factor. The [TPR pipeline](https://github.com/Critt-Kent/TPR-DB-web-app/tree/main/libs/tpr_pipeline) function [stanzaFeatures](https://github.com/Critt-Kent/TPR-DB-web-app/blob/main/libs/tpr_pipeline/nlp/segmentation.py) adds this information to each token. Together, these annotations form the basis for a rich set of linguistic product features capturing both surface form and underlying syntactic structure.
 
 ### Japanese and Chinese Sentence Segmentation and Tokenization
-As Japanese and Chinese do not separate words by white spaces, we use [Jieba](https://jieba.readthedocs.io/en/latest/) for Chinese tokenization and fragment the sequence of tokens into segments after one of the following characters:  '。！？.!?'  For Japanese tokenization and sentence segmentation, we use [Stanza](https://stanfordnlp.github.io/stanza/) (processors: `tokenize`, `pos`). All other languages (i.e. languages that separate words with whitespaces) we use the [NLTK](https://www.nltk.org/) function `sent_tokenize` for sentence segmentation and `word_tokenize` for word tokenization.
+As Japanese and Chinese do not separate words by white spaces, we use [Stanza](https://stanfordnlp.github.io/stanza/) for Chinese tokenization and fragment the sequence of tokens into segments after one of the following characters:  '。！？.!?'. For Japanese tokenization and sentence segmentation, we use [Stanza](https://stanfordnlp.github.io/stanza/) (processors: `tokenize`, `pos`). All other languages (i.e. languages that separate words with whitespaces) we use the [NLTK](https://www.nltk.org/) function `sent_tokenize` for sentence segmentation and `word_tokenize` for word tokenization.
 
 
 ## Bilingual Alignment
@@ -31,7 +36,11 @@ Once the individual texts are segmented and tokenized, the TPR-DB [alignment mod
 Currently, the [alignment module](https://github.com/Critt-Kent/TPR-DB-web-app/blob/main/libs/tpr_pipeline/alignment/aligner.py) provides a very rudimentary segment alignment heuristic. This default heuristic pairs each source segment one-to-one with a target segment in a sequential order. When one language side contains more segments than the other, all remaining segments are collapsed into the final alignment group. This rudimentary approach frequently fails and often requires manual correction.
 
 ### Word-level Alignment
-Automatic word-level alignment is handled by [SimAlign](https://github.com/cisnlp/simalign), which matches words across languages without relying on traditional parallel corpora. [SimAlign](https://github.com/cisnlp/simalign) draws on pretrained multilingual language models — such as mBERT or XLM-R — to build similarity matrices between source and target words. Alignment is then determined using methods like iterative refinement and bipartite matching, which map words based on their contextual and static embedding similarities. This unsupervised approach consistently outperforms classical statistical aligners, particularly in low-resource scenarios or when working with specialized content that lacks parallel training data, provided the segment alignment is correct. 
+Automatic word-level alignment is handled by [SimAlign](https://github.com/cisnlp/simalign), which matches words across languages without relying on traditional parallel corpora. [SimAlign](https://github.com/cisnlp/simalign) draws on pretrained multilingual language models — such as mBERT or XLM-R — to build similarity matrices between source and target words. Alignment is then determined using methods like iterative refinement and bipartite matching, which map words based on their contextual and static embedding similarities. This unsupervised approach consistently outperforms classical statistical aligners, particularly in low-resource scenarios or when working with specialized content that lacks parallel training data, provided the segment alignment is correct.
+
+!!! note "Word-level Alignment: Manual or Automatic"
+
+    You can choose whether to align manually or automatically, and you can always manually edit alignments after something has been aligned automatically (see [Manual Alignment](../align-annotate/manual.md)).
 
 
 ## Keystroke-to-word Mapping
