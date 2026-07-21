@@ -6,39 +6,25 @@ description: A description of different utilities (toolkits) that help researche
 
 # Utilities
 
-## `tprdb-utilities` (Python Library)
+There are three main resources provided by CRITT to help you analyze your data:
 
-The Python library `tprdb-utilities` ([Python Package Index](https://pypi.org/project/tprdb-utilities/) | [GitHub Repo](https://github.com/Critt-Kent/tprdb-utilities)) is a library that makes it easy to fetch data tables from specific TPR-DB studies and then read them into Pandas DataFrames for analysis.
+* Shiny R Interface
 
-### `fetcher`
+* `tprdb-utilities` Python library
 
-The `fetcher` module and its **`fetch_TPRDB_tables()`** function works with the [TPR-DB web app](https://critt.as.kent.edu/tpr/)'s API to download/update data tables for a specific TPR-DB study, saving the most up-to-date tables in a location of your choosing.
+* [CRITT Academy](academy.md) code notebooks
 
-!!! tip "Why fetch?"
+## Shiny R Interface
 
-    If you need to analyze the data from a location other than the CRITT TPR-DB Jupyter server, this module/function makes it **super easy to download and organize the data tables** 🤓
+This is the best resource to get an immediate look at your data so you can begin to formulate ideas for what you want to subsequently analyze in greater depth.
 
-### `reader`
+Translation **progression graphs** are one of several methods for visualizing data from different tables. It depicts the temporal dynamics of the translation process by concurrently plotting partial information extracted from multiple unit tables.
 
-The `reader` module and its **`read_TPRDB_tables()`** function takes the data tables you have downloaded for one or more studies you specify and reads them into a Pandas DataFrame object for subsequent analysis.
+Progression graphs are implemented using `Shiny R`, which is based on a reactive programming model. As a result, plots and tables are automatically updated whenever you change an input. Here is a link to the CRITT Shiny R interface:
 
-If working directly from the CRITT TPR-DB Jupyter server, the same module/function will also read the data directly from where the TPR-DB stores it.
+[CRITT Shiny R Interface](https://critt.as.kent.edu/shiny/ProgGraph/){ .md-button .md-button--primary }
 
-### `transformer`
-
-The `transformer` module contains utility functions that will *transform* your data in various ways:
-
-* **`prep_parallel_texts()`**: this function prepares bitexts (source text and the target text of one participant) and/or tritexts (source text and the target texts of two participants), organized by segment, so that you can, for example, run automatic quality evaluation metrics like BLEU and COMET.
-* **`recompute_pause_based_metrics()`**: this function will compute pause-based metrics (typing bursts (**TB**), typing gap (**TB**), and typing duration (**TD**))—calculated using a custom pause threshold you provide—and add them to your Segments DataFrame (based on SG tables)
-
-## Progression Graphs
-Translation progression graphs are one of several methods for visualizing data from different tables. It depicts the temporal dynamics of the translation process by concurrently plotting partial information extracted from multiple unit tables.
-
-Progression graphs are implemented using `ShinyR`, which is based on a reactive programming model. As a result, plots and tables are automatically updated whenever you change an input. The progression graph interface can be accessed [here](https://critt.as.kent.edu/shiny/ProgGraph/).
-
-
-
-### Generating translation progression graphs
+### Progression Graphs
 The following are the steps for generating a progression graph. 
 
 First, you need to specify the user. The default **User** is *PUBLIC*, which provides access to a variety of public studies. To generate progression graphs for your private studies, change the user name to your own in the left panel.
@@ -84,3 +70,32 @@ You can also customize the progression graph by selecting **Show/Hide Items** fr
 ![TU line & AU table](img/AU.png)
 
 The progression graph above displays the TU lines (as shown by the red dashed line). Within the selected time window, there are six complete translation units (TUs 21–26). The table provides detailed AU features.
+
+### View Data Tables
+
+From the Shiny R interface, you can also load any data table for the current session, and the rows of the data table will be limited to what is currently visible in the progression graph. This can be very useful for inspecting features associated with what you are zoomed in on in the progression graph.
+
+## `tprdb-utilities` (Python Library)
+
+The Python library `tprdb-utilities` ([Python Package Index](https://pypi.org/project/tprdb-utilities/) | [GitHub Repo](https://github.com/Critt-Kent/tprdb-utilities)) is a library that makes it easy to fetch data tables from specific TPR-DB studies and then read them into Pandas DataFrames for analysis.
+
+### `fetcher`
+
+The `fetcher` module and its **`fetch_TPRDB_tables()`** function works with the [TPR-DB web app](https://critt.as.kent.edu/tpr/)'s API to download/update data tables for a specific TPR-DB study, saving the most up-to-date tables in a location of your choosing.
+
+!!! tip "Why fetch?"
+
+    If you need to analyze the data from a location other than the CRITT TPR-DB Jupyter server, this module/function makes it **super easy to download and organize the data tables** 🤓
+
+### `reader`
+
+The `reader` module and its **`read_TPRDB_tables()`** function takes the data tables you have downloaded for one or more studies you specify and reads them into a Pandas DataFrame object for subsequent analysis.
+
+If working directly from the CRITT TPR-DB Jupyter server, the same module/function will also read the data directly from where the TPR-DB stores it.
+
+### `transformer`
+
+The `transformer` module contains utility functions that will *transform* your data in various ways:
+
+* **`prep_parallel_texts()`**: this function prepares bitexts (source text and the target text of one participant) and/or tritexts (source text and the target texts of two participants), organized by segment, so that you can, for example, run automatic quality evaluation metrics like BLEU and COMET.
+* **`recompute_pause_based_metrics()`**: this function will compute pause-based metrics (typing bursts (**TB**), typing gap (**TB**), and typing duration (**TD**))—calculated using a custom pause threshold you provide—and add them to your Segments DataFrame (based on SG tables)
