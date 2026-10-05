@@ -38,3 +38,4 @@ To merge the inputlog`.idfx` file into the Translog-II `*.xml` file, run the fol
 ```bash
 perl ./InjectIDFX.pl -T <Translog-II>.xml -I <InputLog>.idfx -O <Target_fn>.xml
 ```
+
