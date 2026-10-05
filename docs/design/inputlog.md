@@ -26,7 +26,7 @@ While [inputlog](https://www.inputlog.net/) is designed to work in conjunction w
 
 In order to run [inputlog](https://www.inputlog.net/) with Translog-II, you have to change the recording settings (as Word is the default writing environment for [inputlog](https://www.inputlog.net/)). Be aware that changing this option will limit the use of certain analysis possibilities that [inputlog](https://www.inputlog.net/) provides (e.g., revision analysis, process graph, etc.).
 
-![Recording Settings](./InputLogSettings.png)
+![](InputLogSettings.png)
 
 ### Changing Recording Settings 
 1. Select **File** in the top menu.
@@ -37,3 +37,4 @@ To merge the inputlog`.idfx` file into the Translog-II `*.xml` file, run the fol
 
 ```bash
 perl ./InjectIDFX.pl -T <Translog-II>.xml -I <InputLog>.idfx -O <Target_fn>.xml
+```
