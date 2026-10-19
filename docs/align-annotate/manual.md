@@ -4,7 +4,7 @@ icon: lucide/notebook-pen
 
 # Manual Alignment
 
-!!! info
+!!! tip "Segmentation First, then Align Tokens"
     Before you start manually aligning tokens in your study sessions, you should first make sure that the Source Text (ST) and the Target Text (TT) have been segmented by the ``` Alignment Module  ``` correctly. If that is not the case, you have to make manual corrections. You can read more about that on the page #Edit Segmentation.
 
 The TPR-DB 3.0 allows you to put the various cognitive processes taking place either on the ST or on the TT during translation in relation to each other. To achieve this, a Graphic User Interface has been developed. 
@@ -13,13 +13,13 @@ The TPR-DB 3.0 allows you to put the various cognitive processes taking place ei
 
 Choose the study you wish to work on and open the study sessions. It should look something like this:
 
-![Tabular overview of your study sessions](../assets/images/Alignments-sessions-table.png)
+![Tabular overview of your study sessions](img/Alignments-sessions-table.png)
 
 Pick a session and click on "Open Aligner".
 
 A new window opens displaying your segmented study session. You cannot continue here from here, unless you have finished segmenting your study session, as explained in the [edit Segmentation](segmentation.md) page. In here you can align individual tokens that are already placed within the correct segments. You should see something similar to this:
 
-![Finished segmentation overview of your study session opnened in the Alignment Editor ](../assets/images/Study-Session-Overview-for-Alignment.png)
+![Finished segmentation overview of your study session opnened in the Alignment Editor ](img/Study-Session-Overview-for-Alignment.png)
 
 ## Start Aligning
 
@@ -44,4 +44,4 @@ Additionally, from within the Controls-window, you can change the orientation se
 By using your mouse and/or keyboard you thus select and align equivalent ST- and TT-tokens. 
 
 !!! warning
-    Beware: How you align the ST to the TT has a big impact on your future analysis. in TPR-typical fashion you need to align as fine-grained and holistically as possible. This means that you favor 1:1 word alignments, wherever possible, over 1:n (or n:n) word alignments. Furthermore, you should align as many tokens as possible to reduce data loss in your further analysis. You can read more about the impact of alignemnt [here](https://www.degruyterbrill.com/de/document/doi/10.1075/ata.xx.10gil/html "Impact of word alignment on word translation entropy and other metrics").
+    Beware: How you align the ST to the TT has a big impact on your future analysis. in TPR-typical fashion you need to align as fine-grained and holistically as possible. This means that you favor 1:1 word alignments, wherever possible, over 1:n (or n:n) word alignments. Furthermore, you should align as many tokens as possible to reduce data loss in your further analysis. You can [read more about the impact of alignment here](https://www.degruyterbrill.com/de/document/doi/10.1075/ata.xx.10gil/html "Impact of word alignment on word translation entropy and other metrics").

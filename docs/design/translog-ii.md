@@ -16,9 +16,8 @@ The guide is based on Zou & Carl (2026)[^zoucarl2026].
 
     Keylogging with Translog-II is the most accessible entry point for conducting behavioral experiments in translation process research. The software is freely available, and a keylogging experiment requires no specialized hardware beyond a standard Windows computer.
 
----
 
-## 1. Overview of Translog-II
+## Overview of Translog-II
 
 Translog-II is a specialized tool for recording user activity data (UAD) during translation, writing, and reading tasks. It records keystrokes and, when connected to an eye-tracker, gaze movements during sessions.
 
@@ -53,20 +52,18 @@ For each keystroke event, Translog-II records the event type, the value of the k
 
     The keylogger runs in the background and does not interfere with the writing or translation process. Translog-II logs the exact time at which each **keydown** event occurs.
 
----
 
-## 2. Setting Up an Experiment
+## Setting Up an Experiment
 
 Translog-II provides three main functions for conducting experiments: project creation, session recording, and replay/analysis.
 
-### Step 1 — Create a project
+### Create a project
 
-1. Open **Translog-II Supervisor**.
-2. Select **Project → Create Project**.
+Open **Translog-II Supervisor**, and then select **Project → Create Project**.
 
 ![Creating a project in Translog-II](img/figure2.png)
 
-3. In the "New Project" dialogue box, click **Configure Experiment** to define the experimental parameters.
+In the "New Project" dialogue box, click **Configure Experiment** to define the experimental parameters.
 
 ![Creating a new project in Translog-II Supervisor](img/figure3.png)
 
@@ -85,15 +82,19 @@ The source and target windows can be oriented horizontally or vertically and pos
 
     For language pairs requiring an IME (such as Chinese and Japanese), check the **"Offline Gaze Mapping"** box if an eye-tracker is connected. This ensures proper mapping of alphabetic letters typed on the keyboard to the corresponding logographic characters displayed on screen.
 
-### Step 2 — Configure the experiment
+### Configure the experiment
 
 For our English-to-Chinese example:
 
-1. Enter the English source sentences into the upper window.
-2. Select **Translation** and **Target window at bottom**.
-3. Leave the bottom window empty for the participant's translation.
-4. Adjust font (sans-serif is recommended), text alignment, and layout as needed.
-5. Save the configuration as a `.project` file.
+Enter the English source sentences into the upper window.
+
+Select **Translation** and **Target window at bottom**.
+
+Leave the bottom window empty for the participant's translation.
+
+Adjust font (sans-serif is recommended), text alignment, and layout as needed.
+
+Save the configuration as a `.project` file.
 
 ![Configuring experiment in Translog-II Supervisor](img/figure4.png)
 
@@ -101,12 +102,15 @@ For our English-to-Chinese example:
 
     The `.project` file can be reused for all participants translating the same source text.
 
-### Step 3 — Record a session
+### Record a session
 
-1. Open the `.project` file in **Translog-II User**.
-2. Click **Start Logging** to begin the session. This opens the configured interface displaying the source text and an empty target window.
-3. The participant translates the text.
-4. When the participant finishes, click **Stop Logging**. The session is saved as an XML file.
+Open the `.project` file in **Translog-II User**.
+
+Click **Start Logging** to begin the session. This opens the configured interface displaying the source text and an empty target window.
+
+The participant translates the text.
+
+When the participant finishes, click **Stop Logging**. The session is saved as an XML file.
 
 ![Opening and running a keylogging experiment in Translog-II](img/figure5.png)
 
@@ -114,7 +118,7 @@ For our English-to-Chinese example:
 
     To facilitate later processing with the CRITT TPR-DB, name the file using the TPR-DB naming convention. For example, `P01_T1`, where `P01` identifies the participant and `T1` indicates a translation-from-scratch task with source text 1. See the [TPR-DB naming conventions](https://critt-kent.github.io/TPR-DB-documentation/design/file-naming/) for details.
 
-### Step 4 — Replay and analyze (optional)
+### Replay and analyze (optional)
 
 Translog-II includes a replay tool with three visualization modes:
 
@@ -134,25 +138,21 @@ All three views can be opened simultaneously and synchronized so the cursor in a
 
 The logged data collected by Translog-II can be uploaded to the [CRITT Translation Process Research Database (TPR-DB)](https://sites.google.com/site/centretranslationinnovation/tpr-db) for post-processing and analysis. See the [Automatic Processing](https://critt-kent.github.io/TPR-DB-documentation/process/automatic-processing/) documentation for details.
 
----
 
-## 3. Tips for IME-Mediated Translation Experiments
+## Tips for IME-Mediated Translation Experiments
 
 When conducting experiments with languages that require IMEs (Chinese, Japanese, Korean, etc.), keep the following in mind:
 
 - **Review longer deletions manually** — the automated keystroke-to-word mapping heuristic becomes less reliable as deletion length increases, particularly for multi-word IME conversions. Use the TPR-DB's semi-automatic adjustment tool if precise deletion analysis is needed.
 - **Be aware of timing ambiguity** — for IME input, there are at least two possible measures of production time: the duration of the keystrokes typed, and the time until the character appears on screen. The delay between triggering IME conversion and character appearance reflects both technical processing time and the time the typist spends evaluating and selecting among candidate characters.
 
----
-
-## 4. Further Resources
+## Further Resources
 
 - **Download Translog-II:** [CRITT website](https://sites.google.com/site/centretranslationinnovation/translog-ii)
 - **TPR-DB 3.0 data tables:** [Features table](https://critt-kent.github.io/TPR-DB-documentation/tables/types/)
 - **Auxiliary tools:** [Semi-automatic adjustment tool](https://sites.google.com/site/centretranslationinnovation/tpr-db/auxilliary-tools)
 - **Progression graphs:** [Shiny R interface](https://critt.as.kent.edu/shiny/ProgGraph/)
 
----
 
 ## Citation
 
