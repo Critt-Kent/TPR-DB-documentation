@@ -1,10 +1,19 @@
 Table	Feature	Description	Type
+ST	AltC	Number of different ST-TT crossing (position distortion)	int
+ST	AltS	Number of alternative ST groupings 	int
+ST	AltSTC	Number of joint ST-TT grouping, translation form, and crossing 	int
+ST	AltT	Number of alternative translations	int
+TT	AltT	Number of alternative translations	int
+ST	Annot	Code of annotation (was previously Yawat)	string
+TT	Annot	Code of annotation (was previously Yawat)	string
 PU	AUid	IDs of AUs covered in the unit	string: '1+2+ ..'
 ST	AUid	IDs of AUs covered in the unit	string: '1+2+ ..'
 TT	AUid	IDs of AUs covered in the unit	string: '1+2+ ..'
 PU	AUtype	Types of AUs covered in the unit	string: '1+2+ ..'
 KD	Border	Keystroke at word border: within word, (W) white space (S) deletion (D)	cat: {WW, SW, WS, …}
 KD	Char	Characters typed or deleted	string
+ST	Count	Number of translations	int
+TT	Count	Number of translations	int
 ST	Cross	Cross value	int: -n .. +m
 TT	Cross	Cross value	int: -n .. +m
 AG	CrossS	Cross value from ST view	int: -n .. +m
@@ -30,10 +39,11 @@ AG	Del2	Number of deletions in the second micro unit	int
 ST	Del2	Number of deletions in the second micro unit	int
 TT	Del2	Number of deletions in the second micro unit	int
 AG	DelR	Number of deletions in the revision phase micro unit	int
-TT	DelR	Number of deletions in the revision phase micro unit	int
+ST	DelR	Number of deletions in the revision phase 	int
+TT	DelR	Number of deletions in the revision phase 	int
 ST	deprel	stanza: dependency relation	string
 TT	deprel	stanza: dependency relation	string
-EX	DFix	Total fixation duration	
+EX	DFix	Total fixation duration	int
 SS	DraftTime	Timestamp of the first keystroke (start of drafting)	int
 AG	Dur	Total duration of the unit (in ms)	int: 0 .. n
 AU	Dur	Total duration of the unit (in ms)	int: 0 .. n
@@ -48,7 +58,7 @@ PU	Dur	Total duration of the unit (in ms)	int: 0 .. n
 SG	Dur	Total duration of the unit (in ms)	int: 0 .. n
 SS	Dur	Total duration of the unit (in ms)	int: 0 .. n
 ST	Dur	Total duration of the unit (in ms)	int: 0 .. n
-TT	Dur	Total duration of the unit (in ms)	int: 0 .. n
+TT	Dur	Total production duration (sum over all MUs)	int
 AU	Dur_L	Duration of linear reading	int: 0 .. n
 HC	Dur_L	Duration of linear reading	int: 0 .. n
 HS	Dur_L	Duration of linear reading	int: 0 .. n
@@ -97,7 +107,7 @@ KU	End	Timestamp when the unit ends (in ms)	int
 PU	End	Timestamp when the unit ends (in ms)	int
 AG	End1	Timestamp when the first micro unit ends (in ms)	int
 ST	End1	Timestamp when the first micro unit ends (in ms)	int
-TT	End1	Timestamp when when first micro unit ends (in ms)	int
+TT	End1	Timestamp when the first micro unit ends (in ms)	int
 AG	End2	Timestamp when second micro unit ends (in ms)	int
 HC	Fdur		
 ST	feats	stanza: morphological features	string
@@ -134,13 +144,26 @@ AU	GazePath	Sequence of fixations on ST/TT word IDs	string
 FU	GazePath	Sequence of fixations on ST/TT word IDs	string
 AU	GPlabel	Label of gaze path	{L,R,S,N}
 FD	GPlabel	Label of gaze path	{L,R,S,N}
-HS	HCid	ID of embedding HORF cycle	
+HS	HCid	ID of embedding HORF cycle	int
+ST	HCross	Entropy of ST-TT crossings	Float
+TT	HCross	Entropy of ST-TT crossings	Float
+ST	HCrossN	Normalized HCross (HCross / log(#translations))	Float
 HC	Hdur	Duration of Hesitation	
 ST	head	Stanza: head feature of dependency relation	string
 TT	head	Stanza: head feature of dependency relation	string
 HC	HORF	Type HORF state	{H,O,R,F}
 HS	HORF	Type HORF state	{H,O,R,F}
+ST	HSgrp	Entropy of ST grouping	Float
+ST	HSgrpN	Normalized ST grouping entropy (HSgrp / log(#translations))	Float
 AU	HSid	ID of HORF state	int: 1 .. n
+ST	HSTC	Entropy of joint ST-TT grouping, translation form, and crossing 	Float
+TT	HSTC	Entropy of joint ST-TT grouping, translation form, and crossing 	Float
+ST	HSTCN	Normalized HSTC (HSTC / log(#translations))	Float
+SG	HTot	Sum over HTra values of words	float
+SG	HTotN	Normalized Htot (i.e., HTot / TokS)	float
+ST	HTra	Word translation entropy	Float
+TT	HTra	Word translation entropy	Float
+ST	HTraN	Normalized HTra (HTra / log(#translations))	Float
 SS	HZ	Sample frequency of eyetracker (Herz)	int
 AG	Id	Unique unit ID of unit per session	int: 1 .. n
 AU	Id	Unique unit ID of unit per session	int: 1 .. n
@@ -158,7 +181,12 @@ ST	Id	Unique unit ID of unit per session	int: 1 .. n
 TT	Id	Unique unit ID of unit per session	int: 1 .. n
 AG	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	float
 ST	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	float
-TT	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	float
+TT	InEff	Ratio of insertions and deletions: (ins+del+1) /(ins-del+1)	int
+ST	InfC	Information of this ST-TT crossings	Float
+ST	InfS	Information of ST grouping (i.e. log(1/ProbS))	int
+ST	InfSTC	Information of this joint ST-TT grouping, translation form, crossing 	Float
+ST	InfT	Word translation information (i.e. log(1/ProbT))	int
+TT	InfT	Word translation information (i.e. log(1/ProbT))	int
 AG	Ins	Number of insertions	int: 1.. n
 AU	Ins	Number of insertions	int: 1.. n
 HC	Ins	Number of insertions	int: 1.. n
@@ -176,6 +204,7 @@ AG	Ins2	Number of insertions in second micro unit	int: 1.. n
 ST	Ins2	Number of insertions in second micro unit	int: 1.. n
 TT	Ins2	Number of insertions in second micro unit	int: 1.. n
 AG	InsR	Number of insertions in revision phase	int: 1.. n
+ST	InsR	Number of insertions in revision phase	int: 1.. n
 TT	InsR	Number of insertions in revision phase	int: 1.. n
 HS	KUcount	Number of embedded Kus	
 AU	KUdur	Duration of embedding AU	
@@ -247,10 +276,15 @@ TT	PauseR	Keystroke pause preceeding the micro unit in the revision phase	int
 AU	Phase	Flag indicating in which phase Orientation, Drafting Revision, of the unit occurs	{O,D,R}
 KD	Phase	Flag indicating in which phase Orientation, Drafting Revision, of the unit occurs	{O,D,R}
 PU	Phase	Flag indicating in which phase Orientation, Drafting Revision, of the unit occurs	{O,D,R}
-ST	pos	NLTK: Penn-tree POS tag	string
-TT	pos	NLTK: Penn-tree POS tag	string
+TT	pos	NLTK POS tag	string
 SG	PostGap	Lag of time between last keystroke of current segment and first keystoke of next segment	int
 SG	PreGap	Lag of time between last keystroke of previous segment and first keystoke of current segment	int
+ST	ProbC	Probability of this ST-TT crossing 	Float
+TT	ProbC	Probability of this ST-TT crossing 	Float
+ST	ProbS	Probability of ST grouping	Float
+ST	ProbSTC	Probability of this ST-TT grouping, translation form, and crossing 	Float
+ST	ProbT	Word translation probability	Float
+TT	ProbT	Word translation probability	Float
 AU	PUB	Duration of Production Unit Break	int
 FU	PUB	Duration of Production Unit Break	int
 KU	PUB	Duration of Production Unit Break	int
@@ -273,6 +307,7 @@ HC	RelHdur	Relative duration of hesitation (Duration Hesitation / total Duration
 HC	RelOdur	Relative duration of orientation (Duration Orientation / total Duration)	float
 HC	RelRdur	Relative duration of revision (Duration Revision / total Duration)	float
 SS	RevTime	Timestamp startpoint of revision / end of drafting	int
+ST	SDur	Duration of ST word production (interpretation)	int
 AG	Session	Name of session	string
 AU	Session	Name of session	string
 EX	Session	Name of session	string
@@ -294,7 +329,7 @@ KD	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
 KU	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
 PU	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
 ST	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
-TT	SGid	ST word IDs that are part of the unit	string: '1+2+ ..'
+TT	SGid	ST word IDs that are part of the unit	string: '1+2+3 … '
 AG	SGroup	ST words in unit	string: word1_word2_ …
 ST	SGroup	ST words in unit	string: word1_word2_ …
 TT	SGroup	ST words in unit	string: word1_word2_ …
@@ -316,9 +351,7 @@ AG	STid	Lowest ST word ID in SGid	int
 FD	STid	Lowest ST word ID in SGid	int
 KD	STid	Lowest ST word ID in SGid	int
 ST	STid	Lowest ST word ID in SGid	int
-TT	STid	Lowest ST word ID in SGid	int
-ST	Annot	Code of annotation (was previously Yawat)	string
-ST	SDur	Duration of ST word production (interpretation)	int
+TT	STid	Lowest (starting) ST word ID in SGid	int
 ST	STime	Startimg time when ST word was produced (interpreting)	int
 ST	SToken	ST token (word)	string
 SG	String	TT segment - segment translation, sequence of words	string
@@ -333,8 +366,9 @@ PU	STseg	ST segment IDs that are part of the unit	int
 SG	STseg	ST segment IDs that are part of the unit	int
 SS	STseg	ST segment IDs that are part of the unit	int
 ST	STseg	ST segment IDs that are part of the unit	int
-TT	STseg	ST segment IDs that are part of the unit	int
+TT	STseg	ID of ST segment	int
 AG	Study	Study name	string
+TT	pos	NLTK: Penn-tree POS tag	string
 AU	Study	Study name	string
 EX	Study	Study name	string
 FD	Study	Study name	string
@@ -400,11 +434,11 @@ SG	Text	Source text ID in study	string
 SS	Text	Source text ID in study	string
 ST	Text	Source text ID in study	string
 TT	Text	Source text ID in study	string
-SG	TG_2PUB	Typing Gap: bigger than 2*PUB value	
-SG	TG_4PUB	Typing Gap: bigger than4*PUB value	
-SG	TG_KUI	Typing Gap: bigger than KBI value	
-SG	TG_PUB	Typing Gap: bigger than PUB value	
-SG	TG1000	Typing Gap: bigger than static 1000ms	
+SG	TG_2PUB	Typing Gap: bigger than 2*PUB value	Float
+SG	TG_4PUB	Typing Gap: bigger than4*PUB value	Float
+SG	TG_KUI	Typing Gap: bigger than KBI value	Float
+SG	TG_PUB	Typing Gap: bigger than PUB value	Float
+SG	TG1000	Typing Gap: bigger than static 1000ms	Float
 AG	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
 AU	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
 FD	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
@@ -412,7 +446,7 @@ KD	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
 KU	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
 PU	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
 ST	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
-TT	TGid	TT word IDs that are part of the unit	string: '1+2+3 … '
+TT	TGid	TT word IDs that are part of the unit	string: '1+2+ ..'
 AG	TGroup	TT words in unit	string: word1_word2_ …
 ST	TGroup	TT words in unit	string: word1_word2_ …
 TT	TGroup	TT words in unit	string: word1_word2_ …
@@ -473,8 +507,8 @@ AG	TTid	Lowest (starting) TT word ID in TGid	int
 FD	TTid	Lowest (starting) TT word ID in TGid	int
 KD	TTid	Lowest (starting) TT word ID in TGid	int
 ST	TTid	Lowest (starting) TT word ID in TGid	int
-TT	TTid	Lowest (starting) TT word ID in TGid	int
-TT	TToken	TT token (word	string
+TT	TTid	Lowest TT word ID in TGid	int
+TT	TToken	TT token (word)	string
 AG	TTseg	ID of TT segment	int
 FD	TTseg	ID of TT segment	int
 KD	TTseg	ID of TT segment	int
@@ -483,7 +517,7 @@ PU	TTseg	ID of TT segment	int
 SG	TTseg	ID of TT segment	int
 SS	TTseg	ID of TT segment	int
 ST	TTseg	ID of TT segment	int
-TT	TTseg	ID of TT segment	int
+TT	TTseg	TT segment IDs that are part of the unit	int
 AU	Type	Type of activity unit	{1,2,4,5,6,8}
 KD	Type	Type of keystroke	Ins,Del
 KU	Type	Type of keystroke unit: P:PBU, K:KUI, I:Ins, D:Del, C:Change	{P,K,I,D,C}
